@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://polaretech.github.io/image-collection/sitemap.xml

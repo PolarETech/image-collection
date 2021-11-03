@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-size: 16px;
+  font-family:
+    'Helvetica Neue',
+    'Arial',
+    'Hiragino Kaku Gothic ProN',
+    'Hiragino Sans',
+    'BIZ UDPGothic',
+    'Meiryo',
+    sans-serif;
+}
+
+/* footer */
+footer {
+  font-size: 0.9rem;
+  line-height: 1.8rem;
+  text-align: center;
+}
