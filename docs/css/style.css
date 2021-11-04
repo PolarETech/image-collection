@@ -1,3 +1,9 @@
+:root {
+  --ap-main-background-color: rgb(51, 54, 72);
+  --ap-main-font-color: rgb(155, 193, 159);
+  --ap-main-accent-color: rgb(197, 148, 125);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +16,8 @@ html {
 }
 
 body {
+  background-color: var(--ap-main-background-color);
+  color: var(--ap-main-font-color);
   font-size: 16px;
   font-family:
     'Helvetica Neue',
@@ -21,9 +29,63 @@ body {
     sans-serif;
 }
 
+/* contents */
+main {
+  min-height: calc(100vh - 1.6rem);
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  letter-spacing: 0.07rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  line-height: 6rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.4rem;
+  line-height: 2.8rem;
+  text-align: center;
+}
+
+h3 {
+  margin: 0.7rem 0.7rem 0.5rem;
+  font-size: 1.2rem;
+}
+
+.collection-section {
+  margin: 3rem 2rem;
+  border: 1px solid var(--ap-main-accent-color);
+  border-radius: 0.4rem;
+}
+
+.collection-section:first-of-type {
+  margin-top: 2rem;
+}
+
+.image-area {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 6rem);
+  grid-gap: 0.5rem 1rem;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.image-area img {
+  width: 6rem;
+  height: 6rem;
+}
+
 /* footer */
 footer {
+  font-family: Avenir, Verdana, Arial, Helvetica, sans-serif;
   font-size: 0.9rem;
   line-height: 1.8rem;
   text-align: center;
+}
+
+@media (max-width: 375px) {
+  main {
+    letter-spacing: 0rem;
+  }
 }
