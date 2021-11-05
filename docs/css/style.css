@@ -6,6 +6,7 @@
   --ap-main-accent-color: rgb(197, 148, 125);
   --ap-lightgreen-color: rgb(177, 205, 197);
   --ap-lightgray-color: rgb(184, 174, 139);
+  --ap-gray-color: rgb(145, 145, 127);
 }
 
 * {
@@ -31,6 +32,10 @@ body {
     'BIZ UDPGothic',
     'Meiryo',
     sans-serif;
+}
+
+button {
+  border-style: none;
 }
 
 /* contents */
@@ -144,6 +149,35 @@ h3 {
 
 #close-source-viewer-button:active {
   fill: var(--ap-lightgray-color);
+}
+  /* license area */
+#license-viewer {
+  margin: 1rem 2rem 2rem;
+  letter-spacing: 0.07rem;
+}
+
+#show-license {
+  width: 6rem;
+  height: 2rem;
+  border-radius: 0.4rem;
+  background-color: var(--ap-main-accent-color);
+  color: var(--ap-main-background-color);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#show-license:hover {
+  background-color: var(--ap-lightgray-color);
+}
+
+#show-license:active {
+  background-color: var(--ap-gray-color);
+}
+
+#license-viewer p {
+  margin: 1.3rem 0;
+  font-size: 0.9rem;
 }
 
 /* footer */

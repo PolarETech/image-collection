@@ -10,7 +10,8 @@ module.exports = {
     ecmaVersion: 2018
   },
   globals: {
-    sourceViewer: false
+    sourceViewer: false,
+    licenseViewer: false
   },
   rules: {
     indent: ['error', 2],
