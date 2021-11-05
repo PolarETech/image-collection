@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="0 0 100 100">
+      <circle id="parts1" cx="50" cy="30.0" r="7.0" fill="#f0e9a5" />
+      <circle id="parts2" cx="50" cy="29.3" r="6.3" fill="#d8d39c" />
+      <circle id="parts3" cx="50" cy="28.6" r="5.6" fill="#c0bd92" />
+      <circle id="parts4" cx="50" cy="27.4" r="4.9" fill="#a8a789" />
+      <circle id="parts5" cx="50" cy="25.8" r="4.2" fill="#90917f" />
+
+      <animateTransform href="#parts1" attributeName="transform" type="rotate" begin="-0.46s" dur="1.8s" from="0 50 50" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
+      <animateTransform href="#parts2" attributeName="transform" type="rotate" begin="-0.35s" dur="1.8s" from="-40 50 50" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
+      <animateTransform href="#parts3" attributeName="transform" type="rotate" begin="-0.24s" dur="1.8s" from="-76 50 50" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
+      <animateTransform href="#parts4" attributeName="transform" type="rotate" begin="-0.12s" dur="1.8s" from="-106 50 50" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
+      <animateTransform href="#parts5" attributeName="transform" type="rotate" begin="-0.00s" dur="1.8s" from="-130 50 50" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
