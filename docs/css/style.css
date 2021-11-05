@@ -1,7 +1,11 @@
 :root {
   --ap-main-background-color: rgb(51, 54, 72);
+  --ap-main-background-shadow: rgb(35, 38, 45);
+  --ap-main-background-shadow-with-alpha: rgba(35, 38, 45, 0.3);
   --ap-main-font-color: rgb(155, 193, 159);
   --ap-main-accent-color: rgb(197, 148, 125);
+  --ap-lightgreen-color: rgb(177, 205, 197);
+  --ap-lightgray-color: rgb(184, 174, 139);
 }
 
 * {
@@ -32,6 +36,7 @@ body {
 /* contents */
 main {
   min-height: calc(100vh - 1.6rem);
+  padding-bottom: 36vh;
   font-family: Tahoma, Verdana, Segoe, sans-serif;
   letter-spacing: 0.07rem;
 }
@@ -74,6 +79,71 @@ h3 {
 .image-area img {
   width: 6rem;
   height: 6rem;
+  border-radius: 0.4rem;
+  outline-width: 1px;
+}
+
+.image-area img:active {
+  outline-style: solid;
+  outline-color: var(--ap-lightgray-color);
+}
+
+.image-area img.selected {
+  outline-style: solid;
+  outline-color: var(--ap-lightgreen-color);
+}
+
+.image-area + p {
+  margin: 0.7rem 1rem;
+}
+
+/* source viewer */
+#source-viewer {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 3rem;
+  z-index: 10;
+  width: 100%;
+  height: 0;
+  border-top: 2px solid var(--ap-main-background-shadow);
+  border-bottom: 2px solid var(--ap-main-background-shadow);
+  box-shadow:  0px 0px 5px 3px var(--ap-main-background-shadow-with-alpha);
+  background-color: var(--ap-lightgreen-color);
+  color: var(--ap-main-background-color);
+  transition: height 0.4s;
+}
+
+#code-area {
+  position: relative;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  margin: 3px;
+  padding: 1rem;
+  overflow-y: hidden;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+}
+
+#code-area code {
+  font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+#close-source-viewer-button {
+  display: none;
+  position: absolute;
+  top: -1.5rem;
+  right: 1.5rem;
+  z-index: 11;
+  width: 2.5rem;
+  height: 2.5rem;
+  cursor: pointer;
+  fill: var(--ap-lightgreen-color);
+  stroke: var(--ap-main-background-color);
+}
+
+#close-source-viewer-button:active {
+  fill: var(--ap-lightgray-color);
 }
 
 /* footer */
@@ -82,6 +152,10 @@ footer {
   font-size: 0.9rem;
   line-height: 1.8rem;
   text-align: center;
+}
+
+#svg-data {
+  display: none;
 }
 
 @media (max-width: 375px) {

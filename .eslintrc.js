@@ -9,6 +9,9 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018
   },
+  globals: {
+    sourceViewer: false
+  },
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
