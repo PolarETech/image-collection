@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="0 0 100 100">
+      <g id="parts-set" stroke-width="10" fill="none">
+        <path d="M62.3 31.76 A22 22 0 0 0 37.7 31.76" stroke="#f0e9a5" />
+        <path d="M62.3 31.76 A22 22 0 1 1 37.7 31.76" stroke="#90917f" />
+      </g>
+
+      <animateTransform href="#parts-set"
+          attributeName="transform"
+          type="rotate"
+          begin="0s" dur="1.8s"
+          from="0 50 50" by="360"
+          repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>

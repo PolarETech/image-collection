@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <path id="parts" d="M50 39.69 A10.31 10.31 0 0 1 53.32 40.24 L61.73 25.68 A27 27 0 0 0 38.27 25.68 L46.68 40.24 A10.31 10.31 0 0 1 50 39.69Z" />
+
+    <symbol id="loading-icon" viewBox="0 0 100 100">
+      <use id="parts1" href="#parts" />
+      <use id="parts2" href="#parts" transform="rotate(60 50 50)" />
+      <use id="parts3" href="#parts" transform="rotate(120 50 50)" />
+      <use id="parts4" href="#parts" transform="rotate(180 50 50)" />
+      <use id="parts5" href="#parts" transform="rotate(240 50 50)" />
+      <use id="parts6" href="#parts" transform="rotate(300 50 50)" />
+
+      <animate href="#parts1" attributeName="fill" begin="-0.0s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="fill" begin="-3.3s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="fill" begin="-3.0s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="fill" begin="-2.7s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="fill" begin="-2.4s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="fill" begin="-2.1s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
