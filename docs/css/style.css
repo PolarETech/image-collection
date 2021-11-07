@@ -150,20 +150,50 @@ h3 {
 #close-source-viewer-button:active {
   fill: var(--ap-lightgray-color);
 }
-  /* license area */
-#license-viewer {
+
+/* bottom menu */
+#bottom-menu {
   margin: 1rem 2rem 2rem;
   letter-spacing: 0.07rem;
 }
 
+#bottom-menu--left {
+  display: inline-block;
+  height: 2rem;
+}
+
+#bottom-menu--right {
+  display: inline-block;
+  position: absolute;
+  right: 2rem;
+  height: 2rem;
+}
+
+#bottom-menu--right a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+#bottom-menu--right a:focus {
+  outline: none;
+}
+
+#bottom-menu--right a:focus-visible {
+  outline: var(--ap-main-background-color) auto 1px;
+  outline: -webkit-focus-ring-color auto 1px;
+}
+
+/* contents in bottom menu */
 #show-license {
   width: 6rem;
-  height: 2rem;
+  height: inherit;
   border-radius: 0.4rem;
   background-color: var(--ap-main-accent-color);
   color: var(--ap-main-background-color);
   font-size: 1rem;
   font-weight: 600;
+  vertical-align: top;
   cursor: pointer;
 }
 
@@ -178,6 +208,16 @@ h3 {
 #license-viewer p {
   margin: 1.3rem 0;
   font-size: 0.9rem;
+}
+
+#link-github svg {
+  width: 2rem;
+  height: 2rem;
+  color: #fff;
+}
+
+#link-github svg:hover {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* footer */
