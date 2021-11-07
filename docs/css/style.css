@@ -134,11 +134,10 @@ h3 {
   font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
 }
 
-#close-source-viewer-button {
+#source-viewer svg {
   display: none;
   position: absolute;
   top: -1.5rem;
-  right: 1.5rem;
   z-index: 11;
   width: 2.5rem;
   height: 2.5rem;
@@ -147,8 +146,16 @@ h3 {
   stroke: var(--ap-main-background-color);
 }
 
-#close-source-viewer-button:active {
+#source-viewer svg:active {
   fill: var(--ap-lightgray-color);
+}
+
+#download-source-button {
+  right: 5rem;
+}
+
+#close-source-viewer-button {
+  right: 1.5rem;
 }
 
 /* bottom menu */

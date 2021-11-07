@@ -3,6 +3,7 @@ const sourceViewer = (() => {
   const transitionDuration = 410;
   const viewerHeight = '36vh';
   const sourceViewerId = 'source-viewer';
+  const downloadButtonId = 'download-source-button';
   const closeButtonId = 'close-source-viewer-button';
   const codeAreaId = 'code-area';
 
@@ -33,6 +34,7 @@ const sourceViewer = (() => {
 
   async function openViewer (element) {
     const viewer = document.getElementById(sourceViewerId);
+    const downloadButton = document.getElementById(downloadButtonId);
     const closeButton = document.getElementById(closeButtonId);
     const codeArea = document.getElementById(codeAreaId);
 
@@ -46,6 +48,7 @@ const sourceViewer = (() => {
       await sleep(10);
 
       viewer.style.height = viewerHeight;
+      downloadButton.style.display = 'block';
       closeButton.style.display = 'block';
 
       // Wait for height transition
@@ -53,6 +56,7 @@ const sourceViewer = (() => {
 
       codeArea.style.overflowY = 'scroll';
 
+      downloadButton.addEventListener('click', downloadSVGSource);
       closeButton.addEventListener('click', closeViewer, { once: true });
     }
 
@@ -61,14 +65,18 @@ const sourceViewer = (() => {
 
   async function closeViewer () {
     const viewer = document.getElementById(sourceViewerId);
+    const downloadButton = document.getElementById(downloadButtonId);
     const closeButton = document.getElementById(closeButtonId);
     const codeArea = document.getElementById(codeAreaId);
 
     if (getComputedStyle(viewer).display === 'none') return;
 
+    downloadButton.removeEventListener('click', downloadSVGSource);
+
     disappearSelectedBorder();
     clearCodeContents();
 
+    downloadButton.style.display = '';
     closeButton.style.display = '';
     codeArea.style.overflowY = '';
     viewer.style.height = '';
@@ -137,6 +145,29 @@ const sourceViewer = (() => {
     const codeArea = document.getElementById(codeAreaId);
     codeArea.scrollTop = 0;
     codeArea.scrollLeft = 0;
+  }
+
+  async function downloadSVGSource () {
+    const licenseText = `<!-- PT Image Collection | MIT License | https://github.com/PolarETech/image-collection/blob/main/LICENSE.txt -->\n\n`;
+    const sourceCode = document.getElementById(codeAreaId).innerText;
+    const blob = new Blob([ licenseText, sourceCode ], { type: 'image/svg+xml' });
+
+    const selectedElement = document.getElementsByClassName('selected')[0];
+    const fileName = 'PTIC_' + selectedElement.src.split('/').pop();
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    a.href = url;
+    a.download = fileName;
+    a.click();
+
+    // NOTE:
+    // If sleep is not put in, iOS Safari will fail to download.
+    await sleep(10);
+
+    a.remove();
+    URL.revokeObjectURL(url);
   }
 
   function sleep (msec) {
