@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="0 0 100 100">
+      <circle id="parts1" cx="28" cy="50" />
+      <circle id="parts2" cx="39" cy="50" />
+      <circle id="parts3" cx="50" cy="50" />
+      <circle id="parts4" cx="61" cy="50" />
+      <circle id="parts5" cx="72" cy="50" />
+
+      <animate href="#parts1" attributeName="fill" begin="-0.0s" dur="1.8s" values="#90917f; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.35; 0.7; 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="fill" begin="-1.6s" dur="1.8s" values="#90917f; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.35; 0.7; 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="fill" begin="-1.4s" dur="1.8s" values="#90917f; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.35; 0.7; 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="fill" begin="-1.2s" dur="1.8s" values="#90917f; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.35; 0.7; 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="fill" begin="-1.0s" dur="1.8s" values="#90917f; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.35; 0.7; 1" repeatCount="indefinite" />
+
+      <animate href="#parts1" attributeName="r" begin="-0.0s" dur="1.8s" values="2; 5.3; 2" calcMode="spline" keyTimes="0; 0.25; 1" keySplines="0.42 0 1 1; 0 0 0.28 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="r" begin="-1.6s" dur="1.8s" values="2; 5.3; 2" calcMode="spline" keyTimes="0; 0.25; 1" keySplines="0.42 0 1 1; 0 0 0.28 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="r" begin="-1.4s" dur="1.8s" values="2; 5.3; 2" calcMode="spline" keyTimes="0; 0.25; 1" keySplines="0.42 0 1 1; 0 0 0.28 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="r" begin="-1.2s" dur="1.8s" values="2; 5.3; 2" calcMode="spline" keyTimes="0; 0.25; 1" keySplines="0.42 0 1 1; 0 0 0.28 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="r" begin="-1.0s" dur="1.8s" values="2; 5.3; 2" calcMode="spline" keyTimes="0; 0.25; 1" keySplines="0.42 0 1 1; 0 0 0.28 1" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <rect id="parts" x="46.5" y="46.5" width="7" height="7" rx="1" />
+
+    <symbol id="loading-icon" viewBox="0 0 100 100">
+      <g id="parts-set1">
+        <use href="#parts" x="-22" y="-5" />
+      </g>
+      <g id="parts-set2">
+        <use href="#parts" x="-11" y="-5" />
+        <use href="#parts" x="-22" y="5" />
+      </g>
+      <g id="parts-set3">
+        <use href="#parts" x="0"   y="-5" />
+        <use href="#parts" x="-11" y="5" />
+      </g>
+      <g id="parts-set4">
+        <use href="#parts" x="11" y="-5" />
+        <use href="#parts" x="0"  y="5" />
+      </g>
+      <g id="parts-set5">
+        <use href="#parts" x="22" y="-5" />
+        <use href="#parts" x="11" y="5" />
+      </g>
+      <g id="parts-set6">
+        <use href="#parts" x="22" y="5" />
+      </g>
+
+      <animate href="#parts-set1" attributeName="fill" begin="-0.6s" dur="1.8s" values="#90917f; #f0e9a5; #d8d39b; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.1; 0.175; 0.25; 0.4; 1" repeatCount="indefinite" />
+      <animate href="#parts-set2" attributeName="fill" begin="-0.3s" dur="1.8s" values="#90917f; #f0e9a5; #d8d39b; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.1; 0.175; 0.25; 0.4; 1" repeatCount="indefinite" />
+      <animate href="#parts-set3" attributeName="fill" begin="-0.0s" dur="1.8s" values="#90917f; #f0e9a5; #d8d39b; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.1; 0.175; 0.25; 0.4; 1" repeatCount="indefinite" />
+      <animate href="#parts-set4" attributeName="fill" begin="-1.5s" dur="1.8s" values="#90917f; #f0e9a5; #d8d39b; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.1; 0.175; 0.25; 0.4; 1" repeatCount="indefinite" />
+      <animate href="#parts-set5" attributeName="fill" begin="-1.2s" dur="1.8s" values="#90917f; #f0e9a5; #d8d39b; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.1; 0.175; 0.25; 0.4; 1" repeatCount="indefinite" />
+      <animate href="#parts-set6" attributeName="fill" begin="-0.9s" dur="1.8s" values="#90917f; #f0e9a5; #d8d39b; #f0e9a5; #90917f; #90917f" keyTimes="0; 0.1; 0.175; 0.25; 0.4; 1" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
