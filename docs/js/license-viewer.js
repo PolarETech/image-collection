@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-redeclare
 const licenseViewer = (() => {
   const licenseFileURL = './data/LICENSE.txt';
-  const doneButtonColor = 'var(--ap-main-font-color)';
+  const doneButtonColor = 'var(--ap-main-header-color)';
   const licenseButtonId = 'show-license';
   const licenseViewerId = 'license-viewer';
   const closeButtonId = 'close-source-viewer-button';

@@ -16,12 +16,15 @@
 
       <main>
         <h1>PT Image Collection</h1>
+        <p id="subtitle">Open Source animated SVG icons</p>
+
+        <hr class="separater">
 
         <h2 id="svg-loading-icon">SVG Loading Icon</h2>
 
         <section id="loading-icon-circle" class="collection-section">
           <h3>Circle</h3>
-          <div class="image-area">
+          <figure class="image-area">
             <img src="./img/loading/loading-icon_ci-001.svg" alt="SVG Loading Icon - Circle 001" ontouchstart>
             <img src="./img/loading/loading-icon_ci-002.svg" alt="SVG Loading Icon - Circle 002" ontouchstart>
             <img src="./img/loading/loading-icon_ci-003.svg" alt="SVG Loading Icon - Circle 003" ontouchstart>
@@ -29,37 +32,74 @@
             <img src="./img/loading/loading-icon_ci-005.svg" alt="SVG Loading Icon - Circle 005" ontouchstart>
             <img src="./img/loading/loading-icon_ci-006.svg" alt="SVG Loading Icon - Circle 006" ontouchstart>
             <img src="./img/loading/loading-icon_ci-007.svg" alt="SVG Loading Icon - Circle 007" ontouchstart>
-          </div>
+          </figure>
           <p><small>Select an image to view the svg source code.</small></p>
         </section>
 
         <section id="loading-icon-bar" class="collection-section">
           <h3>Bar</h3>
-          <div class="image-area">
+          <figure class="image-area">
             <img src="./img/loading/loading-icon_ba-001.svg" alt="SVG Loading Icon - Bar 001" ontouchstart>
             <img src="./img/loading/loading-icon_ba-002.svg" alt="SVG Loading Icon - Bar 002" ontouchstart>
             <img src="./img/loading/loading-icon_ba-003.svg" alt="SVG Loading Icon - Bar 003" ontouchstart>
             <img src="./img/loading/loading-icon_ba-004.svg" alt="SVG Loading Icon - Bar 004" ontouchstart>
             <img src="./img/loading/loading-icon_ba-005.svg" alt="SVG Loading Icon - Bar 005" ontouchstart>
-          </div>
+          </figure>
           <p><small>Select an image to view the svg source code.</small></p>
         </section>
 
         <section id="loading-icon-misc" class="collection-section">
           <h3>Misc.</h3>
-          <div class="image-area">
+          <figure class="image-area">
             <img src="./img/loading/loading-icon_mi-001.svg" alt="SVG Loading Icon - Misc 001" ontouchstart>
             <img src="./img/loading/loading-icon_mi-002.svg" alt="SVG Loading Icon - Misc 002" ontouchstart>
-          </div>
+          </figure>
           <p><small>Select an image to view the svg source code.</small></p>
         </section>
 
         <!-- source viewer -->
         <div id="source-viewer">
-          <svg id="download-source-button" ontouchstart><use href="#download-button" /></svg>
-          <svg id="close-source-viewer-button" ontouchstart><use href="#close-button" /></svg>
+          <svg id="download-source-button" ontouchstart><title>Download</title><use href="#download-button" /></svg>
+          <svg id="close-source-viewer-button" ontouchstart><title>Close</title><use href="#close-button" /></svg>
           <pre id="code-area"><code></code></pre>
         </div>
+
+        <hr class="separater">
+
+        <!-- explanation -->
+        <article id="explanation">
+          <h2>HOW TO USE</h2>
+          <ol>
+            <li>Select an image and click it to open a source code viewer.</li>
+            <li>Click a download button <svg id="download-button-sample"><use href="#download-button" /></svg> on the source code viewer to download the image file.</li>
+            <li>Place the downloaded image file on your web server.</li>
+            <li>Load the placed image file in your web page like
+              <br><code>&lt;img src=&quot;placed.svg&quot;&gt;</code> (In HTML),
+              <br><code>&lt;object type=&quot;image/svg+xml&quot; data=&quot;placed.svg&quot;&gt;&lt;/object&gt;</code> (In HTML),
+              <br><code>#foo { background-image: url(&quot;placed.svg&quot;); }</code> (In CSS), etc.
+            </li>
+          </ol>
+
+          <p>You can also write the SVG source code directly into HTML as inline SVG.</p>
+
+          <p><em>IMPORTANT NOTE:</em> Please do not load the image files directly from this website, as the URL may change.</p>
+
+          <h2>CUSTOMIZE</h2>
+          <h3>Changing the SVG icon color</h3>
+          <ol>
+            <li>Open the downloaded SVG file with a text editor and so on.</li>
+            <li>Edit properties where explained by the comments in the file.</li>
+          </ol>
+
+          <h2>SUPPORTED BROWSER</h2>
+          <p>The SVG images have been verified to be available in the latest Chrome, Firefox, and Safari.</p>
+
+          <h2>SVG REFERENCES</h2>
+          <ul>
+            <li><a href="https://www.w3.org/TR/SVG11/" target="_blank">Scalable Vector Graphics (SVG) 1.1 (Second Edition) | W3C Recommendation</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG: Scalable Vector Graphics | MDN</a></li>
+          </ul>
+        </article>
       </main>
 
       <!-- bottom menu -->
