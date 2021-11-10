@@ -3,24 +3,25 @@
      viewBox="0 0 100 100">
 
   <defs>
-    <rect id="parts" x="46.5" y="46.5" width="7" height="7" />
+    <rect id="parts" x="46" y="46" width="8" height="8" />
 
     <symbol id="loading-icon" viewBox="0 0 100 100">
       <g id="parts-set1">
         <use href="#parts" />
       </g>
       <g id="parts-set2">
-        <use href="#parts" x="-11" />
-        <use href="#parts" x="11" />
+        <use href="#parts" x="-12" />
+        <use href="#parts" x="12" />
       </g>
       <g id="parts-set3">
-        <use href="#parts" x="-22" />
-        <use href="#parts" x="22" />
+        <use href="#parts" x="-24" />
+        <use href="#parts" x="24" />
       </g>
 
-      <animate href="#parts-set1" attributeName="fill" begin="-0.0s" dur="1.8s" values="#f0e9a5; #90917f; #f0e9a5; #f0e9a5" keyTimes="0; 0.1; 0.4; 1" repeatCount="indefinite" />
-      <animate href="#parts-set2" attributeName="fill" begin="-1.2s" dur="1.8s" values="#f0e9a5; #90917f; #f0e9a5; #f0e9a5" keyTimes="0; 0.1; 0.4; 1" repeatCount="indefinite" />
-      <animate href="#parts-set3" attributeName="fill" begin="-0.6s" dur="1.8s" values="#f0e9a5; #90917f; #f0e9a5; #f0e9a5" keyTimes="0; 0.1; 0.4; 1" repeatCount="indefinite" />
+      <!-- Editing the "values" properties will change the color -->
+      <animate href="#parts-set1" attributeName="fill" values="#f0e9a5; #90917f; #f0e9a5; #f0e9a5" begin="-0.0s" dur="1.8s" keyTimes="0; 0.1; 0.4; 1" repeatCount="indefinite" />
+      <animate href="#parts-set2" attributeName="fill" values="#f0e9a5; #90917f; #f0e9a5; #f0e9a5" begin="-1.2s" dur="1.8s" keyTimes="0; 0.1; 0.4; 1" repeatCount="indefinite" />
+      <animate href="#parts-set3" attributeName="fill" values="#f0e9a5; #90917f; #f0e9a5; #f0e9a5" begin="-0.6s" dur="1.8s" keyTimes="0; 0.1; 0.4; 1" repeatCount="indefinite" />
     </symbol>
   </defs>
 

@@ -5,6 +5,7 @@
   <defs>
     <radialGradient id="color"
         cx="0.1" cy="0.1" fx="0" fy="0" r="1.2">
+      <!-- Editing the "stop-color" properties will change the color -->
       <stop offset="0.1" stop-color="#f0e9a5" />
       <stop offset="0.9" stop-color="#90917f" />
     </radialGradient>
@@ -19,7 +20,7 @@
       <animateTransform href="#parts"
           attributeName="transform"
           type="rotate"
-          begin="0s" dur="1.8s"
+          dur="1.8s"
           from="45 50 50" by="360"
           repeatCount="indefinite" />
     </symbol>

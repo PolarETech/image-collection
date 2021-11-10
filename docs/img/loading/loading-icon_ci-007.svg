@@ -13,12 +13,13 @@
       <use id="parts5" href="#parts" transform="rotate(240 50 50)" />
       <use id="parts6" href="#parts" transform="rotate(300 50 50)" />
 
-      <animate href="#parts1" attributeName="fill" begin="-0.0s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
-      <animate href="#parts2" attributeName="fill" begin="-3.3s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
-      <animate href="#parts3" attributeName="fill" begin="-3.0s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
-      <animate href="#parts4" attributeName="fill" begin="-2.7s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
-      <animate href="#parts5" attributeName="fill" begin="-2.4s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
-      <animate href="#parts6" attributeName="fill" begin="-2.1s" dur="3.6s" values="#f0e9a5; #90917f" calcMode="discrete" repeatCount="indefinite" />
+      <!-- Editing the "values" properties will change the color -->
+      <animate href="#parts1" attributeName="fill" values="#f0e9a5; #90917f" begin="-0.0s" dur="3.6s" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="fill" values="#f0e9a5; #90917f" begin="-3.3s" dur="3.6s" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="fill" values="#f0e9a5; #90917f" begin="-3.0s" dur="3.6s" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="fill" values="#f0e9a5; #90917f" begin="-2.7s" dur="3.6s" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="fill" values="#f0e9a5; #90917f" begin="-2.4s" dur="3.6s" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="fill" values="#f0e9a5; #90917f" begin="-2.1s" dur="3.6s" calcMode="discrete" repeatCount="indefinite" />
     </symbol>
   </defs>
 
