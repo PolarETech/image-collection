@@ -6,27 +6,49 @@ const licenseViewer = (() => {
   const licenseViewerId = 'license-viewer';
   const closeButtonId = 'close-source-viewer-button';
 
+  const xhr = new XMLHttpRequest();
+  xhr.responseType = 'blob';
+  xhr.timeout = 20000;
+
   return {
     showLicenseText: () => {
-      const xhr = new XMLHttpRequest();
-      xhr.onload = () => {
-        const blob = xhr.response;
+      if (xhr.readyState !== 0 && xhr.readyState !== 4) return;
 
-        const reader = new FileReader();
-        reader.readAsText(blob);
-
-        reader.onload = () => {
-          addLicenseContent(reader.result);
-          changeLicenseButtonBehavior();
-          closeSourceCodeViewer();
-        };
-      };
-
-      xhr.open('GET', licenseFileURL);
-      xhr.responseType = 'blob';
-      xhr.send(null);
+      fetchData();
     }
   };
+
+  function fetchData () {
+    xhr.onload = () => readData(xhr.response);
+
+    xhr.onerror = () => toast.showToast('connectionError');
+    xhr.ontimeout = () => toast.showToast('timeoutError');
+
+    xhr.onloadstart = () => startBlinking();
+    xhr.onloadend = () => stopBlinking();
+
+    xhr.open('GET', licenseFileURL);
+    xhr.send(null);
+  }
+
+  function readData (blob) {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.result === '') {
+        toast.showToast('serverError');
+        return;
+      }
+
+      addLicenseContent(reader.result);
+      changeLicenseButtonBehavior();
+      closeSourceCodeViewer();
+    };
+
+    reader.onerror = () => toast.showToast('serverError');
+
+    reader.readAsText(blob);
+  }
 
   function addLicenseContent (content) {
     let viewer = document.createElement('p');
@@ -68,6 +90,16 @@ const licenseViewer = (() => {
     const closeSourceViewerButton = document.getElementById(closeButtonId);
 
     closeSourceViewerButton.dispatchEvent(clickEvent);
+  }
+
+  function startBlinking () {
+    const button = document.getElementById(licenseButtonId);
+    button.classList.add('blinking');
+  }
+
+  function stopBlinking () {
+    const button = document.getElementById(licenseButtonId);
+    button.classList.remove('blinking');
   }
 })();
 

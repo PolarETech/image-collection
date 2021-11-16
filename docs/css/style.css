@@ -321,6 +321,15 @@ h2 {
   background-color: var(--ap-gray-color);
 }
 
+#show-license.blinking {
+  animation: 1.2s ease-out infinite alternate blinking;
+}
+
+@keyframes blinking {
+  from { background-color: var(--ap-gray-color); }
+  to { background-color: var(--ap-main-accent-color); }
+}
+
 #license-viewer p {
   margin: 1.3rem 0;
   font-size: 0.9rem;
