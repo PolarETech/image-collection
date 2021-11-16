@@ -7,30 +7,45 @@ const sourceViewer = (() => {
   const closeButtonId = 'close-source-viewer-button';
   const codeAreaId = 'code-area';
 
+  const xhr = new XMLHttpRequest();
+  xhr.responseType = 'blob';
+  xhr.timeout = 20000;
+
   return {
     showSVGSource: e => {
       if (e.target.classList.contains('selected')) return;
 
-      const element = e.target;
-
-      const xhr = new XMLHttpRequest();
-      xhr.onload = () => {
-        const blob = xhr.response;
-
-        const reader = new FileReader();
-        reader.readAsText(blob);
-
-        reader.onload = () => {
-          openViewer(element);
-          setCodeContents(reader.result);
-        };
-      };
-
-      xhr.open('GET', element.src);
-      xhr.responseType = 'blob';
-      xhr.send(null);
+      fetchData(e.target);
     }
   };
+
+  function fetchData (element) {
+    xhr.onload = () => readData(xhr.response, element);
+
+    xhr.onerror = () => toast.showToast('connectionError');
+    xhr.ontimeout = () => toast.showToast('timeoutError');
+
+    xhr.open('GET', element.src);
+    xhr.send(null);
+  }
+
+  function readData (blob, element) {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.result === '') {
+        toast.showToast('serverError');
+        return;
+      }
+
+      openViewer(element);
+      setCodeContents(reader.result);
+    };
+
+    reader.onerror = () => toast.showToast('serverError');
+
+    reader.readAsText(blob);
+  }
 
   async function openViewer (element) {
     const viewer = document.getElementById(sourceViewerId);
