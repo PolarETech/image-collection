@@ -6,6 +6,7 @@ const sourceViewer = (() => {
   const downloadButtonId = 'download-source-button';
   const closeButtonId = 'close-source-viewer-button';
   const codeAreaId = 'code-area';
+  const loadingIconId = 'loading-icon';
 
   const xhr = new XMLHttpRequest();
   xhr.responseType = 'blob';
@@ -14,6 +15,7 @@ const sourceViewer = (() => {
   return {
     showSVGSource: e => {
       if (e.target.classList.contains('selected')) return;
+      if (e.target.classList.contains('loading')) return;
 
       fetchData(e.target);
     }
@@ -24,6 +26,9 @@ const sourceViewer = (() => {
 
     xhr.onerror = () => toast.showToast('connectionError');
     xhr.ontimeout = () => toast.showToast('timeoutError');
+
+    xhr.onloadstart = () => addLoadingIcon(element);
+    xhr.onloadend = () => removeLoadingIcon();
 
     xhr.open('GET', element.src);
     xhr.send(null);
@@ -100,6 +105,54 @@ const sourceViewer = (() => {
     await sleep(transitionDuration);
 
     viewer.style.display = '';
+  }
+
+  function addLoadingIcon (element) {
+    removeLoadingIcon();
+
+    element.classList.add('loading');
+
+    const loadingIcon = document.createElement('div');
+    element.after(loadingIcon);
+    loadingIcon.setAttribute('id', loadingIconId);
+
+    adjustLoadingIconPosition();
+
+    window.addEventListener('resize', adjustLoadingIconPosition);
+  }
+
+  function removeLoadingIcon () {
+    const loadingIcon = document.getElementById(loadingIconId);
+    const loadingElements = document.querySelectorAll('.image-area img.loading');
+
+    if (loadingIcon !== null) {
+      loadingIcon.remove();
+    }
+
+    loadingElements.forEach(loadingElement => {
+      loadingElement.classList.remove('loading');
+    });
+
+    window.removeEventListener('resize', adjustLoadingIconPosition);
+  }
+
+  function adjustLoadingIconPosition () {
+    const loadingIcon = document.getElementById(loadingIconId);
+    const targetImage = document.querySelector('.image-area img.loading');
+
+    if (loadingIcon === null || targetImage === null) {
+      removeLoadingIcon();
+      return;
+    }
+
+    // MEMO:
+    // svg images width: 6rem; height: 6rem;
+    // loading-icon width: 5rem; height: 0.25rem;
+    const marginTop = Math.round(targetImage.clientHeight / 6 * 5.5);
+    const marginLeft = Math.round(targetImage.clientWidth / 6 * 0.5);
+
+    loadingIcon.style.top = `${targetImage.offsetTop + marginTop}px`;
+    loadingIcon.style.left = `${targetImage.offsetLeft + marginLeft}px`;
   }
 
   function appearSelectedBorder (element) {

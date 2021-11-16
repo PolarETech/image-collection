@@ -127,6 +127,22 @@ h2 {
   color: var(--ap-main-header-color);
 }
 
+#loading-icon {
+  position: absolute;
+  width: 5rem;
+  height: 0.25rem;
+  background-color: var(--ap-main-font-color);
+  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAyIj48ZGVmcz48cmVjdCBpZD0icGFydHMiIHdpZHRoPSI0IiBoZWlnaHQ9IjIiIGZpbGwtb3BhY2l0eT0iMC43IiB0cmFuc2Zvcm09InNrZXdYKC0yOCkiLz48L2RlZnM+PHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGc+PHVzZSBocmVmPSIjcGFydHMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMikiLz48dXNlIGhyZWY9IiNwYXJ0cyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQpIi8+PHVzZSBocmVmPSIjcGFydHMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQpIi8+PHVzZSBocmVmPSIjcGFydHMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyKSIvPjx1c2UgaHJlZj0iI3BhcnRzIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMCkiLz48dXNlIGhyZWY9IiNwYXJ0cyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgpIi8+PGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJ0cmFuc2xhdGUiIGR1cj0iMS42cyIgdmFsdWVzPSIwOzI7NDs2IiBjYWxjTW9kZT0iZGlzY3JldGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+PC9nPjwvc3ZnPiA=");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: 6rem 0.4rem;
+  mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAyIj48ZGVmcz48cmVjdCBpZD0icGFydHMiIHdpZHRoPSI0IiBoZWlnaHQ9IjIiIGZpbGwtb3BhY2l0eT0iMC43IiB0cmFuc2Zvcm09InNrZXdYKC0yOCkiLz48L2RlZnM+PHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjIiIGZpbGwtb3BhY2l0eT0iMC41Ii8+PGc+PHVzZSBocmVmPSIjcGFydHMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMikiLz48dXNlIGhyZWY9IiNwYXJ0cyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQpIi8+PHVzZSBocmVmPSIjcGFydHMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQpIi8+PHVzZSBocmVmPSIjcGFydHMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyKSIvPjx1c2UgaHJlZj0iI3BhcnRzIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMCkiLz48dXNlIGhyZWY9IiNwYXJ0cyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjgpIi8+PGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJ0cmFuc2xhdGUiIGR1cj0iMS42cyIgdmFsdWVzPSIwOzI7NDs2IiBjYWxjTW9kZT0iZGlzY3JldGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+PC9nPjwvc3ZnPiA=");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 6rem 0.4rem;
+  content: "";
+}
+
 /* source viewer */
 #source-viewer {
   display: none;
