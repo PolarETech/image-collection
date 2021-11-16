@@ -11,7 +11,8 @@ module.exports = {
   },
   globals: {
     sourceViewer: false,
-    licenseViewer: false
+    licenseViewer: false,
+    toast: false
   },
   rules: {
     indent: ['error', 2],
