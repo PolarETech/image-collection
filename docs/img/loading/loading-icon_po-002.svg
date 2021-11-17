@@ -3,20 +3,18 @@
      viewBox="0 0 100 100">
 
   <defs>
-    <rect id="parts-bg" x="43" y="43" width="14" height="14" />
-
     <symbol id="loading-icon" viewBox="0 0 100 100">
       <!-- Editing the "fill" property will change the color of the background rectangles -->
       <g fill="#90917f">
-        <use href="#parts-bg" transform="translate(-16 -16)" />
-        <use href="#parts-bg" transform="translate(-16 0)" />
-        <use href="#parts-bg" transform="translate(-16 16)" />
-        <use href="#parts-bg" transform="translate(0 -16)" />
-        <use href="#parts-bg" />
-        <use href="#parts-bg" transform="translate(0 16)" />
-        <use href="#parts-bg" transform="translate(16 -16)" />
-        <use href="#parts-bg" transform="translate(16 0)" />
-        <use href="#parts-bg" transform="translate(16 16)" />
+        <rect x="43" y="43" width="14" height="14" transform="translate(-16 -16)" />
+        <rect x="43" y="43" width="14" height="14" transform="translate(-16 0)" />
+        <rect x="43" y="43" width="14" height="14" transform="translate(-16 16)" />
+        <rect x="43" y="43" width="14" height="14" transform="translate(0 -16)" />
+        <rect x="43" y="43" width="14" height="14" />
+        <rect x="43" y="43" width="14" height="14" transform="translate(0 16)" />
+        <rect x="43" y="43" width="14" height="14" transform="translate(16 -16)" />
+        <rect x="43" y="43" width="14" height="14" transform="translate(16 0)" />
+        <rect x="43" y="43" width="14" height="14" transform="translate(16 16)" />
       </g>
 
       <!-- Editing the "fill" property will change the color of the moving rectangles -->
