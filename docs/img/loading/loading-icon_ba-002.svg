@@ -3,10 +3,10 @@
      viewBox="0 0 100 100">
 
   <defs>
-    <symbol id="loading-icon" viewBox="0 0 100 100">
-      <rect id="parts1" x="-5" y="-5" width="10" height="10" rx="1" transform="translate(29 50)" />
-      <rect id="parts2" x="-5" y="-5" width="10" height="10" rx="1" transform="translate(50 50)" />
-      <rect id="parts3" x="-5" y="-5" width="10" height="10" rx="1" transform="translate(71 50)" />
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <rect id="parts1" x="-9" y="-9" width="18" height="18" rx="1" transform="translate(-34)" />
+      <rect id="parts2" x="-9" y="-9" width="18" height="18" rx="1" />
+      <rect id="parts3" x="-9" y="-9" width="18" height="18" rx="1" transform="translate(+34)" />
 
       <!-- Editing the "values" properties will change the color -->
       <animate href="#parts1" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-0.0s" dur="1.8s" keyTimes="0; 0.25; 0.5; 1" repeatCount="indefinite" />

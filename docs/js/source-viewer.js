@@ -146,7 +146,7 @@ const sourceViewer = (() => {
     }
 
     // MEMO:
-    // svg images width: 6rem; height: 6rem;
+    // svg images width: 6rem; height: 6rem; padding: 1.4rem;
     // loading-icon width: 5rem; height: 0.25rem;
     const marginTop = Math.round(targetImage.clientHeight / 6 * 5.5);
     const marginLeft = Math.round(targetImage.clientWidth / 6 * 0.5);

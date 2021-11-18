@@ -3,16 +3,16 @@
      viewBox="0 0 100 100">
 
   <defs>
-    <rect id="parts" x="31" y="48" width="38" height="4" rx="2" />
+    <rect id="parts" x="-39" y="-4" width="78" height="8" rx="4" />
 
-    <symbol id="loading-icon" viewBox="0 0 100 100">
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
       <!-- Editing the "fill" property will change the color of the background lines -->
       <g fill="#90917f">
-        <use href="#parts" y="20" />
-        <use href="#parts" y="10" />
+        <use href="#parts" y="-42" />
+        <use href="#parts" y="-21" />
         <use href="#parts" />
-        <use href="#parts" y="-10" />
-        <use href="#parts" y="-20" />
+        <use href="#parts" y="+21" />
+        <use href="#parts" y="+42" />
       </g>
 
       <!-- Editing the "fill" property will change the color of the moving line -->
@@ -21,7 +21,7 @@
       <animate href="#parts-fg"
           attributeName="y"
           dur="1.8s"
-          values="20; 10; 0; -10; -20; -100"
+          values="42; 21; 0; -21; -42; 100"
           calcMode="discrete"
           repeatCount="indefinite" />
     </symbol>

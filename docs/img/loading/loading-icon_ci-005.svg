@@ -10,18 +10,18 @@
       <stop offset="0.9" stop-color="#90917f" />
     </radialGradient>
 
-    <symbol id="loading-icon" viewBox="0 0 100 100">
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
       <circle id="parts"
-          cx="50" cy="50" r="22"
+          r="41"
           stroke="url(#color)"
-          stroke-width="10"
+          stroke-width="18"
           fill="none" />
 
       <animateTransform href="#parts"
           attributeName="transform"
           type="rotate"
           dur="1.8s"
-          from="45 50 50" by="360"
+          from="45" by="360"
           repeatCount="indefinite" />
     </symbol>
   </defs>

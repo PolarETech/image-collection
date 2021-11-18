@@ -11,24 +11,24 @@
     </linearGradient>
 
     <clipPath id="cut-off-bottom">
-      <rect x="0" y="0" width="100" height="50" />
+      <rect x="-50" y="-50" width="100" height="50" />
     </clipPath>
 
-    <symbol id="loading-icon" viewBox="0 0 100 100">
-      <g transform="translate(0 13)"
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <g transform="translate(0 25)"
          clip-path="url(#cut-off-bottom)"
-         stroke="url(#color)" stroke-width="4" fill="none">
+         stroke="url(#color)" stroke-width="6" fill="none">
 
-        <path id="parts1" d="M25 50 A25 25 0 0 0 75 50" />
-        <path id="parts2" d="M32 50 A18 18 0 0 0 68 50" />
-        <path id="parts3" d="M39 50 A11 11 0 0 0 61 50" />
+        <path id="parts1" d="M-47 0 A47 47 0 0 0 47 0" />
+        <path id="parts2" d="M-37 0 A37 37 0 0 0 37 0" />
+        <path id="parts3" d="M-27 0 A27 27 0 0 0 27 0" />
       </g>
 
       <animate href="#color" attributeName="x2" dur="3.6s" values="0; 1; 1.2" keyTimes="0; 0.4; 1" repeatCount="indefinite" />
 
-      <animateTransform href="#parts1" attributeName="transform" type="rotate" begin="-0.0s" dur="3.6s" values="0 50 50; 360 50 50; 360 50 50" calcMode="spline" keyTimes="0; 0.99; 1" keySplines="0.1 0.25 0.85 1; 0 0 1 1" repeatCount="indefinite" />
-      <animateTransform href="#parts2" attributeName="transform" type="rotate" begin="-3.3s" dur="3.6s" values="0 50 50; 360 50 50; 360 50 50" calcMode="spline" keyTimes="0; 0.82; 1" keySplines="0.1 0.25 0.85 1; 0 0 1 1" repeatCount="indefinite" />
-      <animateTransform href="#parts3" attributeName="transform" type="rotate" begin="-3.0s" dur="3.6s" values="0 50 50; 360 50 50; 360 50 50" calcMode="spline" keyTimes="0; 0.65; 1" keySplines="0.1 0.25 0.85 1; 0 0 1 1" repeatCount="indefinite" />
+      <animateTransform href="#parts1" attributeName="transform" type="rotate" begin="-0.0s" dur="3.6s" values="0; 360; 360" calcMode="spline" keyTimes="0; 0.99; 1" keySplines="0.1 0.25 0.85 1; 0 0 1 1" repeatCount="indefinite" />
+      <animateTransform href="#parts2" attributeName="transform" type="rotate" begin="-3.3s" dur="3.6s" values="0; 360; 360" calcMode="spline" keyTimes="0; 0.82; 1" keySplines="0.1 0.25 0.85 1; 0 0 1 1" repeatCount="indefinite" />
+      <animateTransform href="#parts3" attributeName="transform" type="rotate" begin="-3.0s" dur="3.6s" values="0; 360; 360" calcMode="spline" keyTimes="0; 0.65; 1" keySplines="0.1 0.25 0.85 1; 0 0 1 1" repeatCount="indefinite" />
     </symbol>
   </defs>
 

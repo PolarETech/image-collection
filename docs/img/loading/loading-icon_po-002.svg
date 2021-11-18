@@ -3,42 +3,42 @@
      viewBox="0 0 100 100">
 
   <defs>
-    <symbol id="loading-icon" viewBox="0 0 100 100">
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
       <!-- Editing the "fill" property will change the color of the background rectangles -->
       <g fill="#90917f">
-        <rect x="43" y="43" width="14" height="14" transform="translate(-16 -16)" />
-        <rect x="43" y="43" width="14" height="14" transform="translate(-16 0)" />
-        <rect x="43" y="43" width="14" height="14" transform="translate(-16 16)" />
-        <rect x="43" y="43" width="14" height="14" transform="translate(0 -16)" />
-        <rect x="43" y="43" width="14" height="14" />
-        <rect x="43" y="43" width="14" height="14" transform="translate(0 16)" />
-        <rect x="43" y="43" width="14" height="14" transform="translate(16 -16)" />
-        <rect x="43" y="43" width="14" height="14" transform="translate(16 0)" />
-        <rect x="43" y="43" width="14" height="14" transform="translate(16 16)" />
+        <rect x="-15" y="-15" width="30" height="30" transform="translate(-35 -35)" />
+        <rect x="-15" y="-15" width="30" height="30" transform="translate(-35   0)" />
+        <rect x="-15" y="-15" width="30" height="30" transform="translate(-35  35)" />
+        <rect x="-15" y="-15" width="30" height="30" transform="translate(  0 -35)" />
+        <rect x="-15" y="-15" width="30" height="30" />
+        <rect x="-15" y="-15" width="30" height="30" transform="translate(  0  35)" />
+        <rect x="-15" y="-15" width="30" height="30" transform="translate( 35 -35)" />
+        <rect x="-15" y="-15" width="30" height="30" transform="translate( 35   0)" />
+        <rect x="-15" y="-15" width="30" height="30" transform="translate( 35  35)" />
       </g>
 
       <!-- Editing the "fill" property will change the color of the moving rectangles -->
       <g fill="#f0e9a5">
-        <polygon id="parts1" transform="translate(-16 -16)" />
-        <polygon id="parts2" transform="translate(-16 0)" />
-        <polygon id="parts3" transform="translate(-16 16)" />
-        <polygon id="parts4" transform="translate(0 -16)" />
+        <polygon id="parts1" transform="translate(-35 -35)" />
+        <polygon id="parts2" transform="translate(-35   0)" />
+        <polygon id="parts3" transform="translate(-35  35)" />
+        <polygon id="parts4" transform="translate(  0 -35)" />
         <polygon id="parts5" />
-        <polygon id="parts6" transform="translate(0 16)" />
-        <polygon id="parts7" transform="translate(16 -16)" />
-        <polygon id="parts8" transform="translate(16 0)" />
-        <polygon id="parts9" transform="translate(16 16)" />
+        <polygon id="parts6" transform="translate(  0  35)" />
+        <polygon id="parts7" transform="translate( 35 -35)" />
+        <polygon id="parts8" transform="translate( 35   0)" />
+        <polygon id="parts9" transform="translate( 35  35)" />
       </g>
 
-      <animate href="#parts1" attributeName="points" begin="-0.000s" dur="2.7s" values="50 50, 56 44, 50 50, 44 56; 43 43, 57 43, 57 57, 43 57; 43 43, 57 43, 57 57, 43 57; 50 50, 50 50, 50 50, 50 50; 50 50, 50 50, 50 50, 50 50" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
-      <animate href="#parts2" attributeName="points" begin="-2.565s" dur="2.7s" values="50 50, 56 44, 50 50, 44 56; 43 43, 57 43, 57 57, 43 57; 43 43, 57 43, 57 57, 43 57; 50 50, 50 50, 50 50, 50 50; 50 50, 50 50, 50 50, 50 50" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
-      <animate href="#parts3" attributeName="points" begin="-2.430s" dur="2.7s" values="50 50, 56 44, 50 50, 44 56; 43 43, 57 43, 57 57, 43 57; 43 43, 57 43, 57 57, 43 57; 50 50, 50 50, 50 50, 50 50; 50 50, 50 50, 50 50, 50 50" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
-      <animate href="#parts4" attributeName="points" begin="-2.430s" dur="2.7s" values="50 50, 56 44, 50 50, 44 56; 43 43, 57 43, 57 57, 43 57; 43 43, 57 43, 57 57, 43 57; 50 50, 50 50, 50 50, 50 50; 50 50, 50 50, 50 50, 50 50" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
-      <animate href="#parts5" attributeName="points" begin="-2.295s" dur="2.7s" values="50 50, 56 44, 50 50, 44 56; 43 43, 57 43, 57 57, 43 57; 43 43, 57 43, 57 57, 43 57; 50 50, 50 50, 50 50, 50 50; 50 50, 50 50, 50 50, 50 50" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
-      <animate href="#parts6" attributeName="points" begin="-2.160s" dur="2.7s" values="50 50, 56 44, 50 50, 44 56; 43 43, 57 43, 57 57, 43 57; 43 43, 57 43, 57 57, 43 57; 50 50, 50 50, 50 50, 50 50; 50 50, 50 50, 50 50, 50 50" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
-      <animate href="#parts7" attributeName="points" begin="-2.160s" dur="2.7s" values="50 50, 56 44, 50 50, 44 56; 43 43, 57 43, 57 57, 43 57; 43 43, 57 43, 57 57, 43 57; 50 50, 50 50, 50 50, 50 50; 50 50, 50 50, 50 50, 50 50" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
-      <animate href="#parts8" attributeName="points" begin="-2.025s" dur="2.7s" values="50 50, 56 44, 50 50, 44 56; 43 43, 57 43, 57 57, 43 57; 43 43, 57 43, 57 57, 43 57; 50 50, 50 50, 50 50, 50 50; 50 50, 50 50, 50 50, 50 50" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
-      <animate href="#parts9" attributeName="points" begin="-1.890s" dur="2.7s" values="50 50, 56 44, 50 50, 44 56; 43 43, 57 43, 57 57, 43 57; 43 43, 57 43, 57 57, 43 57; 50 50, 50 50, 50 50, 50 50; 50 50, 50 50, 50 50, 50 50" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts1" attributeName="points" begin="-0.000s" dur="2.7s" values="0 0, 12 -12, 0 0, -12 12; -15 -15, 15 -15, 15 15, -15 15; -15 -15, 15 -15, 15 15, -15 15; 0 0, 0 0, 0 0, 0 0; 0 0, 0 0, 0 0, 0 0" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="points" begin="-2.565s" dur="2.7s" values="0 0, 12 -12, 0 0, -12 12; -15 -15, 15 -15, 15 15, -15 15; -15 -15, 15 -15, 15 15, -15 15; 0 0, 0 0, 0 0, 0 0; 0 0, 0 0, 0 0, 0 0" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="points" begin="-2.430s" dur="2.7s" values="0 0, 12 -12, 0 0, -12 12; -15 -15, 15 -15, 15 15, -15 15; -15 -15, 15 -15, 15 15, -15 15; 0 0, 0 0, 0 0, 0 0; 0 0, 0 0, 0 0, 0 0" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="points" begin="-2.430s" dur="2.7s" values="0 0, 12 -12, 0 0, -12 12; -15 -15, 15 -15, 15 15, -15 15; -15 -15, 15 -15, 15 15, -15 15; 0 0, 0 0, 0 0, 0 0; 0 0, 0 0, 0 0, 0 0" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="points" begin="-2.295s" dur="2.7s" values="0 0, 12 -12, 0 0, -12 12; -15 -15, 15 -15, 15 15, -15 15; -15 -15, 15 -15, 15 15, -15 15; 0 0, 0 0, 0 0, 0 0; 0 0, 0 0, 0 0, 0 0" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="points" begin="-2.160s" dur="2.7s" values="0 0, 12 -12, 0 0, -12 12; -15 -15, 15 -15, 15 15, -15 15; -15 -15, 15 -15, 15 15, -15 15; 0 0, 0 0, 0 0, 0 0; 0 0, 0 0, 0 0, 0 0" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts7" attributeName="points" begin="-2.160s" dur="2.7s" values="0 0, 12 -12, 0 0, -12 12; -15 -15, 15 -15, 15 15, -15 15; -15 -15, 15 -15, 15 15, -15 15; 0 0, 0 0, 0 0, 0 0; 0 0, 0 0, 0 0, 0 0" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts8" attributeName="points" begin="-2.025s" dur="2.7s" values="0 0, 12 -12, 0 0, -12 12; -15 -15, 15 -15, 15 15, -15 15; -15 -15, 15 -15, 15 15, -15 15; 0 0, 0 0, 0 0, 0 0; 0 0, 0 0, 0 0, 0 0" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts9" attributeName="points" begin="-1.890s" dur="2.7s" values="0 0, 12 -12, 0 0, -12 12; -15 -15, 15 -15, 15 15, -15 15; -15 -15, 15 -15, 15 15, -15 15; 0 0, 0 0, 0 0, 0 0; 0 0, 0 0, 0 0, 0 0" keyTimes="0; 0.1; 0.45; 0.6; 1" repeatCount="indefinite" />
     </symbol>
   </defs>
 

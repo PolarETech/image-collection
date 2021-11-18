@@ -3,30 +3,30 @@
      viewBox="0 0 100 100">
 
   <defs>
-    <rect id="parts" x="46" y="46" width="8" height="8" rx="1" />
+    <rect id="parts" x="-7" y="-7" width="14" height="14" rx="2" />
 
-    <symbol id="loading-icon" viewBox="0 0 100 100">
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
       <g id="parts-set1">
-        <use href="#parts" x="-24" y="-6" />
+        <use href="#parts" x="-40" y="-10" />
       </g>
       <g id="parts-set2">
-        <use href="#parts" x="-12" y="-6" />
-        <use href="#parts" x="-24" y="6" />
+        <use href="#parts" x="-20" y="-10" />
+        <use href="#parts" x="-40" y="+10" />
       </g>
       <g id="parts-set3">
-        <use href="#parts" x="0"   y="-6" />
-        <use href="#parts" x="-12" y="6" />
+        <use href="#parts" x="0"   y="-10" />
+        <use href="#parts" x="-20" y="+10" />
       </g>
       <g id="parts-set4">
-        <use href="#parts" x="12" y="-6" />
-        <use href="#parts" x="0"  y="6" />
+        <use href="#parts" x="+20" y="-10" />
+        <use href="#parts" x="0"   y="+10" />
       </g>
       <g id="parts-set5">
-        <use href="#parts" x="24" y="-6" />
-        <use href="#parts" x="12" y="6" />
+        <use href="#parts" x="+40" y="-10" />
+        <use href="#parts" x="+20" y="+10" />
       </g>
       <g id="parts-set6">
-        <use href="#parts" x="24" y="6" />
+        <use href="#parts" x="+40" y="+10" />
       </g>
 
       <!-- Editing the "values" properties will change the color -->

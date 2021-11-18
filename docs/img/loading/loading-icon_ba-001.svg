@@ -3,10 +3,10 @@
      viewBox="0 0 100 100">
 
   <defs>
-    <symbol id="loading-icon" viewBox="0 0 100 100">
-      <circle id="parts1" cx="29" cy="50" r="7" />
-      <circle id="parts2" cx="50" cy="50" r="7" />
-      <circle id="parts3" cx="71" cy="50" r="7" />
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <circle id="parts1" cx="-38" r="12" />
+      <circle id="parts2" cx="0"   r="12" />
+      <circle id="parts3" cx="+38" r="12" />
 
       <!-- Editing the "values" properties will change the color -->
       <animate href="#parts1" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-0.0s" dur="1.8s" keyTimes="0; 0.25; 0.5; 1" repeatCount="indefinite" />

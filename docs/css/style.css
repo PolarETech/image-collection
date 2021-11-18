@@ -108,6 +108,7 @@ h2 {
 .image-area img {
   width: 6rem;
   height: 6rem;
+  padding : 1.4rem;
   border-radius: 0.4rem;
   outline-width: 1px;
 }

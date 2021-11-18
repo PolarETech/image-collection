@@ -3,19 +3,19 @@
      viewBox="0 0 100 100">
 
   <defs>
-    <symbol id="loading-icon" viewBox="0 0 100 100">
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
       <!-- Editing the "fill" properties will change the color -->
-      <circle id="parts1" cx="50" cy="30.0" r="7.0" fill="#f0e9a5" />
-      <circle id="parts2" cx="50" cy="29.3" r="6.3" fill="#d8d39c" />
-      <circle id="parts3" cx="50" cy="28.6" r="5.6" fill="#c0bd92" />
-      <circle id="parts4" cx="50" cy="27.4" r="4.9" fill="#a8a789" />
-      <circle id="parts5" cx="50" cy="25.8" r="4.2" fill="#90917f" />
+      <circle id="parts1" cy="35.6" r="12.0" fill="#f0e9a5" />
+      <circle id="parts2" cy="37.4" r="10.8" fill="#d8d39c" />
+      <circle id="parts3" cy="39.2" r="9.6"  fill="#c0bd92" />
+      <circle id="parts4" cy="41.0" r="8.4"  fill="#a8a789" />
+      <circle id="parts5" cy="42.8" r="7.2"  fill="#90917f" />
 
-      <animateTransform href="#parts1" attributeName="transform" type="rotate" begin="-0.46s" dur="1.8s" from="-130 50 50" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
-      <animateTransform href="#parts2" attributeName="transform" type="rotate" begin="-0.35s" dur="1.8s" from="-170 50 50" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
-      <animateTransform href="#parts3" attributeName="transform" type="rotate" begin="-0.24s" dur="1.8s" from="-206 50 50" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
-      <animateTransform href="#parts4" attributeName="transform" type="rotate" begin="-0.12s" dur="1.8s" from="-236 50 50" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
-      <animateTransform href="#parts5" attributeName="transform" type="rotate" begin="-0.00s" dur="1.8s" from="-260 50 50" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
+      <animateTransform href="#parts1" attributeName="transform" type="rotate" begin="-0.45s" dur="1.8s" from="50"  by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
+      <animateTransform href="#parts2" attributeName="transform" type="rotate" begin="-0.33s" dur="1.8s" from="10"  by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
+      <animateTransform href="#parts3" attributeName="transform" type="rotate" begin="-0.22s" dur="1.8s" from="-26" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
+      <animateTransform href="#parts4" attributeName="transform" type="rotate" begin="-0.11s" dur="1.8s" from="-56" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
+      <animateTransform href="#parts5" attributeName="transform" type="rotate" begin="-0.00s" dur="1.8s" from="-80" by="360" calcMode="spline" keyTimes="0; 1" keySplines="0.3 0.7 0.7 0.3" repeatCount="indefinite" />
     </symbol>
   </defs>
 

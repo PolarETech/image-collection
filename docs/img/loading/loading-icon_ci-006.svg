@@ -3,18 +3,18 @@
      viewBox="0 0 100 100">
 
   <defs>
-    <symbol id="loading-icon" viewBox="0 0 100 100">
-      <g id="parts-set" stroke-width="10" fill="none">
-      <!-- Editing the "stroke" properties will change the color -->
-        <path stroke="#f0e9a5" d="M62.3 31.76 A22 22 0 0 0 37.7 31.76" />
-        <path stroke="#90917f" d="M62.3 31.76 A22 22 0 1 1 37.7 31.76" />
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <g id="parts-set" stroke-width="18" fill="none">
+        <!-- Editing the "stroke" properties will change the color -->
+        <path stroke="#f0e9a5" d="M-24.1 -33.2 A41 41 0 0 1 24.1 -33.2" />
+        <path stroke="#90917f" d="M-24.1 -33.2 A41 41 0 1 0 24.1 -33.2" />
       </g>
 
       <animateTransform href="#parts-set"
           attributeName="transform"
           type="rotate"
           dur="1.8s"
-          from="0 50 50" by="360"
+          from="0" to="360"
           repeatCount="indefinite" />
     </symbol>
   </defs>
