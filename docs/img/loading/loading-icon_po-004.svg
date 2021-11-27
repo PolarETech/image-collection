@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <g transform="rotate(45)">
+        <!-- Editing the "fill" property will change the color of the background rectangles -->
+        <g fill="#90917f">
+          <rect x="-8" y="-8" width="16" height="16" transform="translate(-25 -25)" />
+          <rect x="-8" y="-8" width="16" height="16" transform="translate(  0 -25)" />
+          <rect x="-8" y="-8" width="16" height="16" transform="translate( 25 -25)" />
+          <rect x="-8" y="-8" width="16" height="16" transform="translate(-25   0)" />
+          <rect x="-8" y="-8" width="16" height="16" transform="translate( 25   0)" />
+          <rect x="-8" y="-8" width="16" height="16" transform="translate(-25  25)" />
+          <rect x="-8" y="-8" width="16" height="16" transform="translate(  0  25)" />
+          <rect x="-8" y="-8" width="16" height="16" transform="translate( 25  25)" />
+        </g>
+
+        <!-- Editing the "fill" property will change the color of the moving rectangle -->
+        <rect id="parts" fill="#f0e9a5"
+              x="-8" y="-8" width="16" height="16" />
+      </g>
+
+      <animateTransform href="#parts"
+          attributeName="transform"
+          type="translate"
+          dur="1.8s"
+          values="-25 -25; 0 -25; 25 -25; 25 0; 25 25; 0 25; -25 25; -25 0"
+          calcMode="discrete"
+          repeatCount="indefinite" />
+
+      <animateTransform href="#parts"
+          attributeName="transform"
+          type="scale"
+          dur="0.225s"
+          values="1; 1.3"
+          additive="sum"
+          repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
