@@ -6,7 +6,7 @@ const sourceViewer = (() => {
   const downloadButtonId = 'download-source-button';
   const closeButtonId = 'close-source-viewer-button';
   const codeAreaId = 'code-area';
-  const loadingIconId = 'loading-icon';
+  const loadingIconId = 'source-loading-icon';
 
   const xhr = new XMLHttpRequest();
   xhr.responseType = 'blob';
@@ -147,7 +147,7 @@ const sourceViewer = (() => {
 
     // MEMO:
     // svg images width: 6rem; height: 6rem; padding: 1.4rem;
-    // loading-icon width: 5rem; height: 0.25rem;
+    // source-loading-icon width: 5rem; height: 0.25rem;
     const marginTop = Math.round(targetImage.clientHeight / 6 * 5.5);
     const marginLeft = Math.round(targetImage.clientWidth / 6 * 0.5);
 
@@ -244,9 +244,22 @@ const sourceViewer = (() => {
 })();
 
 (function setEventListener () {
+  function endImageLoading (event) {
+    switch (event.type) {
+    case 'load':
+      event.currentTarget.removeEventListener('error', endImageLoading, { once: true });
+      event.currentTarget.addEventListener('click', sourceViewer.showSVGSource);
+      break;
+    case 'error':
+      event.currentTarget.removeEventListener('load', endImageLoading, { once: true });
+      break;
+    }
+  }
+
   const images = document.querySelectorAll('.image-area img');
 
   images.forEach(image => {
-    image.addEventListener('click', sourceViewer.showSVGSource);
+    image.addEventListener('load', endImageLoading, { once: true });
+    image.addEventListener('error', endImageLoading, { once: true });
   });
 }());

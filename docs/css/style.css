@@ -128,7 +128,14 @@ h2 {
   color: var(--ap-main-header-color);
 }
 
-#loading-icon {
+.lazy-loading-icon {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii01MCAtNTAgMTAwIDEwMCI+PGcgc3Ryb2tlPSIjMjcyYTM4IiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiPjxjaXJjbGUgcj0iMjciLz48cGF0aCBkPSJNMCAtMjAgdjE1Ij48YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgZHVyPSIxLjJzIiBmcm9tPSIwIiBieT0iLTM2MCIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L3BhdGg+PC9nPjwvc3ZnPiA=");
+  background-repeat: no-repeat;
+  background-size: 3.2rem 3.2rem;
+  background-position: center;
+}
+
+#source-loading-icon {
   position: absolute;
   width: 5rem;
   height: 0.25rem;
