@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <g id="parts-set"
+         stroke-width="2" stroke-linejoin="round">
+
+        <!-- Editing the "fill" and "stroke" properties will change the color of the tip side parts -->
+        <g fill="#f0e9a5" stroke="#f0e9a5">
+          <polygon points="3 -7, 3 -48, 22 -24.2" />
+          <polygon points="3 -7, 3 -48, 22 -24.2" transform="rotate(90)" />
+          <polygon points="3 -7, 3 -48, 22 -24.2" transform="rotate(180)" />
+          <polygon points="3 -7, 3 -48, 22 -24.2" transform="rotate(270)" />
+        </g>
+
+        <!-- Editing the "fill" and "stroke" properties will change the color of the center side parts -->
+        <g fill="#90917f" stroke="#90917f">
+          <polygon points="3 -3, 24 -3, 24 -22" />
+          <polygon points="3 -3, 24 -3, 24 -22" transform="rotate(90)" />
+          <polygon points="3 -3, 24 -3, 24 -22" transform="rotate(180)" />
+          <polygon points="3 -3, 24 -3, 24 -22" transform="rotate(270)" />
+        </g>
+      </g>
+
+      <animateTransform href="#parts-set"
+          attributeName="transform"
+          type="rotate"
+          dur="3.6s"
+          values="0; 900"
+          calcMode="spline"
+          keySplines="0.37 0 0.63 1"
+          repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
