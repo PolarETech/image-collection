@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Polar Tech">
+    <meta name="description" content="A utility program to calculate division.">
+    <title>Division Calculator | Polar Tech</title>
+    <link rel="icon" href="../favicon.ico">
+
+    <!--
+      Copyright (c) 2021 Polar Tech
+      Released under the MIT license
+      https://opensource.org/licenses/MIT
+    -->
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+      body {
+        color: #313d53;
+        font-size: 16px;
+        line-height: 1.6rem;
+        font-family:
+          'Helvetica Neue',
+          'Arial',
+          'Hiragino Kaku Gothic ProN',
+          'Hiragino Sans',
+          'BIZ UDPGothic',
+          'Meiryo',
+          sans-serif;
+      }
+      .container {
+        width: 100vw;
+      }
+      main {
+        margin: 2rem 3rem;
+      }
+      @media (max-width: 419px) {
+        main {
+          margin: 1rem;
+        }
+      }
+      h1 {
+        max-width: calc(100% - 5rem);
+        font-size: 2rem;
+        line-height: 3rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+        line-height: 2.6rem;
+      }
+      @media (max-width: 419px) {
+        h2 {
+          text-align: center;
+        }
+      }
+      h1 + h2,
+      h2 + section {
+        margin-top: 1rem;
+      }
+      section + h2 {
+        margin-top: 4rem;
+      }
+      input[type='number'],
+      input[type='text'],
+      textarea {
+        appearance: none;
+        -webkit-appearance: none;
+        padding: 0.2rem 0.5rem;
+        border-radius: 0;
+        color: inherit;
+        font-size: 1.2rem;
+        line-height: inherit;
+        font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+      }
+      input[type='number'],
+      input[type='text'] {
+        border: none;
+        border-bottom: 2px solid #e9dcd5;
+      }
+      input[type='number'].invalid,
+      input[type='text'].invalid {
+        border-bottom-color: #cf2087;
+      }
+      textarea {
+        border: 2px solid #e9dcd5;
+      }
+      input[type='number']:focus,
+      input[type='text']:focus,
+      textarea:focus {
+        background-color: #f3ebf4;
+        outline: none;
+      }
+      button {
+        padding: 0.2rem 0.6rem;
+        border: none;
+        background-color: #566b92;
+        color: #dfe6e5;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #4f64ae;
+        color: #f9f8f8;
+      }
+      button:active {
+        background-color: #e9dcd5;
+        color: #4f64ae;
+      }
+      button[disabled] {
+        background-color: #dfe6e5;
+        color: #a5abcd;
+        cursor: not-allowed;
+      }
+
+      .flex-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: flex-start;
+      }
+      @media (max-width: 419px) {
+        .flex-container {
+          flex-direction: column;
+          align-content: center;
+        }
+      }
+
+      .flex-item input[type='number'],
+      .flex-item input[type='text'] {
+        width: 10rem;
+        margin-top: 0.2rem;
+      }
+      .flex-item label {
+        display: block;
+      }
+      .flex-item label:not(:first-of-type) {
+        margin-top: 1.6rem;
+      }
+      .flex-item textarea {
+        min-width: 12.4rem;
+        min-height: 18rem;
+      }
+      @media (max-width: 419px) {
+        .flex-item textarea {
+          min-height: 12rem;
+        }
+      }
+
+      .flex-item.execution {
+        margin: 2rem;
+      }
+
+      #num-round-check {
+        display: inline-block;
+        position: relative;
+        top: 0.25rem;
+      }
+      #num-round-check .checkbox {
+        width: 1.2rem;
+        height: 1.2rem;
+        border: 2px solid #e9dcd5;
+        cursor: pointer;
+      }
+      #num-round-check .checkbox-mark {
+        opacity: 0;
+        stroke: #f9f8f8;
+        stroke-width: 5px;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      #num-round-check .checkbox[aria-checked='true'] {
+        border: none;
+        background-color: #d3b78f;
+      }
+      #num-round-check .checkbox[aria-checked='true'] .checkbox-mark {
+        opacity: 1;
+      }
+
+      #num-round-check + input[type='number'] {
+        width: 8.2rem;
+        margin-left: 0.35rem;
+      }
+
+      .cc-container .relative {
+        position: relative;
+      }
+      .cc-container .relative.colorcode {
+        height: 2.29rem;
+      }
+      .cc-container .relative.colorsample {
+        height: 5.6rem;
+      }
+      .cc-container .sharp-mark {
+        position: absolute;
+        top: 0.4rem;
+        left: -0.8rem;
+        font-size: 1.2rem;
+        line-height: inherit;
+        font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+      }
+      .cc-container .sharp-mark + input {
+        position: absolute;
+      }
+      #color-sample-svg {
+        position: absolute;
+        top: 1.6rem;
+        left: -1rem;
+        width: 12rem;
+        height: 4rem;
+      }
+
+      #link-github {
+        position: absolute;
+        top: 1rem;
+        left: calc(100% - 2.6rem);
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+      #link-github svg {
+        width: 1.6rem;
+        height: 1.6rem;
+        color: rgb(60, 60, 60);
+      }
+      #link-github svg:hover {
+        color: rgba(60, 60, 60, 0.7);
+      }
+      footer {
+        margin-top: 3rem;
+        font-size: 0.9rem;
+        line-height: 1.8rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <main>
+        <h1>Division Calculator</h1>
+
+        <h2 id="number-division">Divide the Number</h2>
+
+        <section class="flex-container num-container">
+          <div class="flex-item input">
+            <label for="num-from">Number from:</label>
+            <input id="num-from" type="number" value="0" title="Enter a number">
+
+            <label for="num-to">Number to:</label>
+            <input id="num-to" type="number" value="360" title="Enter a number">
+
+            <label for="num-into">Divide into:</label>
+            <input id="num-into" type="number" value="7" min="1" title="Enter an integer greater than or equal to 1">
+
+            <label for="num-round-decimal">Rounding decimals:</label>
+            <div id="num-round-check" title="Toggle rounding on and off">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   viewBox="0 0 32 32"
+                   class="checkbox" tabindex="0" role="checkbox" aria-checked="true"
+                   aria-label="Toggle rounding on and off">
+                <path class="checkbox-mark" d="M4 16 Q8 19 13 23 Q20 15 27 8" />
+              </svg>
+            </div>
+            <input id="num-round-decimal" type="number" value="3" min="0" max="6" title="Enter an integer between 0 and 6">
+          </div>
+
+          <div class="flex-item execution">
+            <button id="num-divide" ontouchstart>Divide</button>
+          </div>
+
+          <div class="flex-item result">
+            <label for="num-result">Result:</label>
+            <textarea id="num-result" readonly></textarea>
+          </div>
+        </section>
+        <!-- end of num-container section -->
+
+        <h2 id="colorcode-division">Divide the Color Code</h2>
+
+        <section class="flex-container cc-container">
+          <div class="flex-item input">
+            <label for="cc-from">Color Code from:</label>
+            <div class="relative colorcode">
+              <span class="sharp-mark">#</span>
+              <input id="cc-from" type="text" value="fbdac8" minlength="3" maxlength="6" spellcheck="false" title="Enter a 3-digit or 6-digit hex color code">
+            </div>
+
+            <label for="cc-to">Color Code to:</label>
+            <div class="relative colorcode">
+              <span class="sharp-mark">#</span>
+              <input id="cc-to" type="text" value="9bcbce" minlength="3" maxlength="6" spellcheck="false" title="Enter a 3-digit or 6-digit hex color code">
+            </div>
+
+            <label for="cc-into">Divide into:</label>
+            <input id="cc-into" type="number" value="4" min="1" title="Enter an integer greater than or equal to 1">
+
+            <div class="relative colorsample">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   viewBox="-10 0 120 30"
+                   id="color-sample-svg">
+
+                <defs>
+                  <linearGradient id="sample-gradient"
+                      x1="0" y1="0" x2="1" y2="0">
+                    <stop id="sample-color-from" offset="0" stop-color="#fbdac8" />
+                    <stop id="sample-color-to"   offset="1" stop-color="#9bcbce" />
+                  </linearGradient>
+
+                  <polygon id="sample-mark" points="0 22 -3 30 3 30" fill="#a0a0a0"/>
+                </defs>
+
+                <rect width="100" height="20" fill="none" stroke="#808080" stroke-width="2" />
+                <rect width="100" height="20" fill="url(#sample-gradient)" />
+
+                <g id="sample-mark-group">
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="flex-item execution">
+            <button id="cc-divide" ontouchstart>Divide</button>
+          </div>
+
+          <div class="flex-item result">
+            <label for="cc-result">Result:</label>
+            <textarea id="cc-result" readonly></textarea>
+          </div>
+        </section>
+        <!-- end of cc-container section -->
+
+      </main>
+
+      <a id="link-github" href="https://github.com/PolarETech/image-collection" target="_blank" aria-label="go to the github repository">
+        <svg xmlns="http://www.w3.org/2000/svg" id="github-mark" width="32" height="32" viewBox="0 0 32 32">
+          <path fill="currentColor" fill-rule="evenodd" d="M16,.6a15.79,15.79,0,0,0-5,30.77c.79.15,1.08-.34,1.08-.76s0-1.37,0-2.68c-4.4.95-5.32-2.12-5.32-2.12A4.21,4.21,0,0,0,5,23.5c-1.43-1,.11-1,.11-1a3.3,3.3,0,0,1,2.42,1.63,3.37,3.37,0,0,0,4.6,1.31,3.35,3.35,0,0,1,1-2.11c-3.51-.4-7.19-1.75-7.19-7.81a6.08,6.08,0,0,1,1.62-4.23,5.7,5.7,0,0,1,.16-4.18S9,6.72,12.05,8.77a15,15,0,0,1,7.9,0c3-2,4.34-1.62,4.34-1.62a5.7,5.7,0,0,1,.16,4.18,6.08,6.08,0,0,1,1.62,4.23c0,6.07-3.69,7.4-7.21,7.8a3.74,3.74,0,0,1,1.07,2.92c0,2.11,0,3.81,0,4.33s.28.91,1.08.76A15.79,15.79,0,0,0,16,.6Z" />
+        </svg>
+      </a>
+
+      <footer>
+        <p>© 2021 Polar Tech | MIT License</p>
+      </footer>
+
+    </div>
+    <!-- end of container -->
+
+    <script type="text/javascript">
+      const main = (() => {
+        return {
+          executeValidation: event => {
+            switch (event.currentTarget.id.split('-')[0]) {
+            case 'num':
+              validateNumberDivisionValues();
+              break;
+            case 'cc':
+              validateColorCodeDivisionValues();
+              break;
+            }
+          },
+
+          executeDivision: event => {
+            switch (event.currentTarget.id.split('-')[0]) {
+            case 'num':
+              reflectDivisionResult('num', divideNumber());
+              break;
+            case 'cc':
+              reflectDivisionResult('cc', divideColorCode());
+              break;
+            }
+          },
+
+          toggleNumberDivisionRoundCheckbox: event => {
+            if (event.type === 'keydown') {
+              if (event.code === 'Space') {
+                event.preventDefault();
+              } else {
+                return;
+              }
+            }
+
+            if (event.type === 'click') {
+              // NOTE:
+              // When click the checkbox,
+              // the area before and after the checkbox may also be selected,
+              // thus deselecting it. (Safari, Chrome)
+              window.getSelection().removeAllRanges();
+
+              // NOTE:
+              // When click the checkbox,
+              // the checkbox will be focused and outline will be visible.
+              // thus deselect the checkbox. (Safari, Chrome)
+              event.currentTarget.blur();
+            }
+
+            const currentState = event.currentTarget.getAttribute('aria-checked') === 'true';
+            event.currentTarget.setAttribute('aria-checked', !currentState);
+
+            validateNumberDivisionValues();
+          },
+
+          changeNumberDivisionRoundDecimal: () => {
+            const el = getNumberDivisionElements();
+
+            // NOTE:
+            // Uncheck the checkbox if an invalid value is input,
+            // or check the checkbox if an valid value is input.
+            el.round.setAttribute('aria-checked', validateDecimalPlace(true, el.decimal.value));
+            el.decimal.style.borderColor = null;
+
+            validateNumberDivisionValues();
+          },
+
+          loadPage: () => {
+            reflectDivisionResult('num', divideNumber());
+            reflectDivisionResult('cc', divideColorCode());
+          }
+        };
+
+        // **************************
+        //  Elements and Values
+        // **************************
+
+        function getNumberDivisionElements () {
+          return {
+            from: document.getElementById('num-from'),
+            to: document.getElementById('num-to'),
+            into: document.getElementById('num-into'),
+            round: document.querySelector('#num-round-check .checkbox'),
+            decimal: document.getElementById('num-round-decimal'),
+            button: document.getElementById('num-divide')
+          };
+        }
+
+        function getColorCodeDivisionElements () {
+          return {
+            from: document.getElementById('cc-from'),
+            to: document.getElementById('cc-to'),
+            into: document.getElementById('cc-into'),
+            button: document.getElementById('cc-divide')
+          };
+        }
+
+        function getColorCodeSampleElements () {
+          return {
+            svgColorFrom: document.getElementById('sample-color-from'),
+            svgColorTo: document.getElementById('sample-color-to'),
+            svgMarkGroup: document.getElementById('sample-mark-group')
+          };
+        }
+
+        function getResultElement (type) {
+          return document.getElementById(`${type}-result`);
+        }
+
+        function getInvalidFieldElements (type) {
+          return document.querySelectorAll(`.${type}-container .invalid`);
+        }
+
+        function getNumberDivisionValues () {
+          const el = getNumberDivisionElements();
+
+          return {
+            from: el.from.value,
+            to: el.to.value,
+            into: el.into.value,
+            round: el.round.getAttribute('aria-checked') === 'true',
+            decimal: el.decimal.value
+          };
+        }
+
+        function getColorCodeDivisionValues () {
+          const el = getColorCodeDivisionElements();
+
+          const values = {
+            from: el.from.value,
+            to: el.to.value,
+            into: el.into.value
+          };
+
+          if (values.from.startsWith('#')) values.from = values.from.slice(1);
+          if (values.to.startsWith('#')) values.to = values.to.slice(1);
+
+          // NOTE:
+          // The number of digits of the color code in the final output will
+          // align with the larger number of digits of the input color code.
+          values.digits = Math.max(values.from.length, values.to.length);
+
+          return values;
+        }
+
+        // **************************
+        //  Validation
+        // **************************
+
+        function validateNumber (value) {
+          return !(Number.isNaN(parseFloat(value)));
+        }
+
+        function validateDivisionNumber (value) {
+          const v = Number(value);
+          return (Number.isInteger(v) && v > 0);
+        }
+
+        function validateDecimalPlace (isRound, value) {
+          if (isRound === false) return true;
+
+          const v = Number(value);
+          return (value !== '' && Number.isInteger(v) && 0 <= v && v <= 6);
+        }
+
+        function validateColorCode (hexStr) {
+          const numArr = hexStr2numArr(hexStr).filter(v => (0 <= v && v <= 255));
+          return numArr.length === 3;
+        }
+
+        function isInvalidFieldExists (type) {
+          return getInvalidFieldElements(type).length > 0;
+        }
+
+        function reflectValidationResultInField (target, isValid) {
+          if (isValid) {
+            target.classList.remove('invalid');
+          } else {
+            target.classList.add('invalid');
+          }
+        }
+
+        function reflectValidationResultInButton (target, isValid) {
+          if (isValid) {
+            target.removeAttribute('disabled');
+          } else {
+            target.setAttribute('disabled', true);
+          }
+        }
+
+        function validateNumberDivisionValues () {
+          const el = getNumberDivisionElements();
+          const values = getNumberDivisionValues();
+
+          reflectValidationResultInField(el.from, validateNumber(values.from));
+          reflectValidationResultInField(el.to, validateNumber(values.to));
+          reflectValidationResultInField(el.into, validateDivisionNumber(values.into));
+          reflectValidationResultInField(el.decimal, validateDecimalPlace(values.round, values.decimal));
+
+          const isValid = !(isInvalidFieldExists('num'));
+          reflectValidationResultInButton(el.button, isValid);
+
+          return isValid;
+        }
+
+        function validateColorCodeDivisionValues () {
+          const el = getColorCodeDivisionElements();
+          const values = getColorCodeDivisionValues();
+
+          reflectValidationResultInField(el.from, validateColorCode(values.from));
+          reflectValidationResultInField(el.to, validateColorCode(values.to));
+          reflectValidationResultInField(el.into, validateDivisionNumber(values.into));
+
+          const isValid = !(isInvalidFieldExists('cc'));
+          reflectValidationResultInButton(el.button, isValid);
+          if (isValid) reflectValuesInColorSample();
+
+          return isValid;
+        }
+
+        // **************************
+        //  Division
+        // **************************
+
+        function divide (from, to, into) {
+          const output = [];
+          const d = (to - from) / into;
+
+          for (let i = 0; i <= into; i++) {
+            output.push(from + d * i);
+          }
+
+          return output;
+        }
+
+        function reflectDivisionResult (type, result) {
+          getResultElement(type).value = result;
+        }
+
+        // **************************
+        //  functions for Number Division
+        // **************************
+
+        function getNumericNumberDivisionValues () {
+          const values = getNumberDivisionValues();
+
+          values.from = Number(values.from);
+          values.to = Number(values.to);
+          values.into = Number(values.into);
+          values.decimal = Number(values.decimal);
+
+          return values;
+        }
+
+        function divideNumber () {
+          if (validateNumberDivisionValues() === false) return 'Error';
+
+          const values = getNumericNumberDivisionValues();
+
+          let result = divide(values.from, values.to, values.into);
+
+          if (values.round) {
+            const k = 10 ** values.decimal;
+            result = result.map(v => (Math.round(v * k) / k).toFixed(values.decimal));
+          }
+
+          return result.join('\n');
+        }
+
+        // **************************
+        //  functions for Color Code Division
+        // **************************
+
+        function getNumericColorCodeDivisionValues () {
+          const values = getColorCodeDivisionValues();
+
+          values.from = hexStr2numArr(values.from, values.digits);
+          values.to = hexStr2numArr(values.to, values.digits);
+          values.into = Number(values.into);
+
+          return values;
+        }
+
+        function hexStr2numArr (hexStr, digits = 6) {
+          let output = [];
+
+          const reNonHex = /[^\dABCDEFabcdef]/;
+          if (reNonHex.test(hexStr)) return output;
+
+          switch (hexStr.length) {
+          case 3:
+            output = hexStr.match(/.{1}/g);
+
+            // NOTE:
+            // Convert 3-digit hex (fff) to 6-digit hex (ffffff)
+            // for the case where the final output is 6-digit hex.
+            if (digits === 6) output = output.map(v => v.repeat(2));
+
+            break;
+          case 6:
+            output = hexStr.match(/.{2}/g);
+            break;
+          default:
+            return output;
+          }
+
+          return output.map(v => Number.parseInt(v, 16));
+        }
+
+        function numArr2hexStr (numArr, digits = 6) {
+          const output = numArr.map(v => {
+            return Math.round(v).toString(16).padStart(digits / 3, '0');
+          });
+
+          return output.join('');
+        }
+
+        function divideColorCode() {
+          if (validateColorCodeDivisionValues() === false) return 'Error';
+
+          const values = getNumericColorCodeDivisionValues();
+          const rgb = [];
+          const result = [];
+
+          for (let i = 0; i < 3; i++) {
+            rgb.push(divide(values.from[i], values.to[i], values.into));
+          }
+          // -> rgb = [[divided R decimal numbers], [divided G decimal numbers], [divided B decimal numbers]]
+
+          for (let i = 0; i <= values.into; i++) {
+            result.push(numArr2hexStr(
+              [rgb[0][i], rgb[1][i], rgb[2][i]],
+              values.digits
+            ));
+          }
+
+          return result.map(v => `#${v}`).join('\n');
+        }
+
+        // **************************
+        //  Color Sample
+        // **************************
+
+        function reflectValuesInColorSample () {
+          const el = getColorCodeSampleElements();
+          const values = getColorCodeDivisionValues();
+
+          el.svgColorFrom.setAttribute('stop-color', `#${values.from}`);
+          el.svgColorTo.setAttribute('stop-color', `#${values.to}`);
+
+          // Adjust the number of mark elements
+          while (el.svgMarkGroup.children.length - 1 > values.into) {
+            el.svgMarkGroup.removeChild(el.svgMarkGroup.firstChild);
+          }
+
+          while (el.svgMarkGroup.children.length <= values.into) {
+            const mark = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+            mark.href.baseVal='#sample-mark';
+            el.svgMarkGroup.appendChild(mark);
+          }
+
+          // Adjust the position of mark elements
+          const posX = divide(0, 100, values.into);
+
+          for (let i = 0; i <= values.into; i++) {
+            el.svgMarkGroup.children[i].setAttribute('x', Math.round(posX[i] * 10) / 10);
+          }
+        }
+      })();
+
+      (function setEventListener () {
+        // Number Division
+        const numberDivisionInputFields = document.querySelectorAll('.num-container input');
+
+        numberDivisionInputFields.forEach(input => {
+          input.addEventListener('input', main.executeValidation);
+          input.addEventListener('mouseup', main.executeValidation);
+        });
+
+        const numRound = document.querySelector('#num-round-check .checkbox');
+        numRound.addEventListener('click', main.toggleNumberDivisionRoundCheckbox);
+        numRound.addEventListener('keydown', main.toggleNumberDivisionRoundCheckbox);
+
+        const numDecimal = document.getElementById('num-round-decimal');
+        numDecimal.addEventListener('input', main.changeNumberDivisionRoundDecimal);
+        numDecimal.removeEventListener('input', main.executeValidation);
+
+        const numDivide = document.getElementById('num-divide');
+        numDivide.addEventListener('click', main.executeDivision);
+
+        // Color Code Division
+        const ccDivisionInputFields = document.querySelectorAll('.cc-container input');
+
+        ccDivisionInputFields.forEach(input => {
+          input.addEventListener('input', main.executeValidation);
+          input.addEventListener('mouseup', main.executeValidation);
+        });
+
+        const ccDivide = document.getElementById('cc-divide');
+        ccDivide.addEventListener('click', main.executeDivision);
+
+        window.addEventListener('load', main.loadPage, { once: true });
+      }());
+    </script>
+
+  </body>
+</html>

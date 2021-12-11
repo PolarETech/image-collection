@@ -24,3 +24,4 @@ SVG images have been verified to be available in the latest Chrome, Firefox, and
 ## Utility for writing SVG source code
 
 - [keySplines Visualizer](https://polaretech.github.io/image-collection/utils/keysplines-visualizer.html)
+- [Division Calculator](https://polaretech.github.io/image-collection/utils/division-calculator.html)
