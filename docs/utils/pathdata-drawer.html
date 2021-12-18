@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Polar Tech">
+    <meta name="description" content="A utility program to draw path data in real time.">
+    <title>Real-Time Path Data Drawer | Polar Tech</title>
+    <link rel="icon" href="../favicon.ico">
+
+    <!--
+      Copyright (c) 2021 Polar Tech
+      Released under the MIT license
+      https://opensource.org/licenses/MIT
+    -->
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+      body {
+        color: #313642;
+        font-size: 16px;
+        line-height: 1.6rem;
+        font-family:
+          'Helvetica Neue',
+          'Arial',
+          'Hiragino Kaku Gothic ProN',
+          'Hiragino Sans',
+          'BIZ UDPGothic',
+          'Meiryo',
+          sans-serif;
+      }
+      .container {
+        width: 100vw;
+      }
+      main {
+        margin: 2rem;
+      }
+      @media (max-width: 419px) {
+        main {
+          margin: 1rem auto;
+        }
+      }
+      h1 {
+        max-width: calc(100vw - 5rem);
+        margin: 1rem;
+        font-size: 2rem;
+        line-height: 3rem;
+      }
+      textarea,
+      input[type='text'],
+      input[type='number'],
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        padding: 0 0.2rem;
+        border: 1px solid #a1a9ba;
+        border-radius: 0;
+        color: inherit;
+        font-size: 0.9rem;
+        line-height: 1.4rem;
+        font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+      }
+      select {
+        background-color: #fff;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjYTFhOWJhIi8+PHBhdGggZD0iTTggMTIsIDE3IDIxLCAyNiAxMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjwvc3ZnPgo=');
+        background-position: right center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        cursor: pointer;
+      }
+      textarea:focus,
+      input[type='text']:focus,
+      input[type='number']:focus,
+      select:focus {
+        background-color: #fff6f5;
+      }
+      textarea:focus,
+      input[type='text']:focus,
+      input[type='number']:focus {
+        outline: none;
+      }
+      label {
+        line-height: 2.4rem;
+      }
+
+      h1 + .flex-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+        margin-top: 1rem;
+      }
+      @media (max-width: 799px) {
+        h1 + .flex-container {
+          flex-direction: column;
+          align-items: center;
+          align-content: center;
+        }
+      }
+
+      .drawer {
+        position: relative;
+        width: calc(100vw - 1rem);
+        max-width: calc(400px + 4rem);
+      }
+      .drawer svg {
+        width: calc(100vw - 5rem);
+        max-width: 400px;
+        height: calc(100vw - 5rem);
+        max-height: 400px;
+        margin: 2rem;
+      }
+      .coords-text {
+        position: absolute;
+        top: 0;
+        width: calc(100vw - 1rem);
+        max-width: calc(400px + 4rem);
+        height: calc(100vw - 1rem);
+        max-height: calc(400px + 4rem);
+        font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+        pointer-events: none;
+      }
+      .coords-text #start-coords {
+        position: absolute;
+        top: 0.3rem;
+        left: 0.6rem;
+      }
+      .coords-text #end-coords {
+        position: absolute;
+        right: 0.6rem;
+        bottom: 0.3rem;
+        text-align: right;
+      }
+      .coords-text #cursor-coords {
+        position: absolute;
+        top: 0.3rem;
+        right: 1.2rem;
+        text-align: right;
+      }
+
+      .path-info {
+        margin: 0.5rem 2rem 0;
+      }
+      .path-info p {
+        width: 100%;
+        overflow-wrap: break-word;
+      }
+
+      .data-input {
+        width: calc(100vw - 400px - 10rem);
+        margin-top: 0.4rem;
+        margin-left: 1.5rem;
+      }
+      .data-input textarea#input-path-data {
+        width: 100%;
+        min-height: 20rem;
+        padding: 0.2rem 0.5rem;
+        font-size: 1.1rem;
+        line-height: 1.7rem;
+      }
+      @media (max-width: 799px) {
+        .data-input {
+          width: calc(100vw - 5rem);
+          margin-top: 1.5rem;
+          margin-left: 0;
+        }
+        .data-input textarea#input-path-data {
+          min-height: 15rem;
+          font-size: inherit;
+          line-height: inherit;
+        }
+      }
+
+      .settings {
+        width: 410px;
+        margin-top: 1rem;
+      }
+      .settings:first-of-type {
+        margin-top: 1.5rem;
+      }
+      .settings .flex-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+      }
+      .settings .flex-item + .flex-item {
+        margin-left: 0.8rem;
+      }
+      .settings .spacer {
+        width: 100%;
+      }
+      @media (max-width: 799px) {
+        .settings {
+          margin-right: auto;
+          margin-left: auto;
+        }
+      }
+      @media (max-width: 499px),
+             (min-width: 800px) and (max-width: 959px) {
+        .settings {
+          width: 220px;
+        }
+        .settings .flex-container {
+          flex-direction: column;
+        }
+        .settings .flex-item + .flex-item {
+          margin-left: 0;
+        }
+        .settings .spacer {
+          display: none;
+        }
+      }
+      .settings p b {
+        font-size: 1.1rem;
+      }
+      .settings .checkbox {
+        display: inline-block;
+        position: relative;
+        top: 0.2rem;
+        width: 1.2rem;
+        height: 1.2rem;
+        border: 1px solid #a1a4ba;
+        cursor: pointer;
+      }
+      .settings .checkbox use {
+        opacity: 0;
+        fill: #315985;
+      }
+      .settings .checkbox[aria-checked='true'] use {
+        opacity: 1;
+      }
+      .settings input[type='text'] {
+        width: 10rem;
+      }
+      .settings input[type='number'] {
+        width: 5rem;
+      }
+      .settings select {
+        width: 7rem;
+      }
+      .settings.guideline .checkbox,
+      .settings.path-style label {
+        margin-right: 0.1rem;
+      }
+
+      #quick-ref {
+        width: calc(100vw - 8rem);
+        margin: 2rem auto 0;
+      }
+      @media (max-width: 799px) {
+        #quick-ref {
+          width: calc(100vw - 5rem);
+        }
+      }
+      #quick-ref > p {
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+      #quick-ref > p:not(:first-of-type) {
+        margin-top: 2rem;
+      }
+      #quick-ref ul {
+        margin-left: 2rem;
+      }
+      #quick-ref li {
+        margin-top: 0.4rem;
+      }
+
+      #quick-ref table {
+        display: block;
+        max-height: 70vh;
+        margin: 1rem 0;
+        overflow: scroll;
+        border: 1px solid #313642;
+        empty-cells: show;
+        border-spacing: 0;
+      }
+      #quick-ref th,
+      #quick-ref td {
+        padding: 0.5rem;
+      }
+      #quick-ref thead th {
+        position: sticky;
+        top: 0;
+        border-right: 1px solid #a1a9ba;
+        background-color: #313642;
+        color: #fff;
+      }
+      #quick-ref tbody th,
+      #quick-ref td {
+        border-right: 1px solid #a1a9ba;
+        border-bottom: 1px solid #a1a9ba;
+        letter-spacing: 0.03rem;
+      }
+      #quick-ref thead th:last-of-type,
+      #quick-ref td:last-of-type {
+        width: 100%;
+        border-right: none;
+      }
+      #quick-ref tr:last-of-type td {
+        border-bottom: none;
+      }
+      #quick-ref tbody th {
+        width: 6.5rem;
+        background-color: #ccdae9;
+      }
+      #quick-ref td:first-of-type {
+        width: 10rem;
+      }
+      #quick-ref td:last-of-type {
+        min-width: 14rem;
+      }
+      #quick-ref td.note p:not(:first-of-type) {
+        margin-top: 0.8rem;
+      }
+
+      #link-github {
+        position: absolute;
+        top: 1rem;
+        left: calc(100% - 2.6rem);
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+      #link-github svg {
+        width: 1.6rem;
+        height: 1.6rem;
+        color: rgb(60, 60, 60);
+      }
+      #link-github svg:hover {
+        color: rgba(60, 60, 60, 0.7);
+      }
+      footer {
+        margin-top: 3rem;
+        font-size: 0.9rem;
+        line-height: 1.8rem;
+        text-align: center;
+      }
+      #svg-data {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <main>
+        <h1>Real-Time Path Data Drawer</h1>
+
+        <section class="flex-container">
+          <div class="flex-item drawer">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="100" height="100"
+                 viewBox="0 0 100 100">
+
+              <defs>
+                <symbol id="svg-base" viewBox="0 0 100 100">
+                  <rect x="0" y="0" width="100" height="100" fill="#fff" />
+
+                  <g stroke="#a1a9ba" stroke-width="0.15" fill="none">
+                    <g id="svg-guide-grid" display="inline">
+                      <line x1="0" y1="10" x2="100" y2="10" />
+                      <line x1="0" y1="20" x2="100" y2="20" />
+                      <line x1="0" y1="30" x2="100" y2="30" />
+                      <line x1="0" y1="40" x2="100" y2="40" />
+                      <line x1="0" y1="50" x2="100" y2="50" stroke-width="0.3" />
+                      <line x1="0" y1="60" x2="100" y2="60" />
+                      <line x1="0" y1="70" x2="100" y2="70" />
+                      <line x1="0" y1="80" x2="100" y2="80" />
+                      <line x1="0" y1="90" x2="100" y2="90" />
+
+                      <line x1="10" y1="0" x2="10" y2="100" />
+                      <line x1="20" y1="0" x2="20" y2="100" />
+                      <line x1="30" y1="0" x2="30" y2="100" />
+                      <line x1="40" y1="0" x2="40" y2="100" />
+                      <line x1="50" y1="0" x2="50" y2="100" stroke-width="0.3" />
+                      <line x1="60" y1="0" x2="60" y2="100" />
+                      <line x1="70" y1="0" x2="70" y2="100" />
+                      <line x1="80" y1="0" x2="80" y2="100" />
+                      <line x1="90" y1="0" x2="90" y2="100" />
+                    </g>
+
+                    <g id="svg-guide-diagonal" display="none">
+                      <line x1="10"  y1="0"  x2="0"   y2="10" />
+                      <line x1="20"  y1="0"  x2="0"   y2="20" />
+                      <line x1="30"  y1="0"  x2="0"   y2="30" />
+                      <line x1="40"  y1="0"  x2="0"   y2="40" />
+                      <line x1="50"  y1="0"  x2="0"   y2="50" stroke-width="0.3" />
+                      <line x1="60"  y1="0"  x2="0"   y2="60" />
+                      <line x1="70"  y1="0"  x2="0"   y2="70" />
+                      <line x1="80"  y1="0"  x2="0"   y2="80" />
+                      <line x1="90"  y1="0"  x2="0"   y2="90" />
+                      <line x1="100" y1="0"  x2="0"   y2="100" stroke-width="0.3" />
+                      <line x1="100" y1="10" x2="10"  y2="100" />
+                      <line x1="100" y1="20" x2="20"  y2="100" />
+                      <line x1="100" y1="30" x2="30"  y2="100" />
+                      <line x1="100" y1="40" x2="40"  y2="100" />
+                      <line x1="100" y1="50" x2="50"  y2="100" stroke-width="0.3" />
+                      <line x1="100" y1="60" x2="60"  y2="100" />
+                      <line x1="100" y1="70" x2="70"  y2="100" />
+                      <line x1="100" y1="80" x2="80"  y2="100" />
+                      <line x1="100" y1="90" x2="90"  y2="100" />
+
+                      <line x1="90"  y1="0"  x2="100" y2="10" />
+                      <line x1="80"  y1="0"  x2="100" y2="20" />
+                      <line x1="70"  y1="0"  x2="100" y2="30" />
+                      <line x1="60"  y1="0"  x2="100" y2="40" />
+                      <line x1="50"  y1="0"  x2="100" y2="50" stroke-width="0.3" />
+                      <line x1="40"  y1="0"  x2="100" y2="60" />
+                      <line x1="30"  y1="0"  x2="100" y2="70" />
+                      <line x1="20"  y1="0"  x2="100" y2="80" />
+                      <line x1="10"  y1="0"  x2="100" y2="90" />
+                      <line x1="0"   y1="0"  x2="100" y2="100" stroke-width="0.3" />
+                      <line x1="0"   y1="10" x2="90"  y2="100" />
+                      <line x1="0"   y1="20" x2="80"  y2="100" />
+                      <line x1="0"   y1="30" x2="70"  y2="100" />
+                      <line x1="0"   y1="40" x2="60"  y2="100" />
+                      <line x1="0"   y1="50" x2="50"  y2="100" stroke-width="0.3" />
+                      <line x1="0"   y1="60" x2="40"  y2="100" />
+                      <line x1="0"   y1="70" x2="30"  y2="100" />
+                      <line x1="0"   y1="80" x2="20"  y2="100" />
+                      <line x1="0"   y1="90" x2="10"  y2="100" />
+                    </g>
+
+                    <g id="svg-guide-circle" display="none">
+                      <circle cx="50" cy="50" r="10" />
+                      <circle cx="50" cy="50" r="20" />
+                      <circle cx="50" cy="50" r="30" />
+                      <circle cx="50" cy="50" r="40" />
+                      <circle cx="50" cy="50" r="50" stroke-width="0.3" />
+                      <circle cx="50" cy="50" r="60" />
+                    </g>
+
+                    <g id="svg-guide-frame" stroke-width="1" >
+                      <rect x="0" y="0" width="100" height="100" />
+                    </g>
+                  </g>
+                </symbol>
+              </defs>
+
+              <use id="svg-base-use" href="#svg-base" />
+
+              <path id="svg-path" d="M0 0 L100 100"
+                    fill="none" fill-rule="nonzero"
+                    stroke="#315985" stroke-width="1" />
+
+              <rect id="svg-draw-area"
+                    x="0" y="0" width="100" height="100"
+                    fill="transparent" cursor="crosshair" />
+            </svg>
+
+            <div class="coords-text">
+              <p id="start-coords">(0, 0)</p>
+              <p id="end-coords">(100, 100)</p>
+              <p id="cursor-coords"></p>
+            </div>
+
+            <div class="path-info">
+              <p>[ Path Information ]</p>
+              <p>Total path length: <span id="path-length"></span></p>
+              <p>Number of anchor points: <span id="path-count"></span></p>
+            </div>
+          </div>
+          <!-- end of drawer div -->
+
+          <div class="flex-item data-input">
+            <p>path d=</p>
+            <textarea id="input-path-data" spellcheck="false">M 67 73, 67 27&NewLine;C 67 13 59 7 50 7&NewLine;S 33 13 33 27&NewLine;v 55&NewLine;Q 33 93 48 93&NewLine;t 15 -11&NewLine;V 40&NewLine;a 13 13 0 0 0 -26 0&NewLine;L 37 69&NewLine;A 4 4 0 0 0 41 73&NewLine;h 18</textarea>
+
+            <p>Editing the text in &quot;path d=&quot; textarea will be immediately reflected in the svg image.</p>
+
+            <div class="settings guideline">
+              <p><b>Guideline Settings</b></p>
+
+              <div class="flex-container">
+                <div class="flex-item">
+                  <svg id="settings-grid" class="checkbox"
+                       tabindex="0" role="checkbox" aria-checked="true"
+                       aria-label="Toggle display grid guideline on and off">
+                    <use href="#svg-checkbox" />
+                  </svg>
+                  <label for="settings-grid">Grid</label>
+                </div>
+
+                <div class="flex-item">
+                  <svg id="settings-diagonal" class="checkbox"
+                       tabindex="0" role="checkbox" aria-checked="false"
+                       aria-label="Toggle display diagonal grid guideline on and off">
+                    <use href="#svg-checkbox" />
+                  </svg>
+                  <label for="settings-diagonal">Diagonal grid</label>
+                </div>
+
+                <div class="flex-item">
+                  <svg id="settings-circle" class="checkbox"
+                       tabindex="0" role="checkbox" aria-checked="false"
+                       aria-label="Toggle display circle guideline on and off">
+                    <use href="#svg-checkbox" />
+                  </svg>
+                  <label for="settings-circle">Circle</label>
+                </div>
+              </div>
+            </div>
+            <!-- end of guideline settings div -->
+
+            <div class="settings path-style">
+              <p><b>Path Settings</b></p>
+
+              <div class="flex-container">
+                <div class="flex-item">
+                  <label for="settings-fill">fill</label>
+                  <input id="settings-fill" type="text" value="none" placeholder="none" spellcheck="false">
+                </div>
+
+                <div class="flex-item">
+                  <label for="settings-fill-rule">fill-rule</label>
+                  <select id="settings-fill-rule">
+                    <option value="nonzero" selected>nonzero</option>
+                    <option value="evenodd">evenodd</option>
+                  </select>
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="flex-item">
+                  <label for="settings-stroke">stroke</label>
+                  <input id="settings-stroke" type="text" value="#315985" placeholder="#315985" spellcheck="false">
+                </div>
+
+                <div class="flex-item">
+                  <label for="settings-stroke-width">stroke-width</label>
+                  <input id="settings-stroke-width" type="number" value="1" min="0" step="0.1" title="Enter a number greater than or equal to 0">
+                </div>
+              </div>
+            </div>
+            <!-- end of path-style settings div -->
+
+            <div class="settings viewbox">
+              <p><b>ViewBox Settings</b></p>
+
+              <div class="flex-container">
+                <div class="flex-item">
+                  <label for="settings-viewbox-size">size</label>
+                  <input id="settings-viewbox-size" type="number" value="100" min="1" title="Enter a number greater than or equal to 1">
+                </div>
+
+                <div class="flex-item">
+                  <label for="settings-origin">origin</label>
+                  <select id="settings-origin">
+                    <option value="top-left" selected">top left</option>
+                    <option value="center">center</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- end of viewbox settings div -->
+
+          </div>
+          <!-- end of data-input div -->
+
+        </section>
+        <!-- end of flex-container section -->
+
+        <article id="quick-ref">
+          <p>Path Command Quick Reference</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Command</th>
+                <th scope="col">Parameters</th>
+                <th scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">M, m</th>
+                <td>x, y</td>
+                <td><b>MoveTo</b>
+                  <br>Specify the starting (x, y) coordinates of the new sub-path.
+                  <br>Subsequent coordinates are treated as parameters of the LineTo (L, l) command.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">L, l</th>
+                <td>x, y</td>
+                <td><b>LineTo</b>
+                  <br>Draw a line from the current coordinates to the given (x, y) coordinates.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">H, h</th>
+                <td>x</td>
+                <td><b>Horizontal LineTo</b>
+                  <br>Draw a horizontal line from the current coordinate to the given (x) and the current y coordinates.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">V, v</th>
+                <td>y</td>
+                <td><b>Vertical LineTo</b>
+                  <br>Draw a vertical line from the current coordinate to the current x and given (y) coordinates.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">C, c</th>
+                <td>x1, y1, x2, y2, x, y</td>
+                <td><b>CurveTo</b>
+                  <br>Draw a cubic Bézier curve from the current coordinates to the given (x, y) coordinates.
+                  <br>(x1, y1) are the coordinates of the control point at the start of the curve.
+                  <br>(x2, y2) are the coordinates of the control point at the end of the curve.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">S, s</th>
+                <td>x2, y2, x, y</td>
+                <td><b>Shorthand / Smooth CurveTo</b>
+                  <br>Draw a cubic Bézier curve from the current coordinates to the given (x, y) coordinates.
+                  <br>(x2, y2) are the coordinates of the control point at the end of the curve.
+                  <br>The coordinates of the control point at the start of the curve are reflection of the end control point of the previous curve.
+                  <br>If the previous command is not CurveTo (C, c, S, s), the coordinates of the control point at the start of the curve will be the same as the start coordinates of the current curve.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Q, q</th>
+                <td>x1, y1, x, y</td>
+                <td><b>Quadratic Bézier CurveTo</b>
+                  <br>Draw a quadratic Bézier curve from the current coordinates to the given (x, y) coordinates.
+                  <br>(x1, y1) are the coordinates of the control point.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">T, t</th>
+                <td>x, y</td>
+                <td><b>Shorthand / Smooth Quadratic Bézier CurveTo</b>
+                  <br>Draw a quadratic Bézier curve from the current coordinates to the given (x, y) coordinates.
+                  <br>The coordinates of the control point reflect the control point of the previous curve.
+                  <br>If the previous command is not Quadratic Bézier CurveTo (Q, q, T, t), the coordinates of the control point will be the same as the start coordinates of the current curve.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">A, a</th>
+                <td>rx, ry,<br>x-axis-rotation,<br>large-arc-flag,<br>sweep-flag,<br>x, y</td>
+                <td><b>Elliptical Arc</b>
+                  <br>Draws an elliptical arc from the current coordinates to the given (x, y) coordinates.
+                  <br>(rx, ry) are the radii of the ellipse.
+                  <br>x-axis-rotation is the rotation degree of the ellipse relative to the x-axis.
+                  <br>large-arc-flag indicates whether to draw the larger arc (1) or the smaller arc (0).
+                  <br>sweep-flag indicates whether to draw the arc with clockwise direction (1) or counterclockwise direction (0).
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Z, z</th>
+                <td></td>
+                <td><b>ClosePath</b>
+                  <br>Connect the last coordinate and the first coordinate of the current sub-path, and close the path with a line.
+                </td>
+              </tr>
+              <tr>
+                <td class="note" colspan="3"><b>Note</b>
+                  <p>In uppercase commands (M, L, H, V, C, S, Q, T, A), coordinate parameters are given as absolute values, while in lowercase commands (m, l, h, v, c, s, q, t, a), coordinate parameters are given as relative values from the current coordinates.</p>
+                  <p>If there are subsequent parameters after a command and its parameters, they are treated as the repetition of the same command. (Excluding the MoveTo (M, m) command and the ClosePath (Z, z) command)</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>References: </p>
+          <ul>
+            <li><a href="https://www.w3.org/TR/SVG11/paths.html#PathData" target="_blank">Paths - SVG 1.1 (Second Edition) | W3C</a></li>
+            <li><a href="https://developer.mozilla.org/ja/docs/Web/SVG/Attribute/d" target="_blank">d - SVG: Scalable Vector Graphics | MDN</a></li>
+          </ul>
+        </article>
+        <!-- end of quick-ref article -->
+
+      </main>
+
+      <a id="link-github" href="https://github.com/PolarETech/image-collection" target="_blank" aria-label="go to the github repository">
+        <svg xmlns="http://www.w3.org/2000/svg" id="github-mark" width="32" height="32" viewBox="0 0 32 32">
+          <path fill="currentColor" fill-rule="evenodd" d="M16,.6a15.79,15.79,0,0,0-5,30.77c.79.15,1.08-.34,1.08-.76s0-1.37,0-2.68c-4.4.95-5.32-2.12-5.32-2.12A4.21,4.21,0,0,0,5,23.5c-1.43-1,.11-1,.11-1a3.3,3.3,0,0,1,2.42,1.63,3.37,3.37,0,0,0,4.6,1.31,3.35,3.35,0,0,1,1-2.11c-3.51-.4-7.19-1.75-7.19-7.81a6.08,6.08,0,0,1,1.62-4.23,5.7,5.7,0,0,1,.16-4.18S9,6.72,12.05,8.77a15,15,0,0,1,7.9,0c3-2,4.34-1.62,4.34-1.62a5.7,5.7,0,0,1,.16,4.18,6.08,6.08,0,0,1,1.62,4.23c0,6.07-3.69,7.4-7.21,7.8a3.74,3.74,0,0,1,1.07,2.92c0,2.11,0,3.81,0,4.33s.28.91,1.08.76A15.79,15.79,0,0,0,16,.6Z" />
+        </svg>
+      </a>
+
+      <footer>
+        <p>© 2021 Polar Tech | MIT License</p>
+      </footer>
+
+    </div>
+    <!-- end of container -->
+
+    <div id="svg-data">
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <symbol id="svg-checkbox" viewBox="0 0 32 32">
+            <rect x="4" y="4" width="24" height="24" />
+          </symbol>
+        </defs>
+      </svg>
+    </div>
+
+    <script type="text/javascript">
+      const main = (() => {
+        return {
+          changePathData: () => {
+            reflectPathData();
+            reflectPathLength();
+            reflectPathItemCount();
+            reflectPathDataError();
+          },
+
+          changeGuidelineSettings: event => {
+            if (event.type === 'keydown') {
+              if (event.code === 'Space') {
+                event.preventDefault();
+              } else {
+                return;
+              }
+            }
+
+            if (event.type === 'click') {
+              // NOTE:
+              // When click the checkbox,
+              // the area before and after the checkbox may also be selected,
+              // thus deselecting it. (Safari, Chrome)
+              window.getSelection().removeAllRanges();
+
+              // NOTE:
+              // When click the checkbox,
+              // the checkbox will be focused and outline will be visible.
+              // thus deselect the checkbox. (Safari, Chrome)
+              event.currentTarget.blur();
+            }
+
+            const target = (() => {
+              switch (event.currentTarget.tagName.toLowerCase()) {
+              case 'svg':
+                return event.currentTarget;
+              case 'label':
+                return document.getElementById(event.currentTarget.getAttribute('for'));
+              }
+            })();
+
+            const currentState = target.getAttribute('aria-checked') === 'true';
+            target.setAttribute('aria-checked', !currentState);
+
+            reflectGuidelineSettings();
+          },
+
+          changePathStyleSettings: () => {
+            reflectPathStyleSettings();
+          },
+
+          changeViewBoxSettings: () => {
+            reflectViewBoxSettings();
+          },
+
+          moveCursor: event => {
+            const pos = getCursorPositionOnDrawer({ x: event.clientX, y: event.clientY });
+            reflectCursorPosition(pos);
+          },
+
+          clearCursorPositionText: () => {
+            reflectCursorPosition(null);
+          },
+
+          loadPage: () => {
+            reflectGuidelineSettings();
+            reflectPathStyleSettings();
+            reflectViewBoxSettings();
+            main.changePathData();
+          }
+        };
+
+        function getCursorPositionOnDrawer (cursor) {
+          // NOTE:
+          // Do not use getScreenCTM(), event.offsetX and event.offsetY
+          // because the coordinates will deviate from the range of 0 to 100
+          // when the user zooms in on the screen.
+          // In this utility, it is assumed that
+          // the users will zoom the screen to see the details of the path.
+
+          const drawArea = document.getElementById('svg-draw-area');
+          const drawAreaRect = drawArea.getBoundingClientRect();
+
+          const viewBoxSize = document.getElementById('settings-viewbox-size').value;
+          const originField = document.getElementById('settings-origin');
+          const origin = originField.options[originField.selectedIndex].value;
+
+          const pos = {
+            x: (cursor.x - drawAreaRect.x) / drawAreaRect.width * viewBoxSize,
+            y: (cursor.y - drawAreaRect.y) / drawAreaRect.height * viewBoxSize
+          };
+
+          if (pos.x < 0 || viewBoxSize < pos.x ||
+              pos.y < 0 || viewBoxSize < pos.y) {
+
+            return null;
+          }
+
+          if (origin === 'center') {
+            const offset = viewBoxSize / 2;
+            pos.x -= offset;
+            pos.y -= offset;
+          }
+
+          return { x: round(pos.x, 3), y: round(pos.y, 3) };
+        }
+
+        function reflectPathData () {
+          const svgPath = document.getElementById('svg-path');
+          const pathData = document.getElementById('input-path-data');
+          svgPath.setAttribute('d', pathData.value);
+        }
+
+        function reflectPathLength () {
+          const svgPath = document.getElementById('svg-path');
+          const span = document.getElementById('path-length');
+          span.innerText = svgPath.getTotalLength();
+        }
+
+        function reflectPathItemCount () {
+          const svgPath = document.getElementById('svg-path');
+          const span = document.getElementById('path-count');
+
+          if (span === null) return;
+
+          // NOTE:
+          // Chrome does not implement pathSegList.
+          // This utility does not provide the feature
+          // to display the number of anchor points by alternative methods
+          // for browsers that do not implement pathSegList.
+          if (svgPath.pathSegList === undefined) {
+            span.parentNode.remove();
+            return;
+          }
+
+          span.innerText = svgPath.pathSegList.numberOfItems;
+        }
+
+        function reflectPathDataError () {
+          const svgPath = document.getElementById('svg-path');
+          const pathData = document.getElementById('input-path-data');
+
+          // NOTE:
+          // If the path length is 0, treat it as an error.
+          if (svgPath.getTotalLength() === 0) {
+            pathData.style.borderColor = '#e67a99';
+          } else {
+            pathData.style.borderColor = null;
+          }
+        }
+
+        function reflectGuidelineSettings () {
+          const grid = document.getElementById('svg-guide-grid');
+          const diagonal = document.getElementById('svg-guide-diagonal');
+          const circle = document.getElementById('svg-guide-circle');
+
+          const gridChecked = document.getElementById('settings-grid').getAttribute('aria-checked') === 'true';
+          const diagonalChecked = document.getElementById('settings-diagonal').getAttribute('aria-checked') === 'true';
+          const circleChecked = document.getElementById('settings-circle').getAttribute('aria-checked') === 'true';
+
+          grid.setAttribute('display', gridChecked ? 'inline' : 'none');
+          diagonal.setAttribute('display', diagonalChecked ? 'inline' : 'none');
+          circle.setAttribute('display', circleChecked ? 'inline' : 'none');
+        }
+
+        function reflectPathStyleSettings () {
+          const path = document.getElementById('svg-path');
+
+          const fill = document.getElementById('settings-fill');
+          const fillRule = document.getElementById('settings-fill-rule');
+          const stroke = document.getElementById('settings-stroke');
+          const strokeWidth = document.getElementById('settings-stroke-width');
+
+          // stroke-width accepts only an number greater than or equal to 0
+          strokeWidth.value = Math.max(0, strokeWidth.value);
+
+          path.setAttribute('fill', fill.value);
+          path.setAttribute('fill-rule', fillRule.options[fillRule.selectedIndex].value);
+          path.setAttribute('stroke', stroke.value);
+          path.setAttribute('stroke-width', strokeWidth.value);
+        }
+
+        function reflectViewBoxSettings () {
+          const svg = document.querySelector('.drawer svg');
+          const baseUse = document.getElementById('svg-base-use');
+          const drawArea = document.getElementById('svg-draw-area');
+          const startCoords = document.getElementById('start-coords');
+          const endCoords = document.getElementById('end-coords');
+
+          const viewBoxSizeField = document.getElementById('settings-viewbox-size');
+          const originField = document.getElementById('settings-origin');
+          const origin = originField.options[originField.selectedIndex].value;
+
+          // viewBox size accepts only an number greater than or equal to 1
+          viewBoxSizeField.value = Math.max(1, viewBoxSizeField.value);
+          const size = viewBoxSizeField.value;
+
+          const coords = (() => {
+            switch (origin) {
+            case 'top-left':
+              return { start: 0, end: size };
+            case 'center':
+              return { start: 0 - (size / 2), end: size / 2 };
+            }
+          })();
+
+          svg.setAttribute('viewBox', `${coords.start} ${coords.start} ${size} ${size}`);
+          baseUse.setAttribute('x', coords.start);
+          baseUse.setAttribute('y', coords.start);
+          drawArea.setAttribute('x', coords.start);
+          drawArea.setAttribute('y', coords.start);
+          drawArea.setAttribute('width', size);
+          drawArea.setAttribute('height', size);
+
+          const roundedStart = round(coords.start, 3);
+          const roundedEnd = round(coords.end, 3);
+          startCoords.innerText = `(${roundedStart}, ${roundedStart})`;
+          endCoords.innerText = `(${roundedEnd}, ${roundedEnd})`;
+        }
+
+        function reflectCursorPosition (pos = null) {
+          const posText = document.getElementById('cursor-coords');
+
+          if (pos === null) {
+            posText.innerText = '';
+            return;
+          }
+
+          posText.innerText = `x: ${pos.x}, y: ${pos.y}`;
+        }
+
+        function round (value, digits = 0) {
+          return Math.round(value * (10 ** digits)) / (10 ** digits);
+        }
+      })();
+
+      (function setEventListener () {
+        const drawArea = document.getElementById('svg-draw-area');
+        drawArea.addEventListener('mousemove', main.moveCursor);
+        drawArea.addEventListener('mouseout', main.clearCursorPositionText);
+
+        const pathData = document.getElementById('input-path-data');
+        pathData.addEventListener('input', main.changePathData);
+
+        const guidelineSettings = document.querySelectorAll('.settings.guideline .checkbox, .settings.guideline label');
+
+        guidelineSettings.forEach(checkbox => {
+          checkbox.addEventListener('click', main.changeGuidelineSettings);
+          if (checkbox.classList.contains('checkbox')) {
+            checkbox.addEventListener('keydown', main.changeGuidelineSettings);
+          }
+        });
+
+        const pathStyleSettings = document.querySelectorAll('.settings.path-style input, .settings.path-style select');
+
+        pathStyleSettings.forEach(input => {
+          input.addEventListener('change', main.changePathStyleSettings);
+        });
+
+        const viewBoxSettings = document.querySelectorAll('.settings.viewbox input, .settings.viewbox select');
+
+        viewBoxSettings.forEach(input => {
+          input.addEventListener('change', main.changeViewBoxSettings);
+        });
+
+        window.addEventListener('load', main.loadPage, { once: true });
+      }());
+    </script>
+
+  </body>
+</html>
