@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Polar Tech">
+    <meta name="description" content="A utility program to generate path data to draw a separated circle.">
+    <title>Separated Circle Generator | Polar Tech</title>
+    <link rel="icon" href="../favicon.ico">
+
+    <!--
+      Copyright (c) 2021 Polar Tech
+      Released under the MIT license
+      https://opensource.org/licenses/MIT
+    -->
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+      body {
+        color: #3b4f5b;
+        font-size: 16px;
+        line-height: 1.6rem;
+        font-family:
+          'Helvetica Neue',
+          'Arial',
+          'Hiragino Kaku Gothic ProN',
+          'Hiragino Sans',
+          'BIZ UDPGothic',
+          'Meiryo',
+          sans-serif;
+      }
+      .container {
+        width: 100vw;
+      }
+      main {
+        margin: 2rem;
+      }
+      @media (max-width: 419px) {
+        main {
+          margin: 1rem auto;
+        }
+      }
+      h1 {
+        max-width: calc(100vw - 5rem);
+        margin: 1rem;
+        font-size: 2rem;
+        line-height: 3rem;
+      }
+      input[type='number'],
+      select,
+      textarea {
+        appearance: none;
+        -webkit-appearance: none;
+        border: 1px solid #678a9f;
+        border-radius: 0;
+        color: inherit;
+      }
+      input[type='number'],
+      select {
+        padding: 0 0.2rem;
+        font-size: 1.1rem;
+        line-height: 1.8rem;
+      }
+      select {
+        background-color: #fff;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjNjc4YTlmIi8+PHBhdGggZD0iTTggMTIsIDE3IDIxLCAyNiAxMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==');
+        background-position: right center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        cursor: pointer;
+      }
+      textarea {
+        padding: 0.2rem 0.5rem;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+      }
+      input[type='number']:focus,
+      select:focus,
+      textarea:focus {
+        background-color: #f7f4ee;
+      }
+      input[type='number']:focus,
+      textarea:focus {
+        outline: none;
+      }
+      label {
+        font-size: 1.1rem;
+        line-height: 3rem;
+      }
+
+      h1 + .flex-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+        margin-top: 1rem;
+      }
+      @media (max-width: 734px) {
+        h1 + .flex-container {
+          flex-direction: column;
+          align-items: center;
+          align-content: center;
+        }
+      }
+
+      .view-svg {
+        position: relative;
+        width: calc(100vw - 1rem);
+        max-width: calc(300px + 4rem);
+      }
+      .view-svg svg {
+        width: calc(100vw - 5rem);
+        max-width: 300px;
+        height: calc(100vw - 5rem);
+        max-height: 300px;
+        margin: 2rem;
+      }
+      .coords-text {
+        position: absolute;
+        top: 0;
+        width: calc(100vw - 1rem);
+        max-width: calc(300px + 4rem);
+        height: calc(100vw - 1rem);
+        max-height: calc(300px + 4rem);
+        font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+        pointer-events: none;
+      }
+      .coords-text #start-coords {
+        position: absolute;
+        top: 0.3rem;
+        left: 0.6rem;
+      }
+      .coords-text #end-coords {
+        position: absolute;
+        right: 0.6rem;
+        bottom: 0.3rem;
+        text-align: right;
+      }
+
+      .settings {
+        width: calc(100vw - 300px - 10rem);
+        margin-top: 1.5rem;
+        margin-left: 1rem;
+      }
+      @media (max-width: 734px) {
+        .settings {
+          width: 462px;
+          margin-left: 0;
+        }
+      }
+      @media (max-width: 539px) {
+        .settings {
+          width: 272px;
+        }
+      }
+
+      .settings .flex-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+      }
+      .settings .flex-item + .flex-item {
+        margin-left: 1.2rem;
+      }
+      .settings .spacer {
+        width: 100%;
+      }
+      @media (max-width: 539px),
+             (min-width: 735px) and (max-width: 919px) {
+        .settings .flex-container {
+          flex-direction: column;
+        }
+        .settings .flex-item + .flex-item {
+          margin-left: 0;
+        }
+        .settings .spacer {
+          display: none;
+        }
+      }
+
+      .settings input[type='number'] {
+        width: 6rem;
+      }
+      .settings input#settings-division-number {
+        width: 4rem;
+      }
+      .settings select {
+        width: 8rem;
+      }
+      .settings select#settings-contour {
+        width: 6rem;
+      }
+      .settings select#settings-direction {
+        width: 12rem;
+      }
+      .settings label {
+        margin-right: 0.2rem;
+      }
+
+      .output {
+        width: calc(100vw - 8rem);
+        margin: 2rem auto 0;
+      }
+      @media (max-width: 734px) {
+        .output {
+          width: calc(100vw - 5rem);
+        }
+      }
+      .output textarea {
+        width: 100%;
+        height: 15.3rem;
+        max-height: 60vh;
+      }
+
+      #link-github {
+        position: absolute;
+        top: 1rem;
+        left: calc(100% - 2.6rem);
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+      #link-github svg {
+        width: 1.6rem;
+        height: 1.6rem;
+        color: rgb(60, 60, 60);
+      }
+      #link-github svg:hover {
+        color: rgba(60, 60, 60, 0.7);
+      }
+      footer {
+        margin-top: 3rem;
+        font-size: 0.9rem;
+        line-height: 1.8rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <main>
+        <h1>Separated Circle Generator</h1>
+
+        <section class="flex-container">
+          <div class="flex-item view-svg">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="100" height="100"
+                 viewBox="0 0 100 100"
+                 id="svg-viewer">
+
+              <defs>
+                <symbol id="svg-base" viewBox="0 0 100 100">
+                  <rect x="0" y="0" width="100" height="100" fill="#fff" />
+
+                  <g stroke="#79b1c3" stroke-width="0.15" fill="none">
+                    <line x1="0" y1="10" x2="100" y2="10" />
+                    <line x1="0" y1="20" x2="100" y2="20" />
+                    <line x1="0" y1="30" x2="100" y2="30" />
+                    <line x1="0" y1="40" x2="100" y2="40" />
+                    <line x1="0" y1="50" x2="100" y2="50" stroke-width="0.3" />
+                    <line x1="0" y1="60" x2="100" y2="60" />
+                    <line x1="0" y1="70" x2="100" y2="70" />
+                    <line x1="0" y1="80" x2="100" y2="80" />
+                    <line x1="0" y1="90" x2="100" y2="90" />
+
+                    <line x1="10" y1="0" x2="10" y2="100" />
+                    <line x1="20" y1="0" x2="20" y2="100" />
+                    <line x1="30" y1="0" x2="30" y2="100" />
+                    <line x1="40" y1="0" x2="40" y2="100" />
+                    <line x1="50" y1="0" x2="50" y2="100" stroke-width="0.3" />
+                    <line x1="60" y1="0" x2="60" y2="100" />
+                    <line x1="70" y1="0" x2="70" y2="100" />
+                    <line x1="80" y1="0" x2="80" y2="100" />
+                    <line x1="90" y1="0" x2="90" y2="100" />
+
+                    <rect x="0" y="0" width="100" height="100" stroke-width="1" />
+                  </g>
+
+                  <path id="svg-error"
+                        d="M10 10 90 90 M90 10 10 90"
+                        fill="none" stroke="#d1c248" stroke-width="6" stroke-linecap="round"
+                        display="none" />
+                </symbol>
+              </defs>
+
+              <use id="svg-base-use" href="#svg-base" />
+
+              <path id="svg-path" fill="#cf5b9d" d="M0 0 L100 100" />
+            </svg>
+
+            <div class="coords-text">
+              <p id="start-coords">(0, 0)</p>
+              <p id="end-coords">(100, 100)</p>
+            </div>
+          </div>
+          <!-- end of view-svg div -->
+
+          <div class="flex-item settings">
+            <div class="flex-container">
+              <div class="flex-item">
+                <label for="settings-outer-radius">Outer Radius</label>
+                <input id="settings-outer-radius" type="number" value="50" title="Enter a non-zero number">
+              </div>
+
+              <div class="flex-item">
+                <label for="settings-inner-radius">Inner Radius</label>
+                <input id="settings-inner-radius" type="number" value="20" title="Enter a non-zero number">
+              </div>
+
+              <div class="spacer"></div>
+
+              <div class="flex-item">
+                <label for="settings-division-number">Division Number</label>
+                <input id="settings-division-number" type="number" value="6" min="1" title="Enter an integer greater than or equal to 1">
+              </div>
+
+              <div class="spacer"></div>
+
+              <div class="flex-item">
+                <label for="settings-gap-width">Gap Width</label>
+                <input id="settings-gap-width" type="number" value="7" title="Enter a number">
+              </div>
+
+              <div class="flex-item">
+                <label for="settings-gap-shape">Gap Shape</label>
+                <select id="settings-gap-shape">
+                  <option value="rectangle" selected>Rectangle</option>
+                  <option value="radial">Radial</option>
+                </select>
+              </div>
+
+              <div class="spacer"></div>
+
+              <div class="flex-item">
+                <label for="settings-direction">Direction</label>
+                <select id="settings-direction">
+                  <option value="vertical" selected">Vertical/Up</option>
+                  <option value="horizontal">Horizontal/Down</option>
+                  <option value="right">Right</option>
+                  <option value="left">Left</option>
+                </select>
+              </div>
+
+              <div class="flex-item">
+                <label for="settings-contour">Contour</label>
+                <select id="settings-contour">
+                  <option value="arc" selected">Arc</option>
+                  <option value="line">Line</option>
+                </select>
+              </div>
+
+              <div class="spacer"></div>
+
+              <div class="flex-item">
+                <label for="settings-viewbox-size">ViewBox Size</label>
+                <input id="settings-viewbox-size" type="number" data-value="100" value="100" min="1" title="Enter a number greater than or equal to 1">
+              </div>
+
+              <div class="flex-item">
+                <label for="settings-origin">Origin</label>
+                <select id="settings-origin">
+                  <option value="top-left" selected">Top Left</option>
+                  <option value="center">Center</option>
+                </select>
+              </div>
+
+              <p>* Changing the ViewBox Size will automatically adjust the Radius and Gap Width values.</p>
+            </div>
+            <!-- end of flex-container section -->
+
+          </div>
+          <!-- end of settings div -->
+
+        </section>
+        <!-- end of flex-container section -->
+
+        <div class="output">
+          <p>Generated Path Data:</p>
+          <textarea id="output-path-data" readonly></textarea>
+        </div>
+
+      </main>
+
+      <a id="link-github" href="https://github.com/PolarETech/image-collection" target="_blank" aria-label="go to the github repository">
+        <svg xmlns="http://www.w3.org/2000/svg" id="github-mark" width="32" height="32" viewBox="0 0 32 32">
+          <path fill="currentColor" fill-rule="evenodd" d="M16,.6a15.79,15.79,0,0,0-5,30.77c.79.15,1.08-.34,1.08-.76s0-1.37,0-2.68c-4.4.95-5.32-2.12-5.32-2.12A4.21,4.21,0,0,0,5,23.5c-1.43-1,.11-1,.11-1a3.3,3.3,0,0,1,2.42,1.63,3.37,3.37,0,0,0,4.6,1.31,3.35,3.35,0,0,1,1-2.11c-3.51-.4-7.19-1.75-7.19-7.81a6.08,6.08,0,0,1,1.62-4.23,5.7,5.7,0,0,1,.16-4.18S9,6.72,12.05,8.77a15,15,0,0,1,7.9,0c3-2,4.34-1.62,4.34-1.62a5.7,5.7,0,0,1,.16,4.18,6.08,6.08,0,0,1,1.62,4.23c0,6.07-3.69,7.4-7.21,7.8a3.74,3.74,0,0,1,1.07,2.92c0,2.11,0,3.81,0,4.33s.28.91,1.08.76A15.79,15.79,0,0,0,16,.6Z" />
+        </svg>
+      </a>
+
+      <footer>
+        <p>© 2021 Polar Tech | MIT License</p>
+      </footer>
+
+    </div>
+    <!-- end of container -->
+
+    <script type="text/javascript">
+      const main = (() => {
+        return {
+          changeCircleSettings: () => {
+            reflectCircleSettings();
+          },
+
+          changeViewBoxSettings: () => {
+            reflectViewBoxSettings();
+            adjustCircleSizeSettingsToResizedViewBoxSize();
+            reflectCircleSettings();
+          },
+
+          loadPage: () => {
+            reflectViewBoxSettings();
+
+            const el = getSettingsElements();
+            el.viewBoxSize.setAttribute('data-value', el.viewBoxSize.value);
+
+            reflectCircleSettings();
+          }
+        };
+
+        function getSettingsElements () {
+          return {
+            outerRadius: document.getElementById('settings-outer-radius'),
+            innerRadius: document.getElementById('settings-inner-radius'),
+            division: document.getElementById('settings-division-number'),
+            gapWidth: document.getElementById('settings-gap-width'),
+            gapShape: document.getElementById('settings-gap-shape'),
+            direction: document.getElementById('settings-direction'),
+            contour: document.getElementById('settings-contour'),
+            viewBoxSize: document.getElementById('settings-viewbox-size'),
+            origin: document.getElementById('settings-origin')
+          };
+        }
+
+        function getSettingsValues () {
+          const el = getSettingsElements();
+
+          // Division Number accepts only an integer greater than or equal to 1
+          el.division.value = Math.max(1, Math.round(Number(el.division.value)));
+
+          return {
+            outerRadius: parseFloat(el.outerRadius.value),
+            innerRadius: parseFloat(el.innerRadius.value),
+            division: parseInt(el.division.value, 10),
+            gapWidth: parseFloat(el.gapWidth.value),
+            gapShape: el.gapShape.options[el.gapShape.selectedIndex].value,
+            direction: el.direction.options[el.direction.selectedIndex].value,
+            contour: el.contour.options[el.contour.selectedIndex].value,
+            viewBoxSize: parseFloat(el.viewBoxSize.value),
+            origin: el.origin.options[el.origin.selectedIndex].value
+          };
+        }
+
+        function getViewBoxElements () {
+          return {
+            svg: document.querySelector('.view-svg svg'),
+            grid: document.getElementById('svg-base-use'),
+            startCoords: document.getElementById('start-coords'),
+            endCoords: document.getElementById('end-coords'),
+            viewBoxSize: document.getElementById('settings-viewbox-size'),
+            origin: document.getElementById('settings-origin')
+          };
+        }
+
+        function reflectCircleSettings () {
+          const settings = getSettingsValues();
+
+          const svgPath = document.getElementById('svg-path');
+          const svgError = document.getElementById('svg-error');
+          const outputPathDataField = document.getElementById('output-path-data');
+
+          const coordinates = calculateCoordinates(
+            settings.outerRadius,
+            settings.innerRadius,
+            settings.division,
+            settings.gapWidth,
+            settings.gapShape,
+            settings.direction,
+            settings.viewBoxSize,
+            settings.origin
+          );
+
+          // Display the error if an error occurs in the calculation of coordinates
+          if (coordinates.outerCoordinates
+            .concat(coordinates.innerCoordinates)
+            .some(v => Object.values(v).includes(NaN))) {
+
+            svgPath.setAttribute('d', '');
+            svgError.setAttribute('display', 'inline');
+            outputPathDataField.value = 'Error';
+            return;
+          }
+
+          const pathData = generatePathData(
+            coordinates,
+            settings.outerRadius,
+            settings.innerRadius,
+            settings.division,
+            settings.contour
+          );
+
+          svgPath.setAttribute('d', pathData.join(' '));
+          svgError.setAttribute('display', 'none');
+          outputPathDataField.value = pathData.join('\n');
+        }
+
+        function reflectViewBoxSettings () {
+          const el = getViewBoxElements();
+
+          // ViewBox Size accepts only an number greater than or equal to 1
+          el.viewBoxSize.value = Math.max(1, el.viewBoxSize.value);
+
+          const size = parseFloat(el.viewBoxSize.value);
+          const origin = el.origin.options[el.origin.selectedIndex].value;
+
+          const coords = (() => {
+            switch (origin) {
+            case 'top-left':
+              return { start: 0, end: size };
+            case 'center':
+              return { start: 0 - (size / 2), end: size / 2 };
+            }
+          })();
+
+          el.svg.setAttribute('viewBox', `${coords.start} ${coords.start} ${size} ${size}`);
+
+          el.grid.setAttribute('x', coords.start);
+          el.grid.setAttribute('y', coords.start);
+
+          el.startCoords.innerText = `(${coords.start}, ${coords.start})`;
+          el.endCoords.innerText = `(${coords.end}, ${coords.end})`;
+        }
+
+        function adjustCircleSizeSettingsToResizedViewBoxSize () {
+          const el = getSettingsElements();
+
+          const size = el.viewBoxSize.value;
+          const prevSize = el.viewBoxSize.getAttribute('data-value');
+
+          if (size === prevSize) return;
+
+          const k = size / prevSize;
+
+          el.outerRadius.value = round(el.outerRadius.value * k, 3);
+          el.innerRadius.value = round(el.innerRadius.value * k, 3);
+          el.gapWidth.value = round(el.gapWidth.value * k, 3);
+
+          el.viewBoxSize.setAttribute('data-value', size);
+
+          if (size > 32 && prevSize > 32) return;
+
+          switch (true) {
+          case size <= 1:
+            el.outerRadius.setAttribute('step', '0.01');
+            el.innerRadius.setAttribute('step', '0.01');
+            el.gapWidth.setAttribute('step', '0.01');
+            break;
+          case size <= 32:
+            el.outerRadius.setAttribute('step', '0.1');
+            el.innerRadius.setAttribute('step', '0.1');
+            el.gapWidth.setAttribute('step', '0.1');
+            break;
+          default:
+            el.outerRadius.removeAttribute('step');
+            el.innerRadius.removeAttribute('step');
+            el.gapWidth.removeAttribute('step');
+          }
+        }
+
+        // **************************
+        //  Coordinates calculation
+        // **************************
+
+        function calculateRadian (r, division, gapWidth) {
+          const radian = deg2rad(360 / division);
+          if (gapWidth === 0) return radian;
+
+          const shift = Math.asin((gapWidth / 2) / r) * 2;
+          return radian - shift;
+        }
+
+        function calculateBaseCoordinates (r, radian, center) {
+          const preX = Math.cos(radian / 2) * r;
+          const preY = Math.sin(radian / 2) * r;
+
+          const x = center + preX;
+          const y1 = center - preY;
+          const y2 = center + preY;
+
+          return { x1: x, y1, x2: x, y2 };
+        }
+
+        function calculateCircularCoordinates (baseCoordinates, center, division, direction) {
+          const baseRadian = deg2rad(360 / division);
+
+          const startRadian = (() => {
+            const halfDegree = 360 / division / 2;
+
+            switch (direction) {
+            case 'vertical':
+              return deg2rad(90 - halfDegree);
+            case 'horizontal':
+              return deg2rad(90);
+            case 'right':
+              return deg2rad(-halfDegree);
+            case 'left':
+              return deg2rad(180 - halfDegree);
+            }
+          })();
+
+          const coordinates = [];
+
+          for (let i = 0; i < division; i++) {
+            const radian = baseRadian * i - startRadian;
+
+            const x1 = (Math.cos(radian) * (baseCoordinates.x1 - center)) - (Math.sin(radian) * (baseCoordinates.y1 - center)) + center;
+            const y1 = (Math.sin(radian) * (baseCoordinates.x1 - center)) + (Math.cos(radian) * (baseCoordinates.y1 - center)) + center;
+            const x2 = (Math.cos(radian) * (baseCoordinates.x2 - center)) - (Math.sin(radian) * (baseCoordinates.y2 - center)) + center;
+            const y2 = (Math.sin(radian) * (baseCoordinates.x2 - center)) + (Math.cos(radian) * (baseCoordinates.y2 - center)) + center;
+
+            coordinates.push({ x1, y1, x2, y2 });
+          }
+
+          return coordinates;
+        }
+
+        function calculateCoordinates (outerRadius, innerRadius, division, gapWidth, gapShape, direction, boxSize, origin) {
+          const center = (() => {
+            switch (origin) {
+            case 'top-left':
+              return boxSize / 2;
+            case 'center':
+              return 0;
+            }
+          })();
+
+          const outerCoordinates = (() => {
+            const radius = (() => {
+              switch (gapShape) {
+              case 'rectangle':
+                return outerRadius;
+              case 'radial':
+                return Math.max(Math.abs(outerRadius), Math.abs(innerRadius));
+              }
+            })();
+
+            const radian = calculateRadian(radius, division, gapWidth);
+            const baseCoordinates = calculateBaseCoordinates(outerRadius, radian, center);
+
+            return calculateCircularCoordinates(baseCoordinates, center, division, direction);
+          })();
+
+          const innerCoordinates = (() => {
+            const radius = (() => {
+              switch (gapShape) {
+              case 'rectangle':
+                return innerRadius;
+              case 'radial':
+                return Math.max(Math.abs(outerRadius), Math.abs(innerRadius));
+              }
+            })();
+
+            const radian = calculateRadian(radius, division, gapWidth);
+            const baseCoordinates = calculateBaseCoordinates(innerRadius, radian, center);
+
+            return calculateCircularCoordinates(baseCoordinates, center, division, direction);
+          })();
+
+          return { outerCoordinates, innerCoordinates };
+        }
+
+        // **************************
+        //  Path data
+        // **************************
+
+        function generatePathData (coordinates, outerRadius, innerRadius, division, contour) {
+          const digits = 3;
+          const largeArcFlag = division === 1 ? 1 : 0;
+          const pathData = [];
+
+          for (let i = 0; i < division; i++) {
+            const outPos = Object.fromEntries(
+              Object.entries(coordinates.outerCoordinates[i])
+                .map(([key, val]) => [key, round(val, digits)])
+            );
+
+            const inPos = Object.fromEntries(
+              Object.entries(coordinates.innerCoordinates[i])
+                .map(([key, val]) => [key, round(val, digits)])
+            );
+
+            switch (contour) {
+            case 'arc':
+              pathData.push(`M${outPos.x1} ${outPos.y1} A${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${outPos.x2} ${outPos.y2} ` +
+                            `L${inPos.x2} ${inPos.y2} A${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${inPos.x1} ${inPos.y1}Z`);
+              break;
+            case 'line':
+              pathData.push(`M${outPos.x1} ${outPos.y1} L${outPos.x2} ${outPos.y2}, ${inPos.x2} ${inPos.y2}, ${inPos.x1} ${inPos.y1}Z`);
+              break;
+            }
+          }
+
+          return pathData;
+        }
+
+        // **************************
+        //  General
+        // **************************
+
+        function round (value, digits = 0) {
+          return Math.round(value * (10 ** digits)) / (10 ** digits);
+        }
+
+        function deg2rad (degree) {
+          return degree * (Math.PI / 180);
+        }
+      })();
+
+      (function setEventListener () {
+        const settings = document.querySelectorAll('.settings input, .settings select');
+
+        settings.forEach(input => {
+          input.addEventListener('change', main.changeCircleSettings);
+        });
+
+        const viewBoxSize = document.getElementById('settings-viewbox-size');
+        viewBoxSize.addEventListener('change', main.changeViewBoxSettings);
+        viewBoxSize.removeEventListener('change', main.changeCircleSettings);
+
+        const origin = document.getElementById('settings-origin');
+        origin.addEventListener('change', main.changeViewBoxSettings);
+        origin.removeEventListener('change', main.changeCircleSettings);
+
+        window.addEventListener('load', main.loadPage, { once: true });
+      }());
+    </script>
+
+  </body>
+</html>

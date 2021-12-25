@@ -26,3 +26,4 @@ SVG images have been verified to be available in the latest Chrome, Firefox, and
 - [keySplines Visualizer](https://polaretech.github.io/image-collection/utils/keysplines-visualizer.html)
 - [Division Calculator](https://polaretech.github.io/image-collection/utils/division-calculator.html)
 - [Real-Time Path Data Drawer](https://polaretech.github.io/image-collection/utils/pathdata-drawer.html)
+- [Separated Circle Generator](https://polaretech.github.io/image-collection/utils/separated-circle-generator.html)
