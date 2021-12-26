@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Polar Tech">
+    <meta name="description" content="A utility program to encode and decode data with base64.">
+    <title>Base64 Encoder / Decoder | Polar Tech</title>
+    <link rel="icon" href="../favicon.ico">
+
+    <!--
+      Copyright (c) 2021 Polar Tech
+      Released under the MIT license
+      https://opensource.org/licenses/MIT
+    -->
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+      body {
+        background-color: #ece2d7;
+        color: #613550;
+        font-size: 16px;
+        line-height: 1.6rem;
+        font-family:
+          'Helvetica Neue',
+          'Arial',
+          'Hiragino Kaku Gothic ProN',
+          'Hiragino Sans',
+          'BIZ UDPGothic',
+          'Meiryo',
+          sans-serif;
+      }
+      .container {
+        width: 100vw;
+      }
+      main {
+        margin: 2rem 4rem;
+      }
+      @media (max-width: 419px) {
+        main {
+          margin: 1rem 2rem;
+        }
+      }
+      h1 {
+        max-width: calc(100vw - 6rem);
+        font-size: 2rem;
+        line-height: 3rem;
+      }
+
+      section + h1 {
+        margin-top: 3rem;
+      }
+      section > p {
+        margin-top: 0.5rem;
+      }
+      textarea + p {
+        margin-top: 1rem;
+      }
+
+      textarea {
+        appearance: none;
+        -webkit-appearance: none;
+        width: calc(100% - 1rem - 2px);
+        min-height: 12rem;
+        margin: 1px;
+        padding: 0.2rem 0.5rem;
+        border-radius: 0;
+        box-sizing: content-box;
+        color: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: 'Menlo', 'Consolas', 'Monaco', 'Courier New', monospace;
+      }
+      textarea.input-data {
+        border: 1px solid #b4768a;
+        background-color: #faf7f4;
+      }
+      textarea.output-data {
+        border: 1px solid #a99e85;
+        background-color: #eff2ed;
+      }
+      textarea:focus {
+        margin: 0;
+        border-width: 2px;
+        outline: none;
+      }
+
+      #converted-img {
+        position: fixed;
+        top: -8rem;
+        right: 3.2rem;
+        width: 6rem;
+        height: 6rem;
+        border-radius: 6%;
+        box-shadow: 0 0 5px -1px #89705a;
+        background-color: #faf7f4ee;
+        background-image: url('');
+        background-position: center;
+        background-size: 80% 80%;
+        background-repeat: no-repeat;
+        content: '';
+        transition: top 0.6s;
+      }
+
+      #link-github {
+        position: absolute;
+        top: 1rem;
+        left: calc(100% - 2.6rem);
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+      #link-github svg {
+        width: 1.6rem;
+        height: 1.6rem;
+        color: rgb(60, 60, 60);
+      }
+      #link-github svg:hover {
+        color: rgba(60, 60, 60, 0.7);
+      }
+      footer {
+        margin-top: 3rem;
+        font-size: 0.9rem;
+        line-height: 1.8rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <main>
+
+        <h1 id="base64-encoder">Base64 Encoder</h1>
+        <p>Convert svg source code to base64-encoded Data URL.</p>
+        <section id="encode-base64">
+          <p>Input:</p>
+          <textarea class="input-data" spellcheck="false"></textarea>
+          <p>Output:</p>
+          <textarea class="output-data" readonly></textarea>
+        </section>
+
+        <h1 id="base64-decoder">Base64 Decoder</h1>
+        <section id="decode-base64">
+          <p>Input:</p>
+          <textarea class="input-data" spellcheck="false"></textarea>
+          <p>Output:</p>
+          <textarea class="output-data" readonly></textarea>
+        </section>
+
+        <h1 id="url-encoder">URL Encoder</h1>
+        <p>Convert svg source code to url-encoded Data URL.</p>
+        <section id="encode-url">
+          <p>Input:</p>
+          <textarea class="input-data" spellcheck="false"></textarea>
+          <p>Output:</p>
+          <textarea class="output-data" readonly></textarea>
+        </section>
+
+        <h1 id="url-decoder">URL Decoder</h1>
+        <section id="decode-url">
+          <p>Input:</p>
+          <textarea class="input-data" spellcheck="false"></textarea>
+          <p>Output:</p>
+          <textarea class="output-data" readonly></textarea>
+        </section>
+
+      </main>
+
+      <div id="converted-img"></div>
+
+      <a id="link-github" href="https://github.com/PolarETech/image-collection" target="_blank" aria-label="go to the github repository">
+        <svg xmlns="http://www.w3.org/2000/svg" id="github-mark" width="32" height="32" viewBox="0 0 32 32">
+          <path fill="currentColor" fill-rule="evenodd" d="M16,.6a15.79,15.79,0,0,0-5,30.77c.79.15,1.08-.34,1.08-.76s0-1.37,0-2.68c-4.4.95-5.32-2.12-5.32-2.12A4.21,4.21,0,0,0,5,23.5c-1.43-1,.11-1,.11-1a3.3,3.3,0,0,1,2.42,1.63,3.37,3.37,0,0,0,4.6,1.31,3.35,3.35,0,0,1,1-2.11c-3.51-.4-7.19-1.75-7.19-7.81a6.08,6.08,0,0,1,1.62-4.23,5.7,5.7,0,0,1,.16-4.18S9,6.72,12.05,8.77a15,15,0,0,1,7.9,0c3-2,4.34-1.62,4.34-1.62a5.7,5.7,0,0,1,.16,4.18,6.08,6.08,0,0,1,1.62,4.23c0,6.07-3.69,7.4-7.21,7.8a3.74,3.74,0,0,1,1.07,2.92c0,2.11,0,3.81,0,4.33s.28.91,1.08.76A15.79,15.79,0,0,0,16,.6Z" />
+        </svg>
+      </a>
+
+      <footer>
+        <p>© 2021 Polar Tech | MIT License</p>
+      </footer>
+
+    </div>
+    <!-- end of container -->
+
+    <script type="text/javascript">
+      const main = (() => {
+        return {
+          convert: async event => {
+            const parentId = event.currentTarget.parentNode.id;
+            const inputData = event.currentTarget.value;
+            const output = document.querySelector(`#${parentId} .output-data`);
+
+            if (inputData === '') {
+              output.value = '';
+              event.target.dispatchEvent(new Event('focus'));
+              return;
+            }
+
+            let convertedData = null;
+
+            switch (parentId) {
+            case 'encode-base64':
+              convertedData = await encodeBase64(trim(inputData));
+              output.value = `data:image/svg+xml;base64,${convertedData}`;
+              break;
+            case 'decode-base64':
+              convertedData = await decodeBase64(cut(inputData));
+              output.value = convertedData;
+              break;
+            case 'encode-url':
+              convertedData = encodeURIComponent(trim(inputData));
+              output.value = `data:image/svg+xml,${convertedData}`;
+              break;
+            case 'decode-url':
+              convertedData = decodeURIComponent(cut(inputData));
+              output.value = convertedData;
+              break;
+            }
+
+            event.target.dispatchEvent(new Event('focus'));
+          },
+
+          showSVG: async event => {
+            const parentId = event.currentTarget.parentNode.id;
+            const imgDiv = document.getElementById('converted-img');
+            let target = null;
+            let data = null;
+
+            // When Data URL decoding fails or the input data is empty
+            if (document.querySelector(`#${parentId} .output-data`).value === '') {
+              imgDiv.style.backgroundImage = null;
+              imgDiv.style.top = null;
+              return;
+            }
+
+            switch (parentId.split('-')[0]) {
+            case 'encode':
+              target = document.querySelector(`#${parentId} .output-data`);
+              break;
+            case 'decode':
+              target = document.querySelector(`#${parentId} .input-data`);
+              break;
+            }
+
+            data = target.value;
+
+            if (data.startsWith('PHN2Z')) {
+              data = `data:image/svg+xml;base64,${data}`;
+            } else if (data.startsWith('%3Csvg')) {
+              data = `data:image/svg+xml,${data}`;
+            }
+
+            imgDiv.style.backgroundImage = `url('${data}')`;
+            imgDiv.style.top = '1rem';
+
+            event.currentTarget.addEventListener('blur', () => {
+              imgDiv.style.backgroundImage = null;
+              imgDiv.style.top = null;
+            }, { once: true });
+          }
+        };
+
+        function encodeBase64 (...textData) {
+          return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const offset = reader.result.indexOf(',') + 1;
+              resolve(reader.result.slice(offset));
+            };
+            reader.onerror = () => resolve('');
+            reader.readAsDataURL(new Blob(textData));
+          });
+        }
+
+        function decodeBase64 (binData, charset = 'utf8') {
+          return fetch(`data:text/plain;charset=${charset};base64,${binData}`)
+            .then(response => response.text())
+            .catch(() => '');
+        }
+
+        function trim (textData) {
+          let out = textData;
+          // WARNING:
+          // It also converts strings which should be kept intact.
+          out = out.replace(/\s+/g, ' ');
+          out = out.replaceAll(' />', '/>');
+          out = out.replaceAll('> <', '><');
+          out = out.replaceAll('; ', ';');
+          out = out.replaceAll(', ', ',');
+          out = out.replace(/<!--.+?-->/g, '');
+          return out;
+        }
+
+        function cut (binData) {
+          let out = binData;
+          out = out.replace(/['"]/g, '');
+          out = out.replace(/data:.*,/g, '');
+          return out;
+        }
+      })();
+
+      (function setEventListener () {
+        const dataInputArea = document.querySelectorAll('.input-data');
+
+        dataInputArea.forEach(el => {
+          el.addEventListener('input', main.convert);
+        });
+
+        const textarea = document.querySelectorAll('textarea');
+
+        textarea.forEach(el => {
+          el.addEventListener('focus', main.showSVG);
+        });
+      }());
+    </script>
+
+  </body>
+</html>
