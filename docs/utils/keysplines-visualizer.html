@@ -379,10 +379,143 @@
         let draggingPoint = false;
         let targetPoint = null;
 
+        const specifiedParamValues = {
+          'ease': [0.25, 0.1, 0.25, 1],
+          'ease-in': [0.42, 0, 1, 1],
+          'ease-out': [0, 0, 0.58, 1],
+          'ease-in-out': [0.42, 0, 0.58, 1],
+          'linear': [0, 0, 1, 1],
+          'projectile-rise': [0.333, 0.667, 0.667, 1],
+          'projectile-fall': [0.333, 0, 0.667, 0.333],
+          'quadrant': [0, 0.55228, 0.44772, 1],
+          'quadrant-inverted': [0.55228, 0, 1, 0.44772]
+        };
+
+        const paramInputField = {
+          field: document.getElementById('param'),
+          getParam: function () { return str2numArr(this.field.value); },
+          setParam: function (param) {
+            const roundedParam = param.map(v => round(v, 3));
+            this.field.value = numArr2str(roundedParam);
+            this.validate();
+          },
+          validate: function () {
+            const param = this.getParam();
+            validateParam(param) ? applyButton.enable() : applyButton.disable();
+          }
+        };
+
+        const applyButton = {
+          button: document.getElementById('apply'),
+          disable: function () { this.button.setAttribute('disabled', true); },
+          enable: function () { this.button.removeAttribute('disabled'); }
+        };
+
+        const urlQuery = {
+          getParam: function () {
+            const query = new URLSearchParams(location.search);
+            return str2numArr(query.get('p'));
+          },
+          setParam: function (param) {
+            const roundedParam = param.map(v => round(v, 3));
+            const url = new URL(location.origin + location.pathname + '?p=' + numArr2qry(roundedParam));
+            history.replaceState(null, null, url);
+          }
+        };
+
+        const graphSVG = document.querySelector('.graph > svg');
+        const graphArea = document.getElementById('graph-area');
+
+        const curve = {
+          curve: document.getElementById('curve'),
+          setParam: function (param) {
+            const roundedPos = param.map(v => round(v * maxPos, 3));
+            this.curve.setAttribute('d', `M${minPos} ${minPos} C${numArr2str(roundedPos)} ${maxPos} ${maxPos}`);
+          }
+        };
+
+        const motion = {
+          motion1: document.getElementById('motion1-height'),
+          motion2: document.getElementById('motion2-move'),
+          setParam: function (param) {
+            const roundedParam = param.map(v => round(v, 3));
+            const keySplinesValue = `0 0 1 1; ${numArr2str(roundedParam)}; 0 0 1 1`;
+            this.motion1.setAttribute('keySplines', keySplinesValue);
+            this.motion2.setAttribute('keySplines', keySplinesValue);
+          }
+        };
+
+        const controlPoint = {
+          point1: document.getElementById('point1'),
+          point2: document.getElementById('point2'),
+          point1Line: document.getElementById('point1-line'),
+          point2Line: document.getElementById('point2-line'),
+          getPosition: function () {
+            const pos = [];
+            pos.push(this.point1.getAttribute('cx'));
+            pos.push(this.point1.getAttribute('cy'));
+            pos.push(this.point2.getAttribute('cx'));
+            pos.push(this.point2.getAttribute('cy'));
+            return pos;
+          },
+          getParam: function () {
+            const pos = this.getPosition();
+            return pos.map(v => v / maxPos);
+          },
+          setPoint1Position: function (pos) {
+            const roundedPos = pos.map(v => round(v, 3));
+            this.point1.setAttribute('cx', roundedPos[0]);
+            this.point1.setAttribute('cy', roundedPos[1]);
+            this.point1Line.setAttribute('points', numArr2str([minPos, minPos, roundedPos[0], roundedPos[1]]));
+          },
+          setPoint2Position: function (pos) {
+            const roundedPos = pos.map(v => round(v, 3));
+            this.point2.setAttribute('cx', roundedPos[0]);
+            this.point2.setAttribute('cy', roundedPos[1]);
+            this.point2Line.setAttribute('points', numArr2str([roundedPos[0], roundedPos[1], maxPos, maxPos]));
+          },
+          setParam: function (param) {
+            const pos = param.map(v => v * maxPos);
+            this.setPoint1Position(pos.slice(0, 2));
+            this.setPoint2Position(pos.slice(2, 4));
+          },
+          getTargetPointPosition: function (targetId) {
+            switch (targetId) {
+            case 'point1':
+              return (this.getPosition().slice(0, 2));
+            case 'point2':
+              return (this.getPosition().slice(2, 4));
+            }
+          },
+          setTargetPointPosition: function (targetId, pos) {
+            switch (targetId) {
+            case 'point1':
+              this.setPoint1Position(pos);
+              break;
+            case 'point2':
+              this.setPoint2Position(pos);
+              break;
+            }
+          }
+        };
+
+        const positionText = {
+          x: document.getElementById('posX-text'),
+          y: document.getElementById('posY-text'),
+          setText: function (pos) {
+            const roundedParam = pos.map(v => round(v / maxPos, 3));
+            this.x.textContent = `x: ${roundedParam[0]}`;
+            this.y.textContent = `y: ${roundedParam[1]}`;
+          },
+          clearText: function () {
+            this.x.textContent = '';
+            this.y.textContent = '';
+          }
+        };
+
         return {
           validateInputParam: () => {
-            const param = getParamFromInput();
-            reflectValidationResultInApplyButton(validateParam(param));
+            paramInputField.validate();
           },
 
           applyParamFromInput: event => {
@@ -394,18 +527,8 @@
               }
             }
 
-            main.validateInputParam();
-            reflectParam(getParamFromInput());
-          },
-
-          applyParamFromURLQuery: () => {
-            reflectParam(getParamFromURLQuery());
-          },
-
-          applySpecifiedParam: event => {
-            const id = event.currentTarget.id;
-            const type = id.slice(id.indexOf('-') + 1);
-            reflectParam(getSpecifiedParam(type));
+            paramInputField.validate();
+            reflectParam(paramInputField.getParam());
           },
 
           adjustParam: event => {
@@ -414,8 +537,14 @@
             reflectParam(getAdjustedParam(type));
           },
 
-          applyParamFromPoint: () => {
-            reflectParam(getCurrentParamFromPoint());
+          applySpecifiedParam: event => {
+            const id = event.currentTarget.id;
+            const type = id.slice(id.indexOf('-') + 1);
+            reflectParam(specifiedParamValues[type]);
+          },
+
+          applyParamFromURLQuery: () => {
+            reflectParam(urlQuery.getParam());
           },
 
           // **************************
@@ -433,8 +562,8 @@
             htmlElement.style.mozUserSelect = 'none';
             htmlElement.style.webkitUserSelect = 'none';
 
-            const pos = getTargetPointPosition();
-            reflectPositionInPositionText(normalizePosition(pos));
+            const pos = controlPoint.getTargetPointPosition(targetPoint.id);
+            positionText.setText(pos);
           },
 
           endPointDrag: () => {
@@ -447,8 +576,8 @@
             htmlElement.style.removeProperty('-moz-user-select');
             htmlElement.style.removeProperty('-webkit-user-select');
 
-            main.applyParamFromPoint();
-            reflectPositionInPositionText(null);
+            reflectParam(controlPoint.getParam());
+            positionText.clearText();
           },
 
           doPointDrag: event => {
@@ -461,97 +590,36 @@
               return;
             }
 
-            reflectPositionInTargetPoint(roundPosition(pos));
-            reflectPositionInPositionText(normalizePosition(pos));
+            controlPoint.setTargetPointPosition(targetPoint.id, pos);
+            positionText.setText(pos);
           }
         };
 
-        // **************************
-        //  Elements
-        // **************************
+        function getCursorPositionOnGraph (cursor) {
+          const point = graphSVG.createSVGPoint();
+          point.x = cursor.x;
+          point.y = cursor.y;
 
-        function getParamInputElement () {
-          return document.getElementById('param');
-        }
+          const ctm = graphArea.getScreenCTM();
+          const inverse = ctm.inverse();
+          const pos = point.matrixTransform(inverse);
 
-        function getApplyButtonElement () {
-          return document.getElementById('apply');
-        }
+          // Return null if the cursor position is outside of the graph border
+          const margin = 3;
+          if (pos.x < minPos - margin || maxPos + margin < pos.x ||
+              pos.y < minPos - margin || maxPos + margin < pos.y) {
 
-        function getSVGElementsInGraph () {
-          return {
-            curve: document.getElementById('curve'),
-            motion1: document.getElementById('motion1-height'),
-            motion2: document.getElementById('motion2-move'),
-            point1Line: document.getElementById('point1-line'),
-            point2Line: document.getElementById('point2-line'),
-            point1: document.getElementById('point1'),
-            point2: document.getElementById('point2')
-          };
-        }
+            return null;
+          }
 
-        function getGraphSVGElements () {
-          return {
-            svg: document.querySelector('.graph > svg'),
-            graphArea: document.getElementById('graph-area')
-          };
-        }
+          pos.x = clamp(pos.x, minPos, maxPos);
+          pos.y = clamp(pos.y, minPos, maxPos);
 
-        function getLineElementConnectedToPoint (pointId) {
-          return document.getElementById(`${pointId}-line`);
-        }
-
-        function getPositionTextElements () {
-          return {
-            textX: document.getElementById('posX-text'),
-            textY: document.getElementById('posY-text')
-          };
-        }
-
-        // **************************
-        //  Parameter acquisition
-        // **************************
-
-        function getParamFromInput () {
-          return str2numArr(getParamInputElement().value);
-        }
-
-        function getParamFromURLQuery () {
-          const query = new URLSearchParams(location.search);
-          if (query.has('p') === false) return null;
-
-          return str2numArr(query.get('p'));
-        }
-
-        function getSpecifiedParam (type) {
-          const specifiedParamValues = {
-            'ease': [0.25, 0.1, 0.25, 1],
-            'ease-in': [0.42, 0, 1, 1],
-            'ease-out': [0, 0, 0.58, 1],
-            'ease-in-out': [0.42, 0, 0.58, 1],
-            'linear': [0, 0, 1, 1],
-            'projectile-rise': [0.333, 0.667, 0.667, 1],
-            'projectile-fall': [0.333, 0, 0.667, 0.333],
-            'quadrant': [0, 0.55228, 0.44772, 1],
-            'quadrant-inverted': [0.55228, 0, 1, 0.44772]
-          };
-
-          return specifiedParamValues[type];
-        }
-
-        function getCurrentParamFromPoint () {
-          const el = getSVGElementsInGraph();
-
-          const param = [];
-          param.push(el.point1.getAttribute('cx') / maxPos);
-          param.push(el.point1.getAttribute('cy') / maxPos);
-          param.push(el.point2.getAttribute('cx') / maxPos);
-          param.push(el.point2.getAttribute('cy') / maxPos);
-          return param;
+          return [pos.x, pos.y];
         }
 
         function getAdjustedParam (type) {
-          const param = getCurrentParamFromPoint();
+          const param = controlPoint.getParam();
 
           const quantityToAdjustDegree = 5;
           const quantityToAdjustDistance = 0.05;
@@ -621,160 +689,22 @@
           return param;
         }
 
-        // **************************
-        //  Parameter Validation
-        // **************************
-
         function validateParam (param) {
-          if (Array.isArray(param) === false || param.length !== 4) return false;
+          if (Array.isArray(param) === false) return false;
+          if (param.length !== 4) return false;
 
           const isInRange = v => (0 <= v && v <= 1);
           return param.every(isInRange);
         }
 
-        function reflectValidationResultInApplyButton (isValid) {
-          const button = getApplyButtonElement();
-
-          if (isValid) {
-            button.removeAttribute('disabled');
-          } else {
-            button.setAttribute('disabled', true);
-          }
-        }
-
-        // **************************
-        //  Parameter Reflection
-        // **************************
-
         function reflectParam (param) {
           if (validateParam(param) === false) return;
 
-          const roundedParam = param.map(v => round(v, 3));
-
-          reflectParamInSVG(roundedParam);
-          reflectParamInInputValue(roundedParam);
-          reflectParamInURLQuery(roundedParam);
-        }
-
-        function reflectParamInSVG (param) {
-          const el = getSVGElementsInGraph();
-
-          // 0.000 .. 1.000 values for keySplines value
-          const keySplinesValue = `0 0 1 1; ${numArr2str(param)}; 0 0 1 1`;
-
-          el.motion1.setAttribute('keySplines', keySplinesValue);
-          el.motion2.setAttribute('keySplines', keySplinesValue);
-
-          // 0.000 .. 100.000 values for path data and coordinates of the control-point shapes
-          const pos = param.map(v => round(v * maxPos, 3));
-
-          el.curve.setAttribute('d', `M${minPos} ${minPos} C${numArr2str(pos)} ${maxPos} ${maxPos}`);
-
-          el.point1Line.setAttribute('points', numArr2str([minPos, minPos, pos[0], pos[1]]));
-          el.point2Line.setAttribute('points', numArr2str([pos[2], pos[3], maxPos, maxPos]));
-
-          el.point1.setAttribute('cx', pos[0]);
-          el.point1.setAttribute('cy', pos[1]);
-          el.point2.setAttribute('cx', pos[2]);
-          el.point2.setAttribute('cy', pos[3]);
-        }
-
-        function reflectParamInInputValue (param) {
-          getParamInputElement().value = numArr2str(param);
-          reflectValidationResultInApplyButton(true);
-        }
-
-        function reflectParamInURLQuery (param) {
-          const url = new URL(location.origin + location.pathname + '?p=' + numArr2qry(param));
-          history.replaceState(null, null, url);
-        }
-
-        // **************************
-        //  functions for PointDrag
-        // **************************
-
-        function roundPosition (pos) {
-          if (pos === null) return null;
-
-          return {
-            x: round(pos.x, 3),
-            y: round(pos.y, 3)
-          };
-        }
-
-        function normalizePosition (pos) {
-          if (pos === null) return null;
-
-          return {
-            x: round(pos.x / maxPos, 3),
-            y: round(pos.y / maxPos, 3)
-          };
-        }
-
-        function getTargetPointPosition () {
-          if (targetPoint === null) return null;
-
-          return {
-            x: targetPoint.getAttribute('cx'),
-            y: targetPoint.getAttribute('cy')
-          };
-        }
-
-        function getCursorPositionOnGraph (cursor) {
-          const el = getGraphSVGElements();
-
-          const point = el.svg.createSVGPoint();
-          point.x = cursor.x;
-          point.y = cursor.y;
-
-          const ctm = el.graphArea.getScreenCTM();
-          const inverse = ctm.inverse();
-          const pos = point.matrixTransform(inverse);
-
-          // Return null if the cursor position is outside of the graph border
-          const margin = 3;
-          if (pos.x < minPos - margin || maxPos + margin < pos.x ||
-              pos.y < minPos - margin || maxPos + margin < pos.y) {
-
-            return null;
-          }
-
-          pos.x = clamp(pos.x, minPos, maxPos);
-          pos.y = clamp(pos.y, minPos, maxPos);
-
-          return { x: pos.x, y: pos.y };
-        }
-
-        function reflectPositionInTargetPoint (pos) {
-          if (targetPoint === null || pos === null) return;
-
-          const pointId = targetPoint.getAttribute('id');
-          const line = getLineElementConnectedToPoint(pointId);
-
-          switch (pointId) {
-          case 'point1':
-            line.setAttribute('points', numArr2str([minPos, minPos, pos.x, pos.y]));
-            break;
-          case 'point2':
-            line.setAttribute('points', numArr2str([pos.x, pos.y, maxPos, maxPos]));
-            break;
-          }
-
-          targetPoint.setAttribute('cx', pos.x);
-          targetPoint.setAttribute('cy', pos.y);
-        }
-
-        function reflectPositionInPositionText (pos = null) {
-          const el = getPositionTextElements();
-
-          if (pos === null) {
-            el.textX.textContent = '';
-            el.textY.textContent = '';
-            return;
-          }
-
-          el.textX.textContent = `x: ${pos.x}`;
-          el.textY.textContent = `y: ${pos.y}`;
+          curve.setParam(param);
+          motion.setParam(param);
+          controlPoint.setParam(param);
+          paramInputField.setParam(param);
+          urlQuery.setParam(param);
         }
 
         // **************************

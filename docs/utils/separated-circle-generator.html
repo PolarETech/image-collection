@@ -300,7 +300,7 @@
 
               <use id="svg-base-use" href="#svg-base" />
 
-              <path id="svg-path" fill="#cf5b9d" d="M0 0 L100 100" />
+              <path id="svg-path" fill="#cf5b9d" d="" />
             </svg>
 
             <div class="coords-text">
@@ -411,121 +411,155 @@
 
     <script type="text/javascript">
       const main = (() => {
-        return {
-          changeCircleSettings: () => {
-            reflectCircleSettings();
+        const settings = {
+          outerRadius: document.getElementById('settings-outer-radius'),
+          innerRadius: document.getElementById('settings-inner-radius'),
+          division: document.getElementById('settings-division-number'),
+          gapWidth: document.getElementById('settings-gap-width'),
+          gapShape: document.getElementById('settings-gap-shape'),
+          direction: document.getElementById('settings-direction'),
+          contour: document.getElementById('settings-contour'),
+          viewBoxSize: document.getElementById('settings-viewbox-size'),
+          origin: document.getElementById('settings-origin'),
+          outerRadiusValue: function () { return parseFloat(this.outerRadius.value); },
+          innerRadiusValue: function () { return parseFloat(this.innerRadius.value); },
+          divisionValue: function () {
+            // Division Number accepts only an integer greater than or equal to 1
+            this.division.value = Math.max(1, Math.round(Number(this.division.value)));
+            return parseInt(this.division.value, 10);
           },
-
-          changeViewBoxSettings: () => {
-            reflectViewBoxSettings();
-            adjustCircleSizeSettingsToResizedViewBoxSize();
-            reflectCircleSettings();
+          gapWidthValue: function () { return parseFloat(this.gapWidth.value); },
+          gapShapeValue: function () { return this.gapShape.options[this.gapShape.selectedIndex].value; },
+          directionValue: function () { return this.direction.options[this.direction.selectedIndex].value; },
+          contourValue: function () { return this.contour.options[this.contour.selectedIndex].value; },
+          originValue: function () { return this.origin.options[this.origin.selectedIndex].value; },
+          viewBoxSizeValue: function () {
+            // ViewBox Size accepts only an number greater than or equal to 1
+            this.viewBoxSize.value = Math.max(1, this.viewBoxSize.value);
+            return parseFloat(this.viewBoxSize.value);
           },
-
-          loadPage: () => {
-            reflectViewBoxSettings();
-
-            const el = getSettingsElements();
-            el.viewBoxSize.setAttribute('data-value', el.viewBoxSize.value);
-
-            reflectCircleSettings();
+          viewBoxPrevSizeValue: function () {
+            return parseFloat(this.viewBoxSize.getAttribute('data-value'));
+          },
+          setViewBoxPrevSizeValue: function (value) {
+            this.viewBoxSize.setAttribute('data-value', value);
+          },
+          setInputStep: function (value) {
+            this.outerRadius.setAttribute('step', value);
+            this.innerRadius.setAttribute('step', value);
+            this.gapWidth.setAttribute('step', value);
+          },
+          removeInputStep: function () {
+            this.outerRadius.removeAttribute('step');
+            this.innerRadius.removeAttribute('step');
+            this.gapWidth.removeAttribute('step');
+          },
+          changeCircleScale: function (scale) {
+            this.outerRadius.value = round(this.outerRadiusValue() * scale, 3);
+            this.innerRadius.value = round(this.innerRadiusValue() * scale, 3);
+            this.gapWidth.value = round(this.gapWidthValue() * scale, 3);
           }
         };
 
-        function getSettingsElements () {
-          return {
-            outerRadius: document.getElementById('settings-outer-radius'),
-            innerRadius: document.getElementById('settings-inner-radius'),
-            division: document.getElementById('settings-division-number'),
-            gapWidth: document.getElementById('settings-gap-width'),
-            gapShape: document.getElementById('settings-gap-shape'),
-            direction: document.getElementById('settings-direction'),
-            contour: document.getElementById('settings-contour'),
-            viewBoxSize: document.getElementById('settings-viewbox-size'),
-            origin: document.getElementById('settings-origin')
-          };
-        }
-
-        function getSettingsValues () {
-          const el = getSettingsElements();
-
-          // Division Number accepts only an integer greater than or equal to 1
-          el.division.value = Math.max(1, Math.round(Number(el.division.value)));
-
-          return {
-            outerRadius: parseFloat(el.outerRadius.value),
-            innerRadius: parseFloat(el.innerRadius.value),
-            division: parseInt(el.division.value, 10),
-            gapWidth: parseFloat(el.gapWidth.value),
-            gapShape: el.gapShape.options[el.gapShape.selectedIndex].value,
-            direction: el.direction.options[el.direction.selectedIndex].value,
-            contour: el.contour.options[el.contour.selectedIndex].value,
-            viewBoxSize: parseFloat(el.viewBoxSize.value),
-            origin: el.origin.options[el.origin.selectedIndex].value
-          };
-        }
-
-        function getViewBoxElements () {
-          return {
-            svg: document.querySelector('.view-svg svg'),
-            grid: document.getElementById('svg-base-use'),
-            startCoords: document.getElementById('start-coords'),
-            endCoords: document.getElementById('end-coords'),
-            viewBoxSize: document.getElementById('settings-viewbox-size'),
-            origin: document.getElementById('settings-origin')
-          };
-        }
-
-        function reflectCircleSettings () {
-          const settings = getSettingsValues();
-
-          const svgPath = document.getElementById('svg-path');
-          const svgError = document.getElementById('svg-error');
-          const outputPathDataField = document.getElementById('output-path-data');
-
-          const coordinates = calculateCoordinates(
-            settings.outerRadius,
-            settings.innerRadius,
-            settings.division,
-            settings.gapWidth,
-            settings.gapShape,
-            settings.direction,
-            settings.viewBoxSize,
-            settings.origin
-          );
-
-          // Display the error if an error occurs in the calculation of coordinates
-          if (coordinates.outerCoordinates
-            .concat(coordinates.innerCoordinates)
-            .some(v => Object.values(v).includes(NaN))) {
-
-            svgPath.setAttribute('d', '');
-            svgError.setAttribute('display', 'inline');
-            outputPathDataField.value = 'Error';
-            return;
+        const viewer = {
+          svg: document.querySelector('.view-svg svg'),
+          baseUse: document.getElementById('svg-base-use'),
+          path: document.getElementById('svg-path'),
+          error: document.getElementById('svg-error'),
+          setViewBox: function (start, size) {
+            this.svg.setAttribute('viewBox', `${start} ${start} ${size} ${size}`);
+            this.baseUse.setAttribute('x', start);
+            this.baseUse.setAttribute('y', start);
+          },
+          setPathData: function (data) {
+            this.path.setAttribute('d', data);
+          },
+          showError: function () {
+            this.path.setAttribute('d', '');
+            this.error.setAttribute('display', 'inline');
+          },
+          hideError: function () {
+            this.error.setAttribute('display', 'none');
           }
+        };
 
-          const pathData = generatePathData(
-            coordinates,
-            settings.outerRadius,
-            settings.innerRadius,
-            settings.division,
-            settings.contour
+        const coordsText = {
+          startCoords: document.getElementById('start-coords'),
+          endCoords: document.getElementById('end-coords'),
+          setCoordsText: function (start, end) {
+            this.startCoords.innerText = `(${start}, ${start})`;
+            this.endCoords.innerText = `(${end}, ${end})`;
+          }
+        };
+
+        const pathOutputField = {
+          field: document.getElementById('output-path-data'),
+          setValue: function (value) { this.field.value = value; },
+          showError: function () { this.field.value = 'Error'; }
+        };
+
+        return {
+          changeCircleSettings: () => {
+            const pathData = getPathDataArray();
+
+            if (pathData === null) {
+              reflectError();
+              return;
+            }
+
+            reflectPathData(pathData);
+          },
+
+          changeViewBoxSettings: () => {
+            reflectViewBoxSettingsInViewer();
+            adjustCircleSizeSettingsToResizedViewBoxSize();
+            main.changeCircleSettings();
+          },
+
+          loadPage: () => {
+            reflectViewBoxSettingsInViewer();
+            settings.setViewBoxPrevSizeValue(settings.viewBoxSizeValue());
+            main.changeCircleSettings();
+          }
+        };
+
+        function getPathDataArray () {
+          const coordinates = calculateCoordinates(
+            settings.outerRadiusValue(),
+            settings.innerRadiusValue(),
+            settings.divisionValue(),
+            settings.gapWidthValue(),
+            settings.gapShapeValue(),
+            settings.directionValue(),
+            settings.viewBoxSizeValue(),
+            settings.originValue()
           );
 
-          svgPath.setAttribute('d', pathData.join(' '));
-          svgError.setAttribute('display', 'none');
-          outputPathDataField.value = pathData.join('\n');
+          if (validateCoordinates(coordinates) === false) return null;
+
+          return generatePathData(
+            coordinates,
+            settings.outerRadiusValue(),
+            settings.innerRadiusValue(),
+            settings.divisionValue(),
+            settings.contourValue()
+          );
         }
 
-        function reflectViewBoxSettings () {
-          const el = getViewBoxElements();
+        function reflectPathData (pathDataArray) {
+          viewer.hideError();
+          viewer.setPathData(pathDataArray.join(' '));
+          pathOutputField.setValue(pathDataArray.join('\n'));
+        }
 
-          // ViewBox Size accepts only an number greater than or equal to 1
-          el.viewBoxSize.value = Math.max(1, el.viewBoxSize.value);
+        function reflectError () {
+          viewer.showError();
+          pathOutputField.showError();
+        }
 
-          const size = parseFloat(el.viewBoxSize.value);
-          const origin = el.origin.options[el.origin.selectedIndex].value;
+        function reflectViewBoxSettingsInViewer () {
+          const size = settings.viewBoxSizeValue();
+          const origin = settings.originValue();
 
           const coords = (() => {
             switch (origin) {
@@ -536,48 +570,30 @@
             }
           })();
 
-          el.svg.setAttribute('viewBox', `${coords.start} ${coords.start} ${size} ${size}`);
-
-          el.grid.setAttribute('x', coords.start);
-          el.grid.setAttribute('y', coords.start);
-
-          el.startCoords.innerText = `(${coords.start}, ${coords.start})`;
-          el.endCoords.innerText = `(${coords.end}, ${coords.end})`;
+          viewer.setViewBox(coords.start, size);
+          coordsText.setCoordsText(coords.start, coords.end);
         }
 
         function adjustCircleSizeSettingsToResizedViewBoxSize () {
-          const el = getSettingsElements();
-
-          const size = el.viewBoxSize.value;
-          const prevSize = el.viewBoxSize.getAttribute('data-value');
+          const size = settings.viewBoxSizeValue();
+          const prevSize = settings.viewBoxPrevSizeValue();
 
           if (size === prevSize) return;
 
-          const k = size / prevSize;
-
-          el.outerRadius.value = round(el.outerRadius.value * k, 3);
-          el.innerRadius.value = round(el.innerRadius.value * k, 3);
-          el.gapWidth.value = round(el.gapWidth.value * k, 3);
-
-          el.viewBoxSize.setAttribute('data-value', size);
+          settings.changeCircleScale(size / prevSize);
+          settings.setViewBoxPrevSizeValue(size);
 
           if (size > 32 && prevSize > 32) return;
 
           switch (true) {
           case size <= 1:
-            el.outerRadius.setAttribute('step', '0.01');
-            el.innerRadius.setAttribute('step', '0.01');
-            el.gapWidth.setAttribute('step', '0.01');
+            settings.setInputStep(0.01);
             break;
           case size <= 32:
-            el.outerRadius.setAttribute('step', '0.1');
-            el.innerRadius.setAttribute('step', '0.1');
-            el.gapWidth.setAttribute('step', '0.1');
+            settings.setInputStep(0.1);
             break;
           default:
-            el.outerRadius.removeAttribute('step');
-            el.innerRadius.removeAttribute('step');
-            el.gapWidth.removeAttribute('step');
+            settings.removeInputStep();
           }
         }
 
@@ -681,6 +697,12 @@
           })();
 
           return { outerCoordinates, innerCoordinates };
+        }
+
+        function validateCoordinates (coordinates) {
+          return coordinates.outerCoordinates
+            .concat(coordinates.innerCoordinates)
+            .some(v => Object.values(v).includes(NaN)) ? false : true;
         }
 
         // **************************

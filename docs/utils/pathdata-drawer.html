@@ -453,7 +453,7 @@
 
               <use id="svg-base-use" href="#svg-base" />
 
-              <path id="svg-path" d="M0 0 L100 100"
+              <path id="svg-path" d=""
                     fill="none" fill-rule="nonzero"
                     stroke="#315985" stroke-width="1" />
 
@@ -713,12 +713,171 @@
 
     <script type="text/javascript">
       const main = (() => {
+        const pathInputField = {
+          field: document.getElementById('input-path-data'),
+          errorColor: '#e67a99',
+          getData: function () { return this.field.value; },
+          showError: function () {
+            this.field.style.borderColor = this.errorColor;
+          },
+          hideError: function () {
+            this.field.style.borderColor = null;
+          }
+        };
+
+        const drawer = {
+          svg: document.querySelector('.drawer svg'),
+          grid: document.getElementById('svg-guide-grid'),
+          diagonal: document.getElementById('svg-guide-diagonal'),
+          circle: document.getElementById('svg-guide-circle'),
+          baseUse: document.getElementById('svg-base-use'),
+          path: document.getElementById('svg-path'),
+          drawArea: document.getElementById('svg-draw-area'),
+          getTotalLength: function () { return this.path.getTotalLength(); },
+          getNumberOfItems: function () {
+            // NOTE:
+            // Chrome does not implement pathSegList.
+            // This utility does not provide the feature
+            // to display the number of anchor points by alternative methods
+            // for browsers that do not implement pathSegList.
+            if (this.path.pathSegList === undefined) return undefined;
+            return this.path.pathSegList.numberOfItems;
+          },
+          setPathData: function (data) {
+            this.path.setAttribute('d', data);
+            this.validate();
+          },
+          validate: function () {
+            // NOTE:
+            // If the path length is 0, treat it as an error.
+            if (this.path.getTotalLength() === 0) {
+              pathInputField.showError();
+              return;
+            }
+            pathInputField.hideError();
+          },
+          setFill: function (value) {
+            this.path.setAttribute('fill', value);
+          },
+          setFillRule: function (value) {
+            this.path.setAttribute('fill-rule', value);
+          },
+          setStroke: function (value) {
+            this.path.setAttribute('stroke', value);
+          },
+          setStrokeWidth: function (value) {
+            this.path.setAttribute('stroke-width', value);
+          },
+          setDisplay: function (target, isVisible) {
+            target.setAttribute('display', isVisible ? 'inline' : 'none');
+          },
+          setGridVisibility: function (isVisible) {
+            this.setDisplay(this.grid, isVisible);
+          },
+          setDiagonalVisibility: function (isVisible) {
+            this.setDisplay(this.diagonal, isVisible);
+          },
+          setCircleVisibility: function (isVisible) {
+            this.setDisplay(this.circle, isVisible);
+          },
+          setViewBox: function (start, size) {
+            this.svg.setAttribute('viewBox', `${start} ${start} ${size} ${size}`);
+            this.baseUse.setAttribute('x', start);
+            this.baseUse.setAttribute('y', start);
+            this.drawArea.setAttribute('x', start);
+            this.drawArea.setAttribute('y', start);
+            this.drawArea.setAttribute('width', size);
+            this.drawArea.setAttribute('height', size);
+          }
+        };
+
+        const pathInfo = {
+          pathLength: document.getElementById('path-length'),
+          pathCount: document.getElementById('path-count'),
+          setPathLength: function (value) {
+            this.pathLength.innerText = value;
+          },
+          setPathCount: function (value) {
+            if (this.pathCount === null) return;
+            if (value === undefined) {
+              this.removePathCountElement();
+              return;
+            }
+            this.pathCount.innerText = value;
+          },
+          removePathCountElement: function () {
+            this.pathCount.parentNode.remove();
+          }
+        };
+
+        const coordsText = {
+          start: document.getElementById('start-coords'),
+          end: document.getElementById('end-coords'),
+          cursor: document.getElementById('cursor-coords'),
+          setCoordsText: function (start, end) {
+            const roundedStartPos = round(start, 3);
+            const roundedEndPos = round(end, 3);
+            this.start.innerText = `(${roundedStartPos}, ${roundedStartPos})`;
+            this.end.innerText = `(${roundedEndPos}, ${roundedEndPos})`;
+          },
+          setCursorText: function (pos) {
+            const roundedPos = pos.map(v => round(v, 3));
+            this.cursor.innerText = `x: ${roundedPos[0]}, y: ${roundedPos[1]}`;
+          },
+          clearCursorText: function () {
+            this.cursor.innerText = '';
+          }
+        };
+
+        const guidelineSettings = {
+          grid: document.getElementById('settings-grid'),
+          diagonal: document.getElementById('settings-diagonal'),
+          circle: document.getElementById('settings-circle'),
+          isGridChecked: function () { return checkbox.isChecked(this.grid); },
+          isDiagonalChecked: function () { return checkbox.isChecked(this.diagonal); },
+          isCircleChecked: function () { return checkbox.isChecked(this.circle); }
+        };
+
+        const pathStyleSettings = {
+          fill: document.getElementById('settings-fill'),
+          fillRule: document.getElementById('settings-fill-rule'),
+          stroke: document.getElementById('settings-stroke'),
+          strokeWidth: document.getElementById('settings-stroke-width'),
+          getFillValue: function () { return this.fill.value; },
+          getFillRuleValue: function () { return this.fillRule.options[this.fillRule.selectedIndex].value; },
+          getStrokeValue: function () { return this.stroke.value; },
+          getStrokeWidthValue: function () {
+            // stroke-width accepts only an number greater than or equal to 0
+            this.strokeWidth.value = Math.max(0, this.strokeWidth.value);
+            return parseFloat(this.strokeWidth.value);
+          }
+        };
+
+        const viewBoxSettings = {
+          viewBoxSize: document.getElementById('settings-viewbox-size'),
+          origin: document.getElementById('settings-origin'),
+          getViewBoxSizeValue: function () {
+            // viewBox size accepts only an number greater than or equal to 1
+            this.viewBoxSize.value = Math.max(1, this.viewBoxSize.value);
+            return parseFloat(this.viewBoxSize.value);
+          },
+          getOriginValue: function () { return this.origin.options[this.origin.selectedIndex].value; }
+        };
+
+        const checkbox = {
+          isChecked: function (el) {
+            return el.getAttribute('aria-checked') === 'true';
+          },
+          toggle: function (el) {
+            el.setAttribute('aria-checked', !this.isChecked(el));
+          }
+        };
+
         return {
           changePathData: () => {
-            reflectPathData();
-            reflectPathLength();
-            reflectPathItemCount();
-            reflectPathDataError();
+            drawer.setPathData(pathInputField.getData());
+            pathInfo.setPathLength(drawer.getTotalLength());
+            pathInfo.setPathCount(drawer.getNumberOfItems());
           },
 
           changeGuidelineSettings: event => {
@@ -753,9 +912,7 @@
               }
             })();
 
-            const currentState = target.getAttribute('aria-checked') === 'true';
-            target.setAttribute('aria-checked', !currentState);
-
+            checkbox.toggle(target);
             reflectGuidelineSettings();
           },
 
@@ -769,11 +926,15 @@
 
           moveCursor: event => {
             const pos = getCursorPositionOnDrawer({ x: event.clientX, y: event.clientY });
-            reflectCursorPosition(pos);
+            if (pos === null) {
+              coordsText.clearCursorText();
+              return;
+            }
+            coordsText.setCursorText(pos);
           },
 
-          clearCursorPositionText: () => {
-            reflectCursorPosition(null);
+          clearCursorCoordsText: () => {
+            coordsText.clearCursorText();
           },
 
           loadPage: () => {
@@ -792,12 +953,10 @@
           // In this utility, it is assumed that
           // the users will zoom the screen to see the details of the path.
 
-          const drawArea = document.getElementById('svg-draw-area');
-          const drawAreaRect = drawArea.getBoundingClientRect();
+          const drawAreaRect = drawer.drawArea.getBoundingClientRect();
 
-          const viewBoxSize = document.getElementById('settings-viewbox-size').value;
-          const originField = document.getElementById('settings-origin');
-          const origin = originField.options[originField.selectedIndex].value;
+          const viewBoxSize = viewBoxSettings.getViewBoxSizeValue();
+          const origin = viewBoxSettings.getOriginValue();
 
           const pos = {
             x: (cursor.x - drawAreaRect.x) / drawAreaRect.width * viewBoxSize,
@@ -816,98 +975,25 @@
             pos.y -= offset;
           }
 
-          return { x: round(pos.x, 3), y: round(pos.y, 3) };
-        }
-
-        function reflectPathData () {
-          const svgPath = document.getElementById('svg-path');
-          const pathData = document.getElementById('input-path-data');
-          svgPath.setAttribute('d', pathData.value);
-        }
-
-        function reflectPathLength () {
-          const svgPath = document.getElementById('svg-path');
-          const span = document.getElementById('path-length');
-          span.innerText = svgPath.getTotalLength();
-        }
-
-        function reflectPathItemCount () {
-          const svgPath = document.getElementById('svg-path');
-          const span = document.getElementById('path-count');
-
-          if (span === null) return;
-
-          // NOTE:
-          // Chrome does not implement pathSegList.
-          // This utility does not provide the feature
-          // to display the number of anchor points by alternative methods
-          // for browsers that do not implement pathSegList.
-          if (svgPath.pathSegList === undefined) {
-            span.parentNode.remove();
-            return;
-          }
-
-          span.innerText = svgPath.pathSegList.numberOfItems;
-        }
-
-        function reflectPathDataError () {
-          const svgPath = document.getElementById('svg-path');
-          const pathData = document.getElementById('input-path-data');
-
-          // NOTE:
-          // If the path length is 0, treat it as an error.
-          if (svgPath.getTotalLength() === 0) {
-            pathData.style.borderColor = '#e67a99';
-          } else {
-            pathData.style.borderColor = null;
-          }
+          return [pos.x, pos.y];
         }
 
         function reflectGuidelineSettings () {
-          const grid = document.getElementById('svg-guide-grid');
-          const diagonal = document.getElementById('svg-guide-diagonal');
-          const circle = document.getElementById('svg-guide-circle');
-
-          const gridChecked = document.getElementById('settings-grid').getAttribute('aria-checked') === 'true';
-          const diagonalChecked = document.getElementById('settings-diagonal').getAttribute('aria-checked') === 'true';
-          const circleChecked = document.getElementById('settings-circle').getAttribute('aria-checked') === 'true';
-
-          grid.setAttribute('display', gridChecked ? 'inline' : 'none');
-          diagonal.setAttribute('display', diagonalChecked ? 'inline' : 'none');
-          circle.setAttribute('display', circleChecked ? 'inline' : 'none');
+          drawer.setGridVisibility(guidelineSettings.isGridChecked());
+          drawer.setDiagonalVisibility(guidelineSettings.isDiagonalChecked());
+          drawer.setCircleVisibility(guidelineSettings.isCircleChecked());
         }
 
         function reflectPathStyleSettings () {
-          const path = document.getElementById('svg-path');
-
-          const fill = document.getElementById('settings-fill');
-          const fillRule = document.getElementById('settings-fill-rule');
-          const stroke = document.getElementById('settings-stroke');
-          const strokeWidth = document.getElementById('settings-stroke-width');
-
-          // stroke-width accepts only an number greater than or equal to 0
-          strokeWidth.value = Math.max(0, strokeWidth.value);
-
-          path.setAttribute('fill', fill.value);
-          path.setAttribute('fill-rule', fillRule.options[fillRule.selectedIndex].value);
-          path.setAttribute('stroke', stroke.value);
-          path.setAttribute('stroke-width', strokeWidth.value);
+          drawer.setFill(pathStyleSettings.getFillValue());
+          drawer.setFillRule(pathStyleSettings.getFillRuleValue());
+          drawer.setStroke(pathStyleSettings.getStrokeValue());
+          drawer.setStrokeWidth(pathStyleSettings.getStrokeWidthValue());
         }
 
         function reflectViewBoxSettings () {
-          const svg = document.querySelector('.drawer svg');
-          const baseUse = document.getElementById('svg-base-use');
-          const drawArea = document.getElementById('svg-draw-area');
-          const startCoords = document.getElementById('start-coords');
-          const endCoords = document.getElementById('end-coords');
-
-          const viewBoxSizeField = document.getElementById('settings-viewbox-size');
-          const originField = document.getElementById('settings-origin');
-          const origin = originField.options[originField.selectedIndex].value;
-
-          // viewBox size accepts only an number greater than or equal to 1
-          viewBoxSizeField.value = Math.max(1, viewBoxSizeField.value);
-          const size = viewBoxSizeField.value;
+          const size = viewBoxSettings.getViewBoxSizeValue();
+          const origin = viewBoxSettings.getOriginValue();
 
           const coords = (() => {
             switch (origin) {
@@ -918,29 +1004,8 @@
             }
           })();
 
-          svg.setAttribute('viewBox', `${coords.start} ${coords.start} ${size} ${size}`);
-          baseUse.setAttribute('x', coords.start);
-          baseUse.setAttribute('y', coords.start);
-          drawArea.setAttribute('x', coords.start);
-          drawArea.setAttribute('y', coords.start);
-          drawArea.setAttribute('width', size);
-          drawArea.setAttribute('height', size);
-
-          const roundedStart = round(coords.start, 3);
-          const roundedEnd = round(coords.end, 3);
-          startCoords.innerText = `(${roundedStart}, ${roundedStart})`;
-          endCoords.innerText = `(${roundedEnd}, ${roundedEnd})`;
-        }
-
-        function reflectCursorPosition (pos = null) {
-          const posText = document.getElementById('cursor-coords');
-
-          if (pos === null) {
-            posText.innerText = '';
-            return;
-          }
-
-          posText.innerText = `x: ${pos.x}, y: ${pos.y}`;
+          drawer.setViewBox(coords.start, size);
+          coordsText.setCoordsText(coords.start, coords.end);
         }
 
         function round (value, digits = 0) {
@@ -951,7 +1016,7 @@
       (function setEventListener () {
         const drawArea = document.getElementById('svg-draw-area');
         drawArea.addEventListener('mousemove', main.moveCursor);
-        drawArea.addEventListener('mouseout', main.clearCursorPositionText);
+        drawArea.addEventListener('mouseout', main.clearCursorCoordsText);
 
         const pathData = document.getElementById('input-path-data');
         pathData.addEventListener('input', main.changePathData);
