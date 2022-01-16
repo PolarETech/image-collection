@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <!-- Editing the "fill" property will change the color of the background rectangles -->
+      <g fill="#90917f">
+        <rect x="-7" y="-7" width="14" height="14" transform="translate(-40)" />
+        <rect x="-7" y="-7" width="14" height="14" transform="translate(-20)" />
+        <rect x="-7" y="-7" width="14" height="14" />
+        <rect x="-7" y="-7" width="14" height="14" transform="translate(+20)" />
+        <rect x="-7" y="-7" width="14" height="14" transform="translate(+40)" />
+      </g>
+
+      <!-- Editing the "fill" property will change the color of the foreground rectangles -->
+      <g fill="#f0e9a5">
+        <polygon id="parts1" transform="translate(-40)" />
+        <polygon id="parts2" transform="translate(-20)" />
+        <polygon id="parts3" />
+        <polygon id="parts4" transform="translate(+20)" />
+        <polygon id="parts5" transform="translate(+40)" />
+      </g>
+
+      <animate href="#parts1" attributeName="points" begin="-0.0s" dur="1.8s" values="-7 7, -7 7, 7 7, 7 7; -7 7, -7 -7, 7 -7, 7 7; -7 7, -7 -7, 7 -7, 7 7; -7 -7, -7 -7, 7 -7, 7 -7; -7 -7, -7 -7, 7 -7, 7 -7" keyTimes="0; 0.1; 0.5; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="points" begin="-1.6s" dur="1.8s" values="-7 7, -7 7, 7 7, 7 7; -7 7, -7 -7, 7 -7, 7 7; -7 7, -7 -7, 7 -7, 7 7; -7 -7, -7 -7, 7 -7, 7 -7; -7 -7, -7 -7, 7 -7, 7 -7" keyTimes="0; 0.1; 0.5; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="points" begin="-1.4s" dur="1.8s" values="-7 7, -7 7, 7 7, 7 7; -7 7, -7 -7, 7 -7, 7 7; -7 7, -7 -7, 7 -7, 7 7; -7 -7, -7 -7, 7 -7, 7 -7; -7 -7, -7 -7, 7 -7, 7 -7" keyTimes="0; 0.1; 0.5; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="points" begin="-1.2s" dur="1.8s" values="-7 7, -7 7, 7 7, 7 7; -7 7, -7 -7, 7 -7, 7 7; -7 7, -7 -7, 7 -7, 7 7; -7 -7, -7 -7, 7 -7, 7 -7; -7 -7, -7 -7, 7 -7, 7 -7" keyTimes="0; 0.1; 0.5; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="points" begin="-1.0s" dur="1.8s" values="-7 7, -7 7, 7 7, 7 7; -7 7, -7 -7, 7 -7, 7 7; -7 7, -7 -7, 7 -7, 7 7; -7 -7, -7 -7, 7 -7, 7 -7; -7 -7, -7 -7, 7 -7, 7 -7" keyTimes="0; 0.1; 0.5; 0.6; 1" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>

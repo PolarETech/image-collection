@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <polygon id="parts" points="0 -8, 8 0, 0 8, -8 0" />
+
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <use id="parts1" href="#parts" y="-5" />
+      <use id="parts2" href="#parts" y="+5" />
+      <use id="parts3" href="#parts" y="-5" />
+      <use id="parts4" href="#parts" y="+5" />
+      <use id="parts5" href="#parts" y="-5" />
+      <use id="parts6" href="#parts" y="+5" />
+      <use id="parts7" href="#parts" y="-5" />
+      <use id="parts8" href="#parts" y="+5" />
+
+      <!-- Editing the "values" properties will change the color -->
+      <animate href="#parts1" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-3.15s" dur="3.6s" calcMode="discrete" keyTimes="0; 0.4; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-2.70s" dur="3.6s" calcMode="discrete" keyTimes="0; 0.4; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-2.25s" dur="3.6s" calcMode="discrete" keyTimes="0; 0.4; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-1.80s" dur="3.6s" calcMode="discrete" keyTimes="0; 0.4; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-1.35s" dur="3.6s" calcMode="discrete" keyTimes="0; 0.4; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-0.90s" dur="3.6s" calcMode="discrete" keyTimes="0; 0.4; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts7" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-0.45s" dur="3.6s" calcMode="discrete" keyTimes="0; 0.4; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts8" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-0.00s" dur="3.6s" calcMode="discrete" keyTimes="0; 0.4; 0.6; 1" repeatCount="indefinite" />
+
+      <animate href="#parts1" attributeName="fill-opacity" values="0; 1; 1; 0" begin="-3.15s" dur="3.6s" keyTimes="0; 0.05; 0.95; 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="fill-opacity" values="0; 1; 1; 0" begin="-2.70s" dur="3.6s" keyTimes="0; 0.05; 0.95; 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="fill-opacity" values="0; 1; 1; 0" begin="-2.25s" dur="3.6s" keyTimes="0; 0.05; 0.95; 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="fill-opacity" values="0; 1; 1; 0" begin="-1.80s" dur="3.6s" keyTimes="0; 0.05; 0.95; 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="fill-opacity" values="0; 1; 1; 0" begin="-1.35s" dur="3.6s" keyTimes="0; 0.05; 0.95; 1" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="fill-opacity" values="0; 1; 1; 0" begin="-0.90s" dur="3.6s" keyTimes="0; 0.05; 0.95; 1" repeatCount="indefinite" />
+      <animate href="#parts7" attributeName="fill-opacity" values="0; 1; 1; 0" begin="-0.45s" dur="3.6s" keyTimes="0; 0.05; 0.95; 1" repeatCount="indefinite" />
+      <animate href="#parts8" attributeName="fill-opacity" values="0; 1; 1; 0" begin="-0.00s" dur="3.6s" keyTimes="0; 0.05; 0.95; 1" repeatCount="indefinite" />
+
+      <animate href="#parts1" attributeName="x" values="40; -40" begin="-3.15s" dur="3.6s" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="x" values="40; -40" begin="-2.70s" dur="3.6s" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="x" values="40; -40" begin="-2.25s" dur="3.6s" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="x" values="40; -40" begin="-1.80s" dur="3.6s" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="x" values="40; -40" begin="-1.35s" dur="3.6s" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="x" values="40; -40" begin="-0.90s" dur="3.6s" repeatCount="indefinite" />
+      <animate href="#parts7" attributeName="x" values="40; -40" begin="-0.45s" dur="3.6s" repeatCount="indefinite" />
+      <animate href="#parts8" attributeName="x" values="40; -40" begin="-0.00s" dur="3.6s" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
