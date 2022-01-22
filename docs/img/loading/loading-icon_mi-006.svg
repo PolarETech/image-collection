@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <clipPath id="clip">
+      <path d="
+        M0 -49
+        Q25 -49, 25 -37 C25 -25, 1 -15, 1 0 S25 25, 25 37 Q25 49, 0 49
+        Q-25 49, -25 37 C-25 25, -1 15, -1 0 S-25 -25, -25 -37 Q-25 -49, 0 -49Z" />
+    </clipPath>
+
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <g id="parts-set" clip-path="url(#clip)">
+        <!-- Editing the "fill" property will change the color of the hourglass shape -->
+        <rect fill="#90917f"
+              x="-50" y="-50" width="100" height="100" />
+
+        <!-- Editing the "fill" property will change the color of the falling sand -->
+        <g fill="#f0e9a5">
+          <polygon id="parts-sand-fall" />
+          <polygon id="parts-sand-top" />
+          <polygon id="parts-sand-bottom" />
+        </g>
+      </g>
+
+      <animate href="#parts-sand-fall"
+          attributeName="points"
+          dur="1.8s"
+          values="
+            -1 -1, 1 -1, 1 0,  -1 0;
+            -1 -1, 1 -1, 1 50, -1 50;
+            -1 -1, 1 -1, 1 50, -1 50;
+            -1 23, 1 23, 1 23, -1 23;
+            -1 23, 1 23, 1 23, -1 23"
+          keyTimes="0; 0.1; 0.7; 0.75; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts-sand-top"
+          attributeName="points"
+          dur="1.8s"
+          values="
+            -50 -42, 50 -42, 50 0, -50 0;
+            -50 0,   50 0,   50 0, -50 0;
+            -50 0,   50 0,   50 0, -50 0"
+          calcMode="spline"
+          keyTimes="0; 0.7; 1"
+          keySplines="0.47 0 0.7 0.5; 0 0 1 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts-sand-bottom"
+          attributeName="points"
+          dur="1.8s"
+          values="
+            -50 50, 50 50, 50 50, 0 50, -50 50;
+            -50 50, 50 50, 50 40, 0 20, -50 40;
+            -50 50, 50 50, 50 40, 0 20, -50 40;
+            -50 42, 50 42, 50 0,  0 0,  -50 0"
+          calcMode="spline"
+          keyTimes="0; 0.75; 0.95; 1"
+          keySplines="0.35 0 0.82 1; 0 0 1 1; 0 0 1 1"
+          repeatCount="indefinite" />
+
+      <animateTransform href="#parts-set"
+          attributeName="transform"
+          type="rotate"
+          dur="1.8s"
+          values="0; 0; 180; 180"
+          keyTimes="0; 0.8; 0.93; 1"
+          repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>

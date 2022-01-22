@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <g stroke-width="2" fill="none">
+        <!-- Editing the "stroke" property will change the color of the background circular lines -->
+        <g stroke="#90917f">
+          <circle r="49" />
+          <circle r="33" />
+        </g>
+
+        <!-- Editing the "stroke" property will change the color of the moving circular lines -->
+        <g stroke="#f0e9a5">
+          <path id="parts1" stroke-dasharray="308.0 308.0" d="M0 -49 A49 49 0 0 1 0 49 A49 49 0 0 1 0 -49" />
+          <path id="parts2" stroke-dasharray="207.4 207.4" d="M0 33 A33 33 0 0 0 0 -33 A33 33 0 0 0 0 33" />
+        </g>
+      </g>
+
+      <animate href="#parts1"
+          attributeName="stroke-dashoffset"
+          dur="3.6s"
+          from="308.0" to="-308.0"
+          repeatCount="indefinite" />
+
+      <animate href="#parts2"
+          attributeName="stroke-dashoffset"
+          dur="3.6s"
+          from="0" to="-414.8"
+          repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
