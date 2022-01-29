@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="letter-L" viewBox="-50 -50 100 100">
+      <path transform="scale(0.25)"
+            d="M-40 -50 H-20 V30 H30 V50 H-40Z" />
+    </symbol>
+
+    <symbol id="letter-O" viewBox="-50 -50 100 100">
+      <path transform="scale(0.25)"
+            fill-rule="evenodd"
+            d="M-40 -50 H40 V50 H-40Z M-20 -30 H20 V30 H-20Z" />
+    </symbol>
+
+    <symbol id="letter-A" viewBox="-50 -50 100 100">
+      <path transform="scale(0.25)"
+            fill-rule="evenodd"
+            d="M-40 -50 H40 V50 H20 V20 H-20 V50 H-40Z M-20 -30 H20 V0 H-20Z" />
+    </symbol>
+
+    <symbol id="letter-D" viewBox="-50 -50 100 100">
+      <path transform="scale(0.25)"
+            d="M-40 -50 H20 V-30 H-20 V30 H20 V50 H-40Z M20 -30 H40 V30 H20Z" />
+    </symbol>
+
+    <symbol id="letter-I" viewBox="-50 -50 100 100">
+      <path transform="scale(0.25)"
+            d="M-20 -50 H20 V-30 H10 V30 H20 V50 H-20 V30 H-10 V-30 H-20Z" />
+    </symbol>
+
+    <symbol id="letter-N" viewBox="-50 -50 100 100">
+      <path transform="scale(0.25)"
+            d="M-40 -50 H-20 L20 13 V-50 H40 V50 H20 L-20 -13 V50 H-40Z" />
+    </symbol>
+
+    <symbol id="letter-G" viewBox="-50 -50 100 100">
+      <path transform="scale(0.25)"
+            d="M-40 -50 H30 V-30 H-20 V30 H20 V10 H0 V-10 H40 V50 H-40Z" />
+    </symbol>
+
+    <symbol id="letter-." viewBox="-50 -50 100 100">
+      <path transform="scale(0.25)"
+            d="M-40 30 H-20 V50 H-40Z" />
+    </symbol>
+
+    <symbol id="loading-icon" viewBox="0 0 100 100">
+      <use id="parts01" href="#letter-L" x="-36" y="-20" />
+      <use id="parts02" href="#letter-O" x="-14" y="-20" />
+      <use id="parts03" href="#letter-A" x="+11" y="-20" />
+      <use id="parts04" href="#letter-D" x="+36" y="-20" />
+      <use id="parts05" href="#letter-I" x="-39" y="+20" />
+      <use id="parts06" href="#letter-N" x="-19" y="+20" />
+      <use id="parts07" href="#letter-G" x="+6"  y="+20" />
+      <use id="parts08" href="#letter-." x="+32" y="+20" />
+      <use id="parts09" href="#letter-." x="+42" y="+20" />
+      <use id="parts10" href="#letter-." x="+52" y="+20" />
+
+      <!-- Editing the "values" properties will change the color -->
+      <animate href="#parts01" attributeName="fill" values="#90917f; #90917f; #f0e9a5; #f0e9a5; #90917f" dur="3.6s" keyTimes="0; 0.01; 0.05; 0.75; 1" repeatCount="indefinite" />
+      <animate href="#parts02" attributeName="fill" values="#90917f; #90917f; #f0e9a5; #f0e9a5; #90917f" dur="3.6s" keyTimes="0; 0.06; 0.10; 0.80; 1" repeatCount="indefinite" />
+      <animate href="#parts03" attributeName="fill" values="#90917f; #90917f; #f0e9a5; #f0e9a5; #90917f" dur="3.6s" keyTimes="0; 0.11; 0.15; 0.85; 1" repeatCount="indefinite" />
+      <animate href="#parts04" attributeName="fill" values="#90917f; #90917f; #f0e9a5; #f0e9a5; #90917f" dur="3.6s" keyTimes="0; 0.16; 0.20; 0.90; 1" repeatCount="indefinite" />
+      <animate href="#parts05" attributeName="fill" values="#90917f; #90917f; #f0e9a5; #f0e9a5; #90917f" dur="3.6s" keyTimes="0; 0.21; 0.25; 0.80; 1" repeatCount="indefinite" />
+      <animate href="#parts06" attributeName="fill" values="#90917f; #90917f; #f0e9a5; #f0e9a5; #90917f" dur="3.6s" keyTimes="0; 0.26; 0.30; 0.85; 1" repeatCount="indefinite" />
+      <animate href="#parts07" attributeName="fill" values="#90917f; #90917f; #f0e9a5; #f0e9a5; #90917f" dur="3.6s" keyTimes="0; 0.31; 0.35; 0.90; 1" repeatCount="indefinite" />
+      <animate href="#parts08" attributeName="fill" values="#90917f; #90917f; #f0e9a5; #f0e9a5; #90917f" dur="3.6s" keyTimes="0; 0.36; 0.40; 0.92; 1" repeatCount="indefinite" />
+      <animate href="#parts09" attributeName="fill" values="#90917f; #90917f; #f0e9a5; #f0e9a5; #90917f" dur="3.6s" keyTimes="0; 0.56; 0.60; 0.94; 1" repeatCount="indefinite" />
+      <animate href="#parts10" attributeName="fill" values="#90917f; #90917f; #f0e9a5; #f0e9a5; #90917f" dur="3.6s" keyTimes="0; 0.76; 0.80; 0.96; 1" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>

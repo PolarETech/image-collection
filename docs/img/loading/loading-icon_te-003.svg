@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <!-- Editing the "fill" property will change the color of the frontside of the circle -->
+      <g fill="#f0e9a5">
+        <path id="letter-L" fill-rule="evenodd"
+              d="M0 -50 A50 50 0 0 0 0 50 A50 50 0 0 0 0 -50Z
+                 M-23 -30 H-3 V20 H27 V30 H-23Z" />
+
+        <path id="letter-O" fill-rule="evenodd"
+              d="M0 -50 A50 50 0 0 0 0 50 A50 50 0 0 0 0 -50Z
+                 M-10 -30 H10 L30 -10 V10 L10 30 H-10 L-30 10 V-10Z M-10 -20 H10 V20 H-10Z" />
+
+        <path id="letter-A" fill-rule="evenodd"
+              d="M0 -50 A50 50 0 0 0 0 50 A50 50 0 0 0 0 -50Z
+                 M-10 -32 H10 L30 -12 V28 H10 V13 H-10 V28 H-30 V-12Z M-10 -22 H10 V3 H-10Z" />
+
+        <path id="letter-D" fill-rule="evenodd"
+              d="M0 -50 A50 50 0 0 0 0 50 A50 50 0 0 0 0 -50Z
+                 M-23 -30 H12 L32 -10 V10 L12 30 H-23Z M-3 -20 H12 V20 H-3Z" />
+
+        <path id="letter-I" fill-rule="evenodd"
+              d="M0 -50 A50 50 0 0 0 0 50 A50 50 0 0 0 0 -50Z
+                 M-20 -30 H20 V-20 H10 V20 H20 V30 H-20 V20 H-10 V-20 H-20Z" />
+
+        <path id="letter-N" fill-rule="evenodd"
+              d="M0 -50 A50 50 0 0 0 0 50 A50 50 0 0 0 0 -50Z
+                 M-30 -28 H-10 V28 H-30Z M10 -28 H30 V28 H10Z M-10 -26 L10 1 V18 L-10 -9Z" />
+
+        <path id="letter-G" fill-rule="evenodd"
+              d="M0 -50 A50 50 0 0 0 0 50 A50 50 0 0 0 0 -50Z
+                 M-10 -30 H10 L30 -10 H10 V-20 H-10 V20 H10 V10 H0 V0 H30 V10 L10 30 H-10 L-30 10 V-10Z" />
+      </g>
+
+      <!-- Editing the "fill" property will change the color of the backside of the circle -->
+      <circle id="parts-back" r="50" fill="#90917f" />
+
+      <animateTransform href="#letter-L" attributeName="transform" type="scale" begin="-0.0s" dur="8.4s" values="0 1; 0 1; 1 1; 1 1; 0 1; 0 1" calcMode="spline" keyTimes="0; 0.017; 0.052; 0.09; 0.125; 1" keySplines="0 0 1 1; 0 0.55 0.45 1; 0 0 1 1; 0.55 0 1 0.45; 0 0 1 1" repeatCount="indefinite" />
+      <animateTransform href="#letter-O" attributeName="transform" type="scale" begin="-7.2s" dur="8.4s" values="0 1; 0 1; 1 1; 1 1; 0 1; 0 1" calcMode="spline" keyTimes="0; 0.017; 0.052; 0.09; 0.125; 1" keySplines="0 0 1 1; 0 0.55 0.45 1; 0 0 1 1; 0.55 0 1 0.45; 0 0 1 1" repeatCount="indefinite" />
+      <animateTransform href="#letter-A" attributeName="transform" type="scale" begin="-6.0s" dur="8.4s" values="0 1; 0 1; 1 1; 1 1; 0 1; 0 1" calcMode="spline" keyTimes="0; 0.017; 0.052; 0.09; 0.125; 1" keySplines="0 0 1 1; 0 0.55 0.45 1; 0 0 1 1; 0.55 0 1 0.45; 0 0 1 1" repeatCount="indefinite" />
+      <animateTransform href="#letter-D" attributeName="transform" type="scale" begin="-4.8s" dur="8.4s" values="0 1; 0 1; 1 1; 1 1; 0 1; 0 1" calcMode="spline" keyTimes="0; 0.017; 0.052; 0.09; 0.125; 1" keySplines="0 0 1 1; 0 0.55 0.45 1; 0 0 1 1; 0.55 0 1 0.45; 0 0 1 1" repeatCount="indefinite" />
+      <animateTransform href="#letter-I" attributeName="transform" type="scale" begin="-3.6s" dur="8.4s" values="0 1; 0 1; 1 1; 1 1; 0 1; 0 1" calcMode="spline" keyTimes="0; 0.017; 0.052; 0.09; 0.125; 1" keySplines="0 0 1 1; 0 0.55 0.45 1; 0 0 1 1; 0.55 0 1 0.45; 0 0 1 1" repeatCount="indefinite" />
+      <animateTransform href="#letter-N" attributeName="transform" type="scale" begin="-2.4s" dur="8.4s" values="0 1; 0 1; 1 1; 1 1; 0 1; 0 1" calcMode="spline" keyTimes="0; 0.017; 0.052; 0.09; 0.125; 1" keySplines="0 0 1 1; 0 0.55 0.45 1; 0 0 1 1; 0.55 0 1 0.45; 0 0 1 1" repeatCount="indefinite" />
+      <animateTransform href="#letter-G" attributeName="transform" type="scale" begin="-1.2s" dur="8.4s" values="0 1; 0 1; 1 1; 1 1; 0 1; 0 1" calcMode="spline" keyTimes="0; 0.017; 0.052; 0.09; 0.125; 1" keySplines="0 0 1 1; 0 0.55 0.45 1; 0 0 1 1; 0.55 0 1 0.45; 0 0 1 1" repeatCount="indefinite" />
+
+      <animateTransform href="#parts-back" attributeName="transform" type="scale" dur="1.2s" values="1 1; 0 1; 0 1; 1 1" keyTimes="0; 0.126; 0.874; 1" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>

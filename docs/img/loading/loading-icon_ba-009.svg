@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <path id="parts1"
+            transform="translate(-34)"
+            d="M0 -15 Q6 -8, 0 0 Q6 8, 0 15 Q-6 8, 0 0 Q-6 -8, 0 -15Z
+               M-15 0 Q-8 -6, 0 0 Q8 -6, 15 0 Q8 6, 0 0 Q-8 6, -15 0Z" />
+
+      <path id="parts2"
+            d="M0 -15 Q6 -8, 0 0 Q6 8, 0 15 Q-6 8, 0 0 Q-6 -8, 0 -15Z
+               M-15 0 Q-8 -6, 0 0 Q8 -6, 15 0 Q8 6, 0 0 Q-8 6, -15 0Z" />
+
+      <path id="parts3"
+            transform="translate(+34)"
+            d="M0 -15 Q6 -8, 0 0 Q6 8, 0 15 Q-6 8, 0 0 Q-6 -8, 0 -15Z
+               M-15 0 Q-8 -6, 0 0 Q8 -6, 15 0 Q8 6, 0 0 Q-8 6, -15 0Z" />
+
+      <!-- Editing the "values" properties will change the color -->
+      <animate href="#parts1" attributeName="fill" values="#f0e9a5; #90917f" begin="-3.15s" dur="3.6s" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="fill" values="#f0e9a5; #90917f" begin="-2.55s" dur="3.6s" calcMode="discrete" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="fill" values="#f0e9a5; #90917f" begin="-1.95s" dur="3.6s" calcMode="discrete" repeatCount="indefinite" />
+
+      <animateTransform href="#parts1" attributeName="transform" type="rotate" values="0; 135; 135; 270; 270" begin="-0.0s" dur="3.6s" calcMode="spline" keyTimes="0; 0.125; 0.5; 0.625; 1" keySplines="0.5 0 0.8 0.5; 0 0 1 1; 0.5 0 0.8 0.5; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts2" attributeName="transform" type="rotate" values="0; 135; 135; 270; 270" begin="-3.0s" dur="3.6s" calcMode="spline" keyTimes="0; 0.125; 0.5; 0.625; 1" keySplines="0.5 0 0.8 0.5; 0 0 1 1; 0.5 0 0.8 0.5; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts3" attributeName="transform" type="rotate" values="0; 135; 135; 270; 270" begin="-2.4s" dur="3.6s" calcMode="spline" keyTimes="0; 0.125; 0.5; 0.625; 1" keySplines="0.5 0 0.8 0.5; 0 0 1 1; 0.5 0 0.8 0.5; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
