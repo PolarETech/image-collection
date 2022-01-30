@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <path id="parts1" d="M-14.142 -34.142 L0 -40, 14.142 -34.142, 7.042 -17, -7.042 -17Z" />
+      <path id="parts2" d="M-14.142 -34.142 L0 -40, 14.142 -34.142, 7.042 -17, -7.042 -17Z" transform="rotate(45)" />
+      <path id="parts3" d="M-14.142 -34.142 L0 -40, 14.142 -34.142, 7.042 -17, -7.042 -17Z" transform="rotate(90)" />
+      <path id="parts4" d="M-14.142 -34.142 L0 -40, 14.142 -34.142, 7.042 -17, -7.042 -17Z" transform="rotate(135)" />
+      <path id="parts5" d="M-14.142 -34.142 L0 -40, 14.142 -34.142, 7.042 -17, -7.042 -17Z" transform="rotate(180)" />
+      <path id="parts6" d="M-14.142 -34.142 L0 -40, 14.142 -34.142, 7.042 -17, -7.042 -17Z" transform="rotate(225)" />
+      <path id="parts7" d="M-14.142 -34.142 L0 -40, 14.142 -34.142, 7.042 -17, -7.042 -17Z" transform="rotate(270)" />
+      <path id="parts8" d="M-14.142 -34.142 L0 -40, 14.142 -34.142, 7.042 -17, -7.042 -17Z" transform="rotate(315)" />
+
+      <!-- Editing the "values" properties will change the color -->
+      <animate href="#parts1" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-0.000s" dur="1.8s" keyTimes="0; 0.1; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-1.575s" dur="1.8s" keyTimes="0; 0.1; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-1.350s" dur="1.8s" keyTimes="0; 0.1; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-1.125s" dur="1.8s" keyTimes="0; 0.1; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-0.900s" dur="1.8s" keyTimes="0; 0.1; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-0.675s" dur="1.8s" keyTimes="0; 0.1; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts7" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-0.450s" dur="1.8s" keyTimes="0; 0.1; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts8" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" begin="-0.225s" dur="1.8s" keyTimes="0; 0.1; 0.6; 1" repeatCount="indefinite" />
+
+      <animateTransform href="#parts1" attributeName="transform" type="translate" values="0 0; 0 -10; 0 0; 0 0" begin="-0.000s" dur="1.8s" calcMode="spline" keyTimes="0; 0.03; 0.3; 1" keySplines="0 0 1 1; 0.333 0 0.667 0.333; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts2" attributeName="transform" type="translate" values="0 0; 0 -10; 0 0; 0 0" begin="-1.575s" dur="1.8s" calcMode="spline" keyTimes="0; 0.03; 0.3; 1" keySplines="0 0 1 1; 0.333 0 0.667 0.333; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts3" attributeName="transform" type="translate" values="0 0; 0 -10; 0 0; 0 0" begin="-1.350s" dur="1.8s" calcMode="spline" keyTimes="0; 0.03; 0.3; 1" keySplines="0 0 1 1; 0.333 0 0.667 0.333; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts4" attributeName="transform" type="translate" values="0 0; 0 -10; 0 0; 0 0" begin="-1.125s" dur="1.8s" calcMode="spline" keyTimes="0; 0.03; 0.3; 1" keySplines="0 0 1 1; 0.333 0 0.667 0.333; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts5" attributeName="transform" type="translate" values="0 0; 0 -10; 0 0; 0 0" begin="-0.900s" dur="1.8s" calcMode="spline" keyTimes="0; 0.03; 0.3; 1" keySplines="0 0 1 1; 0.333 0 0.667 0.333; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts6" attributeName="transform" type="translate" values="0 0; 0 -10; 0 0; 0 0" begin="-0.675s" dur="1.8s" calcMode="spline" keyTimes="0; 0.03; 0.3; 1" keySplines="0 0 1 1; 0.333 0 0.667 0.333; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts7" attributeName="transform" type="translate" values="0 0; 0 -10; 0 0; 0 0" begin="-0.450s" dur="1.8s" calcMode="spline" keyTimes="0; 0.03; 0.3; 1" keySplines="0 0 1 1; 0.333 0 0.667 0.333; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts8" attributeName="transform" type="translate" values="0 0; 0 -10; 0 0; 0 0" begin="-0.225s" dur="1.8s" calcMode="spline" keyTimes="0; 0.03; 0.3; 1" keySplines="0 0 1 1; 0.333 0 0.667 0.333; 0 0 1 1" additive="sum" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>

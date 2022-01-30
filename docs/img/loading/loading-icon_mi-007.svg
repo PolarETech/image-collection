@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <g id="parts-gear">
+        <polygon id="parts-tooth1" points="-6 0, 6 0, 8 25, -8 25" />
+        <polygon id="parts-tooth2" points="-6 0, 6 0, 8 25, -8 25" />
+        <polygon id="parts-tooth3" points="-6 0, 6 0, 8 25, -8 25" />
+        <polygon id="parts-tooth4" points="-6 0, 6 0, 8 25, -8 25" />
+        <polygon id="parts-tooth5" points="-6 0, 6 0, 8 25, -8 25" />
+        <polygon id="parts-tooth6" points="-6 0, 6 0, 8 25, -8 25" />
+
+        <path d="M-46 65 A46 46 0 0 1 46 65 L36 65 A36 36 0 0 0 -36 65Z" />
+        <path d="M-30 65 A30 30 0 0 1 30 65 L23 65 A23 23 0 0 0 -23 65Z" />
+      </g>
+
+      <!-- Editing the "fill" property will change the color of the ball -->
+      <circle id="parts-ball" cy="-9" r="9" fill="#f0e9a5" />
+
+      <!-- Editing the "values" properties will change the color of the gear -->
+      <animate href="#parts-gear" attributeName="fill" values="#90917f; #f0e9a5; #90917f; #90917f" dur="0.9s" keyTimes="0; 0.09; 0.7; 1" repeatCount="indefinite" />
+
+      <animateTransform href="#parts-tooth1" attributeName="transform" type="rotate" values="100 0 65; -100 0 65" begin="-0.0s" dur="5.4s" repeatCount="indefinite" />
+      <animateTransform href="#parts-tooth2" attributeName="transform" type="rotate" values="100 0 65; -100 0 65" begin="-4.5s" dur="5.4s" repeatCount="indefinite" />
+      <animateTransform href="#parts-tooth3" attributeName="transform" type="rotate" values="100 0 65; -100 0 65" begin="-3.6s" dur="5.4s" repeatCount="indefinite" />
+      <animateTransform href="#parts-tooth4" attributeName="transform" type="rotate" values="100 0 65; -100 0 65" begin="-2.7s" dur="5.4s" repeatCount="indefinite" />
+      <animateTransform href="#parts-tooth5" attributeName="transform" type="rotate" values="100 0 65; -100 0 65" begin="-1.8s" dur="5.4s" repeatCount="indefinite" />
+      <animateTransform href="#parts-tooth6" attributeName="transform" type="rotate" values="100 0 65; -100 0 65" begin="-0.9s" dur="5.4s" repeatCount="indefinite" />
+
+      <animateTransform href="#parts-ball" attributeName="transform" type="translate" values="0 0; 0 -30; 0 0" dur="0.9s" calcMode="spline" keySplines="0.25 0.1 0.25 1; 0.33 0 0.67 0.33" repeatCount="indefinite" />
+      <animateTransform href="#parts-ball" attributeName="transform" type="scale" values="1.08 0.92; 0.95 1.05; 1 1; 1 1; 0.95 1.05" dur="0.9s" keyTimes="0; 0.2; 0.3; 0.65; 1" additive="sum" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
