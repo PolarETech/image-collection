@@ -1,6 +1,7 @@
 # PT Image Collection
 
-This repository provides images and source code such as animated SVG icons created by Polar Tech.
+This repository provides images and source code such as animated SVG icons created by Polar Tech.  
+It also provides some utilities for writing SVG source code.
 
 ## Website
 
@@ -21,9 +22,16 @@ SVG images have been verified to be available in the latest Chrome, Firefox, and
 3. Simple and clear code
 4. Small code size
 
-## Utility for writing SVG source code
+## Utilities
 
 - [keySplines Visualizer](https://polaretech.github.io/image-collection/utils/keysplines-visualizer.html)
 - [Division Calculator](https://polaretech.github.io/image-collection/utils/division-calculator.html)
 - [Real-Time Path Data Drawer](https://polaretech.github.io/image-collection/utils/pathdata-drawer.html)
 - [Separated Circle Generator](https://polaretech.github.io/image-collection/utils/separated-circle-generator.html)
+
+## Contributing
+
+Bug reports, feature requests for utilities, and requests for new icon designs are welcome.  
+Please create an [issue](https://github.com/PolarETech/image-collection/issues).
+
+Pull requests for new icon files will not be acceptable.
