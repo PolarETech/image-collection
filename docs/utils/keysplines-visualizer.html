@@ -496,6 +496,26 @@
               this.setPoint2Position(pos);
               break;
             }
+          },
+          displayTargetPointSelected: function (targetId) {
+            switch (targetId) {
+            case 'point1':
+              this.point1.setAttribute('stroke-width', 2);
+              break;
+            case 'point2':
+              this.point2.setAttribute('stroke-width', 2);
+              break;
+            }
+          },
+          displayTargetPointUnselected: function (targetId) {
+            switch (targetId) {
+            case 'point1':
+              this.point1.setAttribute('stroke-width', 1);
+              break;
+            case 'point2':
+              this.point2.setAttribute('stroke-width', 1);
+              break;
+            }
           }
         };
 
@@ -552,8 +572,12 @@
           // **************************
 
           startPointDrag: event => {
-            draggingPoint = true;
+            if (targetPoint) return;
+
             targetPoint = event.currentTarget;
+            controlPoint.displayTargetPointSelected(targetPoint.id);
+
+            draggingPoint = false;
 
             // Adjust cursor display
             window.getSelection().removeAllRanges();
@@ -567,8 +591,12 @@
           },
 
           endPointDrag: () => {
-            draggingPoint = false;
+            if (!targetPoint || !draggingPoint) return;
+
+            controlPoint.displayTargetPointUnselected(targetPoint.id);
             targetPoint = null;
+
+            draggingPoint = false;
 
             // Adjust cursor display
             const htmlElement = document.documentElement;
@@ -581,7 +609,9 @@
           },
 
           doPointDrag: event => {
-            if (!draggingPoint) return;
+            if (!targetPoint) return;
+
+            draggingPoint = true;
 
             const pos = getCursorPositionOnGraph({ x: event.clientX, y: event.clientY });
 
