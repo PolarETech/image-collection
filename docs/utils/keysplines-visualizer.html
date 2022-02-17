@@ -10,7 +10,7 @@
     <link rel="icon" href="../favicon.ico">
 
     <!--
-      Copyright (c) 2021 Polar Tech
+      Copyright (c) 2021-2022 Polar Tech
       Released under the MIT license
       https://opensource.org/licenses/MIT
     -->
@@ -39,7 +39,7 @@
           sans-serif;
       }
       .container {
-        width: 100vw;
+        width: 100%;
         min-width: 360px;
       }
       main {
@@ -101,7 +101,20 @@
         align-content: flex-start;
         margin-top: 1rem;
       }
+      @media (max-width: 809px) {
+        .flex-container {
+          justify-content: center;
+        }
+      }
 
+      .graph {
+        margin-right: 1.5rem;
+      }
+      @media (max-width: 809px) {
+        .graph {
+          margin: 0 auto;
+        }
+      }
       .graph svg {
         width: 360px;
         height: 360px;
@@ -145,31 +158,56 @@
         margin-top: 1rem;
       }
 
-      .data-input {
-        margin: 2.5rem 1.5rem 0;
+      .data {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: calc(100vw - 360px - 7rem);
+        margin-top: 2.5rem;
       }
-      .data-input input#param {
+      @media (max-width: 809px) {
+        .data {
+          align-items: center;
+          width: calc(100% - 3rem);
+        }
+      }
+      .input-param input#param {
         width: 15rem;
       }
-      .data-input button#apply + p {
+      .input-param + div {
         margin-top: 0.5rem;
       }
       .specified-param {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: flex-start;
-        align-content: flex-start;
+        width: 100%;
+        max-height: 60vh;
         margin-top: 1.2rem;
+        overflow-y: scroll;
+        border-top: 1px solid #bdbcb6;
+        border-bottom: 1px solid #bdbcb6;
       }
       .specified-param > div {
-        margin-right: 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 9rem);
+        grid-gap: 0rem 2rem;
+        justify-content: flex-start;
+      }
+      @media (max-width: 809px) {
+        .specified-param > div {
+          justify-content: center;
+        }
+      }
+      @media (max-width: 399px) {
+        .specified-param > div {
+          grid-gap: 0rem 1rem;
+        }
+      }
+      .specified-param > div:not(:first-of-type) {
+        margin-top: 1rem;
       }
       .specified-param button {
         display: block;
         width: 9rem;
-        margin-top: 0.6rem;
+        margin: 0.6rem 0;
       }
 
       #link-github {
@@ -329,30 +367,78 @@
               </div>
             </div>
           </div>
+          <!-- end of graph div -->
 
-          <div class="flex-item data-input">
-            <input id="param" type="text" value="0.25 0.1 0.25 1" spellcheck="false">
-            <button id="apply" ontouchstart>Apply</button>
-            <p>Valid value is four numbers between 0.0 and 1.0.
-              <br>The numbers will be rounded to three decimal places.
-            </p>
+          <div class="flex-item data">
+            <div class="input-param">
+              <input id="param" type="text" value="0.25 0.1 0.25 1" spellcheck="false">
+              <button id="apply" ontouchstart>Apply</button>
+            </div>
+
+            <div>
+              <p>Valid value is four numbers between 0.0 and 1.0.
+                <br>The numbers will be rounded to three decimal places.
+              </p>
+            </div>
 
             <div class="specified-param">
-              <div class="ease">
-                <button id="specified-ease" ontouchstart>ease</button>
-                <button id="specified-ease-in" ontouchstart>ease-in</button>
-                <button id="specified-ease-out" ontouchstart>ease-out</button>
-                <button id="specified-ease-in-out" ontouchstart>ease-in-out</button>
+              <div>
+                <div class="ease-basic">
+                  <button id="specified-ease" ontouchstart>ease</button>
+                  <button id="specified-ease-in" ontouchstart>ease-in</button>
+                  <button id="specified-ease-out" ontouchstart>ease-out</button>
+                  <button id="specified-ease-in-out" ontouchstart>ease-in-out</button>
+                </div>
+                <div class="other">
+                  <button id="specified-linear" ontouchstart>linear</button>
+                  <button id="specified-projectile-rise" ontouchstart>projectile (rise)</button>
+                  <button id="specified-projectile-fall" ontouchstart>projectile (fall)</button>
+                </div>
               </div>
-              <div class="other">
-                <button id="specified-linear" ontouchstart>linear</button>
-                <button id="specified-projectile-rise" ontouchstart>projectile (rise)</button>
-                <button id="specified-projectile-fall" ontouchstart>projectile (fall)</button>
-                <button id="specified-quadrant" ontouchstart>quadrant</button>
-                <button id="specified-quadrant-inverted" ontouchstart>quadrant (inv)</button>
+
+              <div>
+                <div class="ease-quadratic">
+                  <button id="specified-ease-in-quadratic" ontouchstart>quadratic-in</button>
+                  <button id="specified-ease-out-quadratic" ontouchstart>quadratic-out</button>
+                  <button id="specified-ease-in-out-quadratic" ontouchstart>quadratic-in-out</button>
+                </div>
+                <div class="ease-cubic">
+                  <button id="specified-ease-in-cubic" ontouchstart>cubic-in</button>
+                  <button id="specified-ease-out-cubic" ontouchstart>cubic-out</button>
+                  <button id="specified-ease-in-out-cubic" ontouchstart>cubic-in-out</button>
+                </div>
+                <div class="ease-quartic">
+                  <button id="specified-ease-in-quartic" ontouchstart>quartic-in</button>
+                  <button id="specified-ease-out-quartic" ontouchstart>quartic-out</button>
+                  <button id="specified-ease-in-out-quartic" ontouchstart>quartic-in-out</button>
+                </div>
+                <div class="ease-quintic">
+                  <button id="specified-ease-in-quintic" ontouchstart>quintic-in</button>
+                  <button id="specified-ease-out-quintic" ontouchstart>quintic-out</button>
+                  <button id="specified-ease-in-out-quintic" ontouchstart>quintic-in-out</button>
+                </div>
+                <div class="ease-sinusoidal">
+                  <button id="specified-ease-in-sinusoidal" ontouchstart>sine-in</button>
+                  <button id="specified-ease-out-sinusoidal" ontouchstart>sine-out</button>
+                  <button id="specified-ease-in-out-sinusoidal" ontouchstart>sine-in-out</button>
+                </div>
+                <div class="ease-exponential">
+                  <button id="specified-ease-in-exponential" ontouchstart>exponent-in</button>
+                  <button id="specified-ease-out-exponential" ontouchstart>exponent-out</button>
+                  <button id="specified-ease-in-out-exponential" ontouchstart>exponent-in-out</button>
+                </div>
+                <div class="ease-circular">
+                  <button id="specified-ease-in-circular" ontouchstart>circular-in</button>
+                  <button id="specified-ease-out-circular" ontouchstart>circular-out</button>
+                  <button id="specified-ease-in-out-circular" ontouchstart>circular-in-out</button>
+                </div>
               </div>
             </div>
+            <!-- end of specified-param div -->
+
           </div>
+          <!-- end of data div -->
+
         </section>
         <!-- end of flex-container section -->
 
@@ -365,7 +451,7 @@
       </a>
 
       <footer>
-        <p>© 2021 Polar Tech | MIT License</p>
+        <p>© 2021-2022 Polar Tech | MIT License</p>
       </footer>
 
     </div>
@@ -387,8 +473,27 @@
           'linear': [0, 0, 1, 1],
           'projectile-rise': [0.333, 0.667, 0.667, 1],
           'projectile-fall': [0.333, 0, 0.667, 0.333],
-          'quadrant': [0, 0.55228, 0.44772, 1],
-          'quadrant-inverted': [0.55228, 0, 1, 0.44772]
+          'ease-in-quadratic': [0.333, 0, 0.667, 0.333],
+          'ease-out-quadratic': [0.333, 0.667, 0.667, 1],
+          'ease-in-out-quadratic': [0.448, 0, 0.552, 1],
+          'ease-in-cubic': [0.333, 0, 0.667, 0],
+          'ease-out-cubic': [0.333, 1, 0.667, 1],
+          'ease-in-out-cubic': [0.652, 0, 0.348, 1],
+          'ease-in-quartic': [0.507, 0, 0.743, 0],
+          'ease-out-quartic': [0.257, 1, 0.493, 1],
+          'ease-in-out-quartic': [0.763, 0, 0.237, 1],
+          'ease-in-quintic': [0.637, 0, 0.786, 0],
+          'ease-out-quintic': [0.214, 1, 0.363, 1],
+          'ease-in-out-quintic': [0.833, 0, 0.167, 1],
+          'ease-in-sinusoidal': [0.362, 0, 0.674, 0.488],
+          'ease-out-sinusoidal': [0.326, 0.512, 0.638, 1],
+          'ease-in-out-sinusoidal': [0.364, 0, 0.636, 1],
+          'ease-in-exponential': [0.676, 0, 0.851, 0],
+          'ease-out-exponential': [0.149, 1, 0.324, 1],
+          'ease-in-out-exponential': [0.879, 0, 0.121, 1],
+          'ease-in-circular': [0.552, 0, 1, 0.448],
+          'ease-out-circular': [0, 0.552, 0.448, 1],
+          'ease-in-out-circular': [0.841, 0, 0.159, 1]
         };
 
         const paramInputField = {
