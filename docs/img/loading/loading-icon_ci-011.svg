@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <path id="parts1" />
+      <path id="parts2" transform="rotate(60)"  />
+      <path id="parts3" transform="rotate(120)" />
+      <path id="parts4" transform="rotate(180)" />
+      <path id="parts5" transform="rotate(240)" />
+      <path id="parts6" transform="rotate(300)" />
+
+      <!-- Editing the "values" properties will change the color -->
+      <animate href="#parts1" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-0.0s" dur="3.6s" keyTimes="0; 0.1; 0.5; 0.55; 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-3.4s" dur="3.6s" keyTimes="0; 0.1; 0.5; 0.55; 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-3.2s" dur="3.6s" keyTimes="0; 0.1; 0.5; 0.55; 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-3.0s" dur="3.6s" keyTimes="0; 0.1; 0.5; 0.55; 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-2.8s" dur="3.6s" keyTimes="0; 0.1; 0.5; 0.55; 1" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-2.6s" dur="3.6s" keyTimes="0; 0.1; 0.5; 0.55; 1" repeatCount="indefinite" />
+
+      <animate href="#parts1"
+          attributeName="d"
+          begin="-0.0s" dur="3.6s"
+          values="
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z"
+          keyTimes="0; 0.05; 0.1; 0.5; 0.55; 0.6; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts2"
+          attributeName="d"
+          begin="-3.4s" dur="3.6s"
+          values="
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z"
+          keyTimes="0; 0.05; 0.1; 0.5; 0.55; 0.6; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts3"
+          attributeName="d"
+          begin="-3.2s" dur="3.6s"
+          values="
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z"
+          keyTimes="0; 0.05; 0.1; 0.5; 0.55; 0.6; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts4"
+          attributeName="d"
+          begin="-3.0s" dur="3.6s"
+          values="
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z"
+          keyTimes="0; 0.05; 0.1; 0.5; 0.55; 0.6; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts5"
+          attributeName="d"
+          begin="-2.8s" dur="3.6s"
+          values="
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z"
+          keyTimes="0; 0.05; 0.1; 0.5; 0.55; 0.6; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts6"
+          attributeName="d"
+          begin="-2.6s" dur="3.6s"
+          values="
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-24.1 -43.8 A50 50 0 0 1 24.1 -43.8 L15.1 -28.2 A32 32 0 0 0 -15.1 -28.2Z;
+            M-17.1 -47 A50 50 0 0 1 17.1 -47 L10.9 -30.1 A32 32 0 0 0 -10.9 -30.1Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z;
+            M-1 -50 A50 50 0 0 1 1 -50 L1 -32 A32 32 0 0 0 -1 -32Z"
+          keyTimes="0; 0.05; 0.1; 0.5; 0.55; 0.6; 1"
+          repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>

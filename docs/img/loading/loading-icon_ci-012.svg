@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <path id="parts1" transform="rotate(22)" />
+      <path id="parts2" transform="rotate(42)" />
+      <path id="parts3" transform="rotate(62)" />
+      <path id="parts4" transform="rotate(82)" />
+      <path id="parts5" transform="rotate(102)" />
+      <path id="parts6" transform="rotate(122)" />
+
+      <!-- Editing the "values" properties will change the color -->
+      <animate href="#parts1" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-0.3s" dur="1.8s" keyTimes="0; 0.25; 0.6; 0.85; 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-0.6s" dur="1.8s" keyTimes="0; 0.25; 0.6; 0.85; 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-0.9s" dur="1.8s" keyTimes="0; 0.25; 0.6; 0.85; 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-1.2s" dur="1.8s" keyTimes="0; 0.25; 0.6; 0.85; 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-1.5s" dur="1.8s" keyTimes="0; 0.25; 0.6; 0.85; 1" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="fill" values="#90917f; #f0e9a5; #f0e9a5; #90917f; #90917f" begin="-0.0s" dur="1.8s" keyTimes="0; 0.25; 0.6; 0.85; 1" repeatCount="indefinite" />
+
+      <animateTransform href="#parts1" attributeName="transform" type="rotate" values="0; 90; 210; 330; 60; 150; 300; 120; 240; 30; 180; 270" begin="-20.1s" dur="21.6s" calcMode="discrete" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts2" attributeName="transform" type="rotate" values="0; 90; 210; 330; 60; 150; 300; 120; 240; 30; 180; 270" begin="-20.4s" dur="21.6s" calcMode="discrete" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts3" attributeName="transform" type="rotate" values="0; 90; 210; 330; 60; 150; 300; 120; 240; 30; 180; 270" begin="-20.7s" dur="21.6s" calcMode="discrete" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts4" attributeName="transform" type="rotate" values="0; 90; 210; 330; 60; 150; 300; 120; 240; 30; 180; 270" begin="-21.0s" dur="21.6s" calcMode="discrete" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts5" attributeName="transform" type="rotate" values="0; 90; 210; 330; 60; 150; 300; 120; 240; 30; 180; 270" begin="-21.3s" dur="21.6s" calcMode="discrete" additive="sum" repeatCount="indefinite" />
+      <animateTransform href="#parts6" attributeName="transform" type="rotate" values="0; 90; 210; 330; 60; 150; 300; 120; 240; 30; 180; 270" begin="-00.0s" dur="21.6s" calcMode="discrete" additive="sum" repeatCount="indefinite" />
+
+      <animate href="#parts1"
+          attributeName="d"
+          begin="-0.3s" dur="1.8s"
+          values="
+            M-0.1 -12 A12 12 0 0 1 0.1 -12 L0.1 -12 A12 12 0 0 0 -0.1 -12Z;
+            M-1.2 -49.9 A50 50 0 0 1 1.2 -49.9 L0.3 -12 A12 12 0 0 0 -0.3 -12Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-0.7 -49.9 A50 50 0 0 1 0.7 -49.9 L0.5 -31.9 A32 32 0 0 0 -0.5 -31.9Z;
+            M-0.2 -50 A50 50 0 0 1 0.2 -50 L0.2 -50 A50 50 0 0 0 -0.2 -50Z;"
+          keyTimes="0; 0.05; 0.2; 0.8; 0.9; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts2"
+          attributeName="d"
+          begin="-0.6s" dur="1.8s"
+          values="
+            M-0.1 -12 A12 12 0 0 1 0.1 -12 L0.1 -12 A12 12 0 0 0 -0.1 -12Z;
+            M-1.2 -49.9 A50 50 0 0 1 1.2 -49.9 L0.3 -12 A12 12 0 0 0 -0.3 -12Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-0.7 -49.9 A50 50 0 0 1 0.7 -49.9 L0.5 -31.9 A32 32 0 0 0 -0.5 -31.9Z;
+            M-0.2 -50 A50 50 0 0 1 0.2 -50 L0.2 -50 A50 50 0 0 0 -0.2 -50Z;"
+          keyTimes="0; 0.05; 0.2; 0.8; 0.9; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts3"
+          attributeName="d"
+          begin="-0.9s" dur="1.8s"
+          values="
+            M-0.1 -12 A12 12 0 0 1 0.1 -12 L0.1 -12 A12 12 0 0 0 -0.1 -12Z;
+            M-1.2 -49.9 A50 50 0 0 1 1.2 -49.9 L0.3 -12 A12 12 0 0 0 -0.3 -12Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-0.7 -49.9 A50 50 0 0 1 0.7 -49.9 L0.5 -31.9 A32 32 0 0 0 -0.5 -31.9Z;
+            M-0.2 -50 A50 50 0 0 1 0.2 -50 L0.2 -50 A50 50 0 0 0 -0.2 -50Z;"
+          keyTimes="0; 0.05; 0.2; 0.8; 0.9; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts4"
+          attributeName="d"
+          begin="-1.2s" dur="1.8s"
+          values="
+            M-0.1 -12 A12 12 0 0 1 0.1 -12 L0.1 -12 A12 12 0 0 0 -0.1 -12Z;
+            M-1.2 -49.9 A50 50 0 0 1 1.2 -49.9 L0.3 -12 A12 12 0 0 0 -0.3 -12Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-0.7 -49.9 A50 50 0 0 1 0.7 -49.9 L0.5 -31.9 A32 32 0 0 0 -0.5 -31.9Z;
+            M-0.2 -50 A50 50 0 0 1 0.2 -50 L0.2 -50 A50 50 0 0 0 -0.2 -50Z;"
+          keyTimes="0; 0.05; 0.2; 0.8; 0.9; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts5"
+          attributeName="d"
+          begin="-1.5s" dur="1.8s"
+          values="
+            M-0.1 -12 A12 12 0 0 1 0.1 -12 L0.1 -12 A12 12 0 0 0 -0.1 -12Z;
+            M-1.2 -49.9 A50 50 0 0 1 1.2 -49.9 L0.3 -12 A12 12 0 0 0 -0.3 -12Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-0.7 -49.9 A50 50 0 0 1 0.7 -49.9 L0.5 -31.9 A32 32 0 0 0 -0.5 -31.9Z;
+            M-0.2 -50 A50 50 0 0 1 0.2 -50 L0.2 -50 A50 50 0 0 0 -0.2 -50Z;"
+          keyTimes="0; 0.05; 0.2; 0.8; 0.9; 1"
+          repeatCount="indefinite" />
+
+      <animate href="#parts6"
+          attributeName="d"
+          begin="-0.0s" dur="1.8s"
+          values="
+            M-0.1 -12 A12 12 0 0 1 0.1 -12 L0.1 -12 A12 12 0 0 0 -0.1 -12Z;
+            M-1.2 -49.9 A50 50 0 0 1 1.2 -49.9 L0.3 -12 A12 12 0 0 0 -0.3 -12Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-9.2 -49.2 A50 50 0 0 1 9.2 -49.2 L5.9 -31.5 A32 32 0 0 0 -5.9 -31.5Z;
+            M-0.7 -49.9 A50 50 0 0 1 0.7 -49.9 L0.5 -31.9 A32 32 0 0 0 -0.5 -31.9Z;
+            M-0.2 -50 A50 50 0 0 1 0.2 -50 L0.2 -50 A50 50 0 0 0 -0.2 -50Z;"
+          keyTimes="0; 0.05; 0.2; 0.8; 0.9; 1"
+          repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
