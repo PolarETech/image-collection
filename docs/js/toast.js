@@ -7,8 +7,8 @@ const toast = (() => {
   let timer = null;
 
   return {
-    showToast: async messageType => {
-      if (timer != null) {
+    showToast: messageType => {
+      if (timer !== null) {
         clearTimeout(timer);
         clearToastMessage();
       }
