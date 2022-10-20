@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <linearGradient id="color1"
+        gradientUnits="userSpaceOnUse"
+        x1="0" y1="0" x2="0" y2="0"
+        spreadMethod="repeat">
+      <!-- Editing the "stop-color" properties will change the color of the moving line -->
+      <stop offset="0.63" stop-color="#90917f" stop-opacity="0.0" />
+      <stop offset="0.75" stop-color="#f0e9a5" stop-opacity="1.0" />
+    </linearGradient>
+
+    <linearGradient id="color2"
+        gradientUnits="userSpaceOnUse"
+        x1="0" y1="0" x2="0" y2="0"
+        spreadMethod="repeat">
+      <!-- Editing the "stop-color" properties will change the color of the moving line -->
+      <stop offset="0.63" stop-color="#90917f" stop-opacity="0.0" />
+      <stop offset="0.75" stop-color="#f0e9a5" stop-opacity="1.0" />
+    </linearGradient>
+
+    <path id="parts"
+          d="M-54 -9 Q-48 -15, -42 -9 L-30 3 Q-24 9, -18 3 L-6 -9 Q0 -15, 6 -9 L18 3 Q24 9, 30 3 L42 -9 Q48 -15, 54 -9" />
+
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <!-- Editing the "stroke" property will change the color of the background line -->
+      <g stroke="#90917f" stroke-width="1" fill="none">
+        <use href="#parts" />
+        <use href="#parts" transform="rotate(180)" />
+      </g>
+
+      <g stroke-width="3" stroke-dasharray="50.0 86.8" stroke-linecap="round" fill="none">
+        <use id="parts1" href="#parts" stroke="url(#color1)" />
+        <use id="parts2" href="#parts" stroke="url(#color2)" transform="rotate(180)" />
+      </g>
+
+      <animate href="#parts1" attributeName="stroke-dashoffset" begin="-0.0s" dur="3.6s" from="50.0" to="-86.8" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="stroke-dashoffset" begin="-3.1s" dur="3.6s" from="0.0"  to="136.8" repeatCount="indefinite" />
+
+      <animate href="#color1" attributeName="x1" begin="-0.0s" dur="3.6s" from="-155" to="-48" repeatCount="indefinite" />
+      <animate href="#color1" attributeName="x2" begin="-0.0s" dur="3.6s" from="-47"  to="+60" repeatCount="indefinite" />
+      <animate href="#color2" attributeName="x1" begin="-3.1s" dur="3.6s" from="+155" to="+48" repeatCount="indefinite" />
+      <animate href="#color2" attributeName="x2" begin="-3.1s" dur="3.6s" from="+47"  to="-60" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>

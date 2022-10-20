@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <polygon id="parts" points="-45 0, -30 -15, 0 15, 30 -15, 45 0, 30 15, 0 -15, -30 15" />
+
+    <symbol id="loading-icon" viewBox="-50 -50 100 100">
+      <g stroke-linecap="square" fill="none">
+        <!-- Editing the "stroke" property will change the color of the background line -->
+        <use href="#parts" stroke="#90917f"
+             stroke-width="1" fill="none" />
+
+        <!-- Editing the "stroke" property will change the color of the moving lines -->
+        <use id="parts-fg" href="#parts" stroke="#f0e9a5"
+             stroke-width="3" stroke-dasharray="50.0 77.3" />
+      </g>
+
+      <animate href="#parts-fg"
+          attributeName="stroke-dashoffset"
+          dur="1.8s"
+          from="50.0" to="-77.3"
+          repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>

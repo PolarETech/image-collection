@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100" height="100"
+     viewBox="0 0 100 100">
+
+  <defs>
+    <symbol id="letter-L" viewBox="-50 -50 100 100">
+      <path transform="scale(0.13)"
+            stroke-dasharray="100.0 100.0"
+            d="M-30 -50 V50 M-40 40 H35" />
+    </symbol>
+
+    <symbol id="letter-O" viewBox="-50 -50 100 100">
+      <path transform="scale(0.13)"
+            stroke-dasharray="160.0 160.0"
+            d="M-40 -40 H30 V50 M40 40 H-30 V-50" />
+    </symbol>
+
+    <symbol id="letter-A" viewBox="-50 -50 100 100">
+      <path transform="scale(0.13)"
+            stroke-dasharray="160.0 160.0"
+            d="M-30 50 V-40 H40 M30 -50 V50 M-20 10 H20" />
+    </symbol>
+
+    <symbol id="letter-D" viewBox="-50 -50 100 100">
+      <path transform="scale(0.13)"
+            stroke-dasharray="149.9 149.9"
+            d="M-30 50 V-50 M-20 -40 H-10 Q30 -40, 30 0 T-10 40 H-20" />
+    </symbol>
+
+    <symbol id="letter-I" viewBox="-50 -50 100 100">
+      <path transform="scale(0.13)"
+            stroke-dasharray="100.0 100.0"
+            d="M-20 -40 H20 M0 -50 V50 M-20 40 H20" />
+    </symbol>
+
+    <symbol id="letter-N" viewBox="-50 -50 100 100">
+      <path transform="scale(0.13)"
+            stroke-dasharray="104.9 104.9"
+            d="M-30 50 V-50 M30 -50 V50 M30 43 L-30 -43" />
+    </symbol>
+
+    <symbol id="letter-G" viewBox="-50 -50 100 100">
+      <path transform="scale(0.13)"
+            stroke-dasharray="174.1 174.1"
+            d="M30 -40 H0 Q-30 -40, -30 0 T0 40 H30 M30 50 V5 H5" />
+    </symbol>
+
+    <symbol id="loading-icon" viewBox="0 0 100 100">
+      <g stroke-width="20" fill="none">
+        <use id="parts1" href="#letter-L" x="-40" />
+        <use id="parts2" href="#letter-O" x="-27" />
+        <use id="parts3" href="#letter-A" x="-13" />
+        <use id="parts4" href="#letter-D" x="+1" />
+        <use id="parts5" href="#letter-I" x="+12" />
+        <use id="parts6" href="#letter-N" x="+24" />
+        <use id="parts7" href="#letter-G" x="+38" />
+      </g>
+
+      <!-- Editing the "values" properties will change the color -->
+      <animate href="#parts1" attributeName="stroke" values="#f0e9a5; #f0e9a5; #90917f" begin="-0.0s" dur="3.6s" keyTimes="0; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="stroke" values="#f0e9a5; #f0e9a5; #90917f" begin="-3.4s" dur="3.6s" keyTimes="0; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="stroke" values="#f0e9a5; #f0e9a5; #90917f" begin="-3.2s" dur="3.6s" keyTimes="0; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="stroke" values="#f0e9a5; #f0e9a5; #90917f" begin="-3.0s" dur="3.6s" keyTimes="0; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="stroke" values="#f0e9a5; #f0e9a5; #90917f" begin="-2.8s" dur="3.6s" keyTimes="0; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="stroke" values="#f0e9a5; #f0e9a5; #90917f" begin="-2.6s" dur="3.6s" keyTimes="0; 0.6; 1" repeatCount="indefinite" />
+      <animate href="#parts7" attributeName="stroke" values="#f0e9a5; #f0e9a5; #90917f" begin="-2.4s" dur="3.6s" keyTimes="0; 0.6; 1" repeatCount="indefinite" />
+
+      <animate href="#parts1" attributeName="stroke-dashoffset" values="100.0; 0; 0; -100.0; -100.0" begin="-0.0s" dur="3.6s" keyTimes="0; 0.25; 0.65; 0.9; 1" repeatCount="indefinite" />
+      <animate href="#parts2" attributeName="stroke-dashoffset" values="160.0; 0; 0; -160.0; -160.0" begin="-3.4s" dur="3.6s" keyTimes="0; 0.25; 0.65; 0.9; 1" repeatCount="indefinite" />
+      <animate href="#parts3" attributeName="stroke-dashoffset" values="160.0; 0; 0; -160.0; -160.0" begin="-3.2s" dur="3.6s" keyTimes="0; 0.25; 0.65; 0.9; 1" repeatCount="indefinite" />
+      <animate href="#parts4" attributeName="stroke-dashoffset" values="149.9; 0; 0; -149.9; -149.9" begin="-3.0s" dur="3.6s" keyTimes="0; 0.25; 0.65; 0.9; 1" repeatCount="indefinite" />
+      <animate href="#parts5" attributeName="stroke-dashoffset" values="100.0; 0; 0; -100.0; -100.0" begin="-2.8s" dur="3.6s" keyTimes="0; 0.25; 0.65; 0.9; 1" repeatCount="indefinite" />
+      <animate href="#parts6" attributeName="stroke-dashoffset" values="104.9; 0; 0; -104.9; -104.9" begin="-2.6s" dur="3.6s" keyTimes="0; 0.25; 0.65; 0.9; 1" repeatCount="indefinite" />
+      <animate href="#parts7" attributeName="stroke-dashoffset" values="174.1; 0; 0; -174.1; -174.1" begin="-2.4s" dur="3.6s" keyTimes="0; 0.25; 0.65; 0.9; 1" repeatCount="indefinite" />
+    </symbol>
+  </defs>
+
+  <use href="#loading-icon" />
+</svg>
